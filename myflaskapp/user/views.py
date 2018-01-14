@@ -12,7 +12,6 @@ from myflaskapp.utils import flash_errors
 
 bp = Blueprint(name='user',  # pylint: disable=invalid-name
                import_name=__name__,
-               static_folder='../static',
                template_folder='templates')
 
 
