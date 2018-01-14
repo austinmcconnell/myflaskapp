@@ -6,9 +6,9 @@ from flask_mail import email_dispatched
 import rollbar
 import rollbar.contrib.flask
 
-from myflaskapp import commands, user, public
-from myflaskapp.extensions import (bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager,
-                                   migrate, mail, moment)
+from myflaskapp import commands, public, user
+from myflaskapp.extensions import (bcrypt, bootstrap, cache, csrf_protect, db, debug_toolbar,
+                                   login_manager, mail, migrate, moment)
 from myflaskapp.settings import ProdConfig
 
 
@@ -42,6 +42,7 @@ def create_app(config_object=ProdConfig):
 
 def register_extensions(app):
     bcrypt.init_app(app)
+    bootstrap.init_app(app)
     cache.init_app(app)
     db.init_app(app)
     csrf_protect.init_app(app)
@@ -81,4 +82,3 @@ def register_commands(app):
     app.cli.add_command(commands.test)
     app.cli.add_command(commands.lint)
     app.cli.add_command(commands.clean)
-    app.cli.add_command(commands.urls)
