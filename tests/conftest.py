@@ -11,7 +11,7 @@ from myflaskapp.settings import TestConfig
 from .factories import UserFactory
 
 
-@pytest.fixture
+@pytest.fixture(scope='session')
 def app():
     """An application for the tests."""
     _app = create_app(TestConfig)

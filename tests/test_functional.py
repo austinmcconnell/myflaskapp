@@ -4,8 +4,11 @@
 See: http://webtest.readthedocs.org/
 """
 import re
+from urllib.parse import urlparse
 
-from flask import url_for
+from flask import url_for, get_flashed_messages
+from flask_login import login_user
+import pytest
 
 from myflaskapp.extensions import mail
 from myflaskapp.user.models import User
@@ -141,7 +144,6 @@ class TestRegistering:
 
     def test_email_confirmation(self, db, testapp):
         """Confirm a user's email address"""
-        # Goes to registration page
         with mail.record_messages() as outbox:
             res = testapp.get(url_for('user.register'))
 
@@ -151,13 +153,60 @@ class TestRegistering:
             form['password'] = 'secret'
             form['confirm'] = 'secret'
 
-            res = form.submit()
+            form.submit()
 
             body_html = outbox[0].html
 
         groups = re.search('<a href=\"http://localhost(.*)\">', body_html)
         confirmation_url = groups[1]
 
-        res = testapp.get(confirmation_url)
+        testapp.get(confirmation_url)
 
         assert User.get_by_id(1).email_confirmed is True
+
+    def test_email_confirmation_no_user_redirect(self, db, testapp):
+
+        with mail.record_messages() as outbox:
+            res = testapp.get(url_for('user.register'))
+            form = res.forms['registerForm']
+            form['username'] = 'pandas'
+            form['email'] = 'foo@bar.com'
+            form['password'] = 'secret'
+            form['confirm'] = 'secret'
+            form.submit()
+
+            body_html = outbox[0].html
+
+        groups = re.search('<a href=\"http://localhost(.*)\">', body_html)
+        confirmation_url = groups[1] + 'wrong'
+
+        response = testapp.get(confirmation_url)
+
+        assert response.status_code == 302
+        assert urlparse(response.location).path == url_for('public.home')
+
+    @pytest.mark.xfail
+    def test_email_already_confirmed_redirect(self, db, testapp):
+        with mail.record_messages() as outbox:
+            res = testapp.get(url_for('user.register'))
+            form = res.forms['registerForm']
+            form['username'] = 'pandas'
+            form['email'] = 'foo@bar.com'
+            form['password'] = 'secret'
+            form['confirm'] = 'secret'
+            form.submit()
+
+            body_html = outbox[0].html
+
+        groups = re.search('<a href=\"http://localhost(.*)\">', body_html)
+        confirmation_url = groups[1]
+
+        user = User.get_by_id(1)
+
+        login_user(user)
+        response = testapp.get(confirmation_url)
+        flashed_messages = get_flashed_messages()
+
+        assert 'You have already verified your email address.' in flashed_messages
+        assert response.status_code == 302
+        assert urlparse(response.location).path == url_for('public.home')
