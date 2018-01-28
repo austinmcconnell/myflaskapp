@@ -24,6 +24,8 @@ class UserFactory(BaseFactory):
     email = Sequence(lambda n: 'user{0}@example.com'.format(n))
     password = PostGenerationMethodCall('set_password', 'example')
     active = True
+    is_admin = False
+    email_confirmed = False
 
     class Meta:
         """Factory configuration."""
