@@ -2,10 +2,12 @@
 """User models."""
 import datetime as dt
 from time import time
+from typing import TypeVar, Union
 
 from flask import current_app
 from flask_login import UserMixin
 import jwt
+from jwt import InvalidTokenError
 
 from myflaskapp.database import Column, Model, SurrogatePK, db, reference_col, relationship
 from myflaskapp.extensions import bcrypt
@@ -28,6 +30,9 @@ class Role(SurrogatePK, Model):
         return '<Role({name})>'.format(name=self.name)
 
 
+User_Type = TypeVar('User_Type', bound='User')
+
+
 class User(UserMixin, SurrogatePK, Model):
     """A user of the app."""
 
@@ -44,7 +49,7 @@ class User(UserMixin, SurrogatePK, Model):
     email_confirmed = Column(db.Boolean(), nullable=True, default=False)
     email_confirmed_at = Column(db.DateTime, nullable=True)
 
-    def __init__(self, username, email, password=None, **kwargs):
+    def __init__(self, username: str, email: str, password: str=None, **kwargs) -> None:
         """Create instance."""
         db.Model.__init__(self, username=username, email=email, **kwargs)
         if password:
@@ -52,51 +57,51 @@ class User(UserMixin, SurrogatePK, Model):
         else:
             self.password = None
 
-    def set_password(self, password):
+    def set_password(self, password: str) -> None:
         """Set password."""
         self.password = bcrypt.generate_password_hash(password)
 
-    def check_password(self, value):
+    def check_password(self, value: str) -> bool:
         """Check password."""
         return bcrypt.check_password_hash(self.password, value)
 
     @property
-    def full_name(self):
+    def full_name(self) -> str:
         """Full user name."""
         return '{0} {1}'.format(self.first_name, self.last_name)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """Represent instance as a unique string."""
         return '<User({username!r})>'.format(username=self.username)
 
-    def get_reset_password_token(self, expires_in=600):
+    def get_reset_password_token(self, expires_in: int=600) -> str:
         return jwt.encode(
             {'reset_password': self.id, 'exp': time() + expires_in},
             current_app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
 
     @staticmethod
-    def verify_reset_password_token(token):
+    def verify_reset_password_token(token) -> Union[User_Type, None]:
         try:
             user_id = jwt.decode(token, current_app.config['SECRET_KEY'],
                                  algorithms=['HS256'])['reset_password']
-        except:
-            return
+        except InvalidTokenError:
+            return None
         return User.query.get(user_id)
 
-    def confirm_email(self):
+    def confirm_email(self) -> None:
         self.email_confirmed = True
         self.email_confirmed_at = dt.datetime.utcnow()
 
-    def get_confirmation_token(self):
+    def get_confirmation_token(self) -> str:
         return jwt.encode(
             {'confirm_email': self.id},
             current_app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
 
     @staticmethod
-    def verify_confirmation_token(token):
+    def verify_confirmation_token(token: str) -> Union[User_Type, None]:
         try:
             user_id = jwt.decode(token, current_app.config['SECRET_KEY'],
                                  algorithms=['HS256'])['confirm_email']
         except:
-            return
+            return None
         return User.query.get(user_id)
