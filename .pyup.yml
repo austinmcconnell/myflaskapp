@@ -1,0 +1,7 @@
+# see https://pyup.io/docs/configuration/ for all available options
+
+update: insecure
+schedule: "every month"
+
+requirements:
+  - Pipfile.lock
