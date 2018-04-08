@@ -18,7 +18,7 @@ TEST_PATH = os.path.join(PROJECT_ROOT, 'tests')
 def test():
     """Run the tests."""
     import pytest
-    status_code = pytest.main([TEST_PATH, '--verbose', '--cov', 'myflaskapp', '--cov-branch'])
+    status_code = pytest.main([TEST_PATH])
     exit(status_code)
 
 
