@@ -58,7 +58,7 @@ jobs:
           name: Run tests
           command: |
             . venv/bin/activate
-            pytest tests --cov myflaskapp --cov-branch --cov-report=html
+            pytest --cov-report=html
       - run:
           name: Code coverage
           command: |
