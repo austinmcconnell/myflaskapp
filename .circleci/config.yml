@@ -50,6 +50,11 @@ jobs:
             . venv/bin/activate
             npm run lint
       - run:
+          name: Run mypy checker
+          command: |
+          . venv/bin/activate
+          mypy myflaskapp --ignore-missing-imports
+      - run:
           name: Run tests
           command: |
             . venv/bin/activate
