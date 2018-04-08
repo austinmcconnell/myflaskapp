@@ -2,7 +2,7 @@
 """User models."""
 import datetime as dt
 from time import time
-from typing import TypeVar, Union
+from typing import Union
 
 from flask import current_app
 from flask_login import UserMixin
@@ -28,9 +28,6 @@ class Role(SurrogatePK, Model):
     def __repr__(self):
         """Represent instance as a unique string."""
         return '<Role({name})>'.format(name=self.name)
-
-
-User_Type = TypeVar('User_Type', bound='User')
 
 
 class User(UserMixin, SurrogatePK, Model):
@@ -80,7 +77,7 @@ class User(UserMixin, SurrogatePK, Model):
             current_app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
 
     @staticmethod
-    def verify_reset_password_token(token) -> Union[User_Type, None]:
+    def verify_reset_password_token(token) -> Union['User', None]:
         try:
             user_id = jwt.decode(token, current_app.config['SECRET_KEY'],
                                  algorithms=['HS256'])['reset_password']
@@ -98,7 +95,7 @@ class User(UserMixin, SurrogatePK, Model):
             current_app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
 
     @staticmethod
-    def verify_confirmation_token(token: str) -> Union[User_Type, None]:
+    def verify_confirmation_token(token: str) -> Union['User', None]:
         try:
             user_id = jwt.decode(token, current_app.config['SECRET_KEY'],
                                  algorithms=['HS256'])['confirm_email']

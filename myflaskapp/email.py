@@ -5,7 +5,7 @@ from flask import render_template, current_app
 from flask_mail import Message
 
 from myflaskapp.extensions import mail
-from myflaskapp.user.models import User_Type
+from myflaskapp.user.models import User
 
 
 def send_async_email(app, msg):
@@ -22,7 +22,7 @@ def send_email(subject: str, sender: str, recipients: List[str], text_body: str,
     #        args=(current_app._get_current_object(), msg)).start()
 
 
-def send_password_reset_email(user: User_Type):
+def send_password_reset_email(user: User):
     token = user.get_reset_password_token()
     send_email(subject='[My Flask App] Reset Your Password',
                sender=current_app.config['ADMINS'][0],
@@ -33,7 +33,7 @@ def send_password_reset_email(user: User_Type):
                                          user=user, token=token))
 
 
-def send_confirm_email(user: User_Type):
+def send_confirm_email(user: User):
     token = user.get_confirmation_token()
     send_email(subject='[My Flask App] Confirm Your Email Address',
                sender=current_app.config['ADMINS'][0],
