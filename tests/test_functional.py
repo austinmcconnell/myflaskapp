@@ -18,15 +18,15 @@ from .factories import UserFactory
 class TestLoggingIn:
     """Login."""
 
-    def test_login_return_200(self, user, testapp):
+    @pytest.mark.parametrize('endpoint', ('public.home', 'user.login'))
+    def test_login_return_200(self, user, testapp, endpoint):
         """Login successful."""
-        # Goes to homepage
-        res = testapp.get(url_for('public.home'))
-        # Fills out login form in navbar
+        res = testapp.get(url_for(endpoint))
+
         form = res.forms['loginForm']
         form['username'] = user.username
         form['password'] = 'myprecious'
-        # Submits
+
         res = form.submit().follow()
         assert res.status_code == 200
 
@@ -43,30 +43,28 @@ class TestLoggingIn:
         # sees alert
         assert 'You are logged out.' in res
 
-    def test_error_message_incorrect_password(self, user, testapp):
+    @pytest.mark.parametrize('endpoint', ('public.home', 'user.login'))
+    def test_error_message_incorrect_password(self, user, testapp, endpoint):
         """Show error if password is incorrect."""
-        # Goes to homepage
-        res = testapp.get(url_for('public.home'))
-        # Fills out login form, password incorrect
+        res = testapp.get(url_for(endpoint))
+
         form = res.forms['loginForm']
         form['username'] = user.username
         form['password'] = 'wrong'
-        # Submits
+
         res = form.submit()
-        # sees error
         assert 'Invalid password' in res
 
-    def test_error_message_username_doesnt_exist(self, user, testapp):
+    @pytest.mark.parametrize('endpoint', ('public.home', 'user.login'))
+    def test_error_message_username_doesnt_exist(self, user, testapp, endpoint):
         """Show error if username doesn't exist."""
-        # Goes to homepage
-        res = testapp.get(url_for('public.home'))
-        # Fills out login form, password incorrect
+        res = testapp.get(url_for(endpoint))
+
         form = res.forms['loginForm']
         form['username'] = 'unknown'
         form['password'] = 'myprecious'
-        # Submits
+
         res = form.submit()
-        # sees error
         assert 'Unknown user' in res
 
 
