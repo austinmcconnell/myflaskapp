@@ -202,6 +202,8 @@ class TestRegistering:
         user = User.get_by_id(1)
 
         login_user(user)
+        user.email_confirmed = True
+        # FIXME: .get() has a different context. No logged in user
         response = testapp.get(confirmation_url)
         flashed_messages = get_flashed_messages()
 
