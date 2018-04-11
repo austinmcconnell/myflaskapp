@@ -21,7 +21,7 @@ class TestLoggingIn:
     def test_login_return_200(self, user, testapp):
         """Login successful."""
         # Goes to homepage
-        res = testapp.get('/')
+        res = testapp.get(url_for('public.home'))
         # Fills out login form in navbar
         form = res.forms['loginForm']
         form['username'] = user.username
@@ -32,7 +32,7 @@ class TestLoggingIn:
 
     def test_alert_on_logout(self, user, testapp):
         """Show alert on logout."""
-        res = testapp.get('/')
+        res = testapp.get(url_for('public.home'))
         # Fills out login form in navbar
         form = res.forms['loginForm']
         form['username'] = user.username
@@ -46,7 +46,7 @@ class TestLoggingIn:
     def test_error_message_incorrect_password(self, user, testapp):
         """Show error if password is incorrect."""
         # Goes to homepage
-        res = testapp.get('/')
+        res = testapp.get(url_for('public.home'))
         # Fills out login form, password incorrect
         form = res.forms['loginForm']
         form['username'] = user.username
@@ -59,7 +59,7 @@ class TestLoggingIn:
     def test_error_message_username_doesnt_exist(self, user, testapp):
         """Show error if username doesn't exist."""
         # Goes to homepage
-        res = testapp.get('/')
+        res = testapp.get(url_for('public.home'))
         # Fills out login form, password incorrect
         form = res.forms['loginForm']
         form['username'] = 'unknown'
@@ -77,7 +77,7 @@ class TestRegistering:
         """Register a new user."""
         old_count = len(User.query.all())
         # Goes to homepage
-        res = testapp.get('/')
+        res = testapp.get(url_for('public.home'))
         # Clicks Create Account button
         res = res.click('Create account')
         # Fills out the form
