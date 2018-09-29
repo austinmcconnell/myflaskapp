@@ -13,10 +13,6 @@ from myflaskapp.settings import ProdConfig
 
 
 def create_app(config_object=ProdConfig):
-    """An application factory, as explained here: http://flask.pocoo.org/docs/patterns/appfactories/.
-
-    :param config_object: The configuration object to use.
-    """
     app = Flask(__name__.split('.')[0])
     app.config.from_object(config_object)
     register_extensions(app)
@@ -27,7 +23,6 @@ def create_app(config_object=ProdConfig):
 
     @app.before_first_request
     def init_rollbar():
-        """init rollbar module"""
         if app.config['ENV'] in ('production',) and app.config['ROLLBAR_API']:
             rollbar.init(access_token=app.config['ROLLBAR_API'],
                          environment=app.config['ENV'],
@@ -46,7 +41,6 @@ def create_app(config_object=ProdConfig):
 
 
 def register_extensions(app):
-    """Register Flask extensions."""
     bcrypt.init_app(app)
     cache.init_app(app)
     db.init_app(app)
@@ -59,13 +53,11 @@ def register_extensions(app):
 
 
 def register_blueprints(app):
-    """Register Flask blueprints."""
     app.register_blueprint(user.views.bp)
     app.register_blueprint(public.views.bp)
 
 
 def register_errorhandlers(app):
-    """Register error handlers."""
     def render_error(error):
         """Render error template."""
         # If a HTTPException, pull the `code` attribute; default to 500
@@ -76,7 +68,6 @@ def register_errorhandlers(app):
 
 
 def register_shellcontext(app):
-    """Register shell context objects."""
     def shell_context():
         """Shell context objects."""
         return {
@@ -87,7 +78,6 @@ def register_shellcontext(app):
 
 
 def register_commands(app):
-    """Register Click commands."""
     app.cli.add_command(commands.test)
     app.cli.add_command(commands.lint)
     app.cli.add_command(commands.clean)
