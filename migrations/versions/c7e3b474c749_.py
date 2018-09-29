@@ -1,4 +1,5 @@
-"""empty message
+"""
+Alembic revision script.
 
 Revision ID: c7e3b474c749
 Revises: 536562bed58a
@@ -8,12 +9,13 @@ Create Date: 2018-01-13 15:29:42.243171
 from alembic import op
 import sqlalchemy as sa
 
-
 # revision identifiers, used by Alembic.
 revision = 'c7e3b474c749'
 down_revision = '536562bed58a'
 branch_labels = None
 depends_on = None
+
+# pylint: disable=invalid-name
 
 
 def upgrade():
