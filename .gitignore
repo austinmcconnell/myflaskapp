@@ -118,12 +118,5 @@ venv.bak/
 output/*.html
 output/*/index.html
 
-# npm
-/node_modules/
-
-# webpack-built files
-/myflaskapp/static/build/
-/myflaskapp/webpack/manifest.json
-
 # Sqlite Database
 *.db

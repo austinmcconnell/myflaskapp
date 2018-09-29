@@ -2,14 +2,12 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.6.3-node
+      - image: circleci/python:3.6.3
         environment:
           FLASK_CONFIG: testing
           FLASK_APP: autoapp.py
           FLASK_DEBUG: 1
           SECRET_TOKEN: super-secret
-          NODE_ENV: development
-          NPM_CONFIG_PRODUCTION: false
     working_directory: ~/repo
     steps:
       - checkout
@@ -27,28 +25,11 @@ jobs:
           key: deps1-{{ checksum "Pipfile.lock" }}
           paths:
             - "venv"
-      - restore_cache:
-          key: deps1-{{ checksum "package-lock.json" }}
-      - run:
-          name: Install Node dependencies
-          command: npm install --no-save
-      - save_cache:
-          key: deps1-{{ checksum "package-lock.json" }}
-          paths:
-            - "node_modules"
-      - run:
-          name: Build Webpack stuff
-          command: npm run build
       - run:
           name: Run Python linter
           command: |
             . venv/bin/activate
             flask lint
-      - run:
-          name: Run Node linter
-          command: |
-            . venv/bin/activate
-            npm run lint
       - run:
           name: Run mypy checker
           command: |

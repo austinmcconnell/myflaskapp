@@ -8,7 +8,7 @@ import rollbar.contrib.flask
 
 from myflaskapp import commands, user, public
 from myflaskapp.extensions import (bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager,
-                                   migrate, webpack, mail, moment)
+                                   migrate, mail, moment)
 from myflaskapp.settings import ProdConfig
 
 
@@ -54,7 +54,6 @@ def register_extensions(app):
     login_manager.init_app(app)
     debug_toolbar.init_app(app)
     migrate.init_app(app, db)
-    webpack.init_app(app)
     mail.init_app(app)
     moment.init_app(app)
 

@@ -39,8 +39,6 @@ Run the following commands to setup your environment :
     git clone https://github.com/austinmcconnell/myflaskapp
     cd myflaskapp
     pipenv install --dev
-    npm install
-    npm start  # run the webpack dev server and flask server using concurrently
 
 You will see a pretty welcome screen [here](http://localhost:5000)
 
@@ -57,11 +55,7 @@ Take the token from above and place it in a .env file along with the following i
 # Flask
 FLASK_APP=autoapp.py
 FLASK_DEBUG=1
-MYFLASKAPP_SECRET = secret_token_from_above
-
-# Node
-NODE_ENV=development
-NPM_CONFIG_PRODUCTION=false
+MYFLASKAPP_SECRET=secret_token_from_above
 ```
 
 This uses a sqlite database by default for local development. If you would like to setup something more powerful (or that matches your production setup), add the following section to your .env file:
@@ -109,33 +103,11 @@ Note: you can leave the project name off and just use `heroku create` and you'll
 
 #### Set Environment Variables
 
-	heroku config:set NODE_ENV=development NPM_CONFIG_PRODUCTION=false
-
-This will tell Heroku to install all devDependencies as well as the dependencies in your package.json file.
-
-
 	heroku config:set FLASK_APP=autoapp.py FLASK_DEBUG=0
 
 This sets the pertinent Flask env variables on your heroku dyno.
 
 #### Use Webpack to Build Static Assets on Deploy
-
-If you intend to use webpack to build your static assets on deploy to Heroku, make sure the following line is added to your package.json file under `scripts`
-
-	    "postinstall": "npm run build"
-
-Example
-
-```js
-  "scripts": {
-    "build": "NODE_ENV=production webpack --progress --colors -p",
-    "start": "concurrently -n \"WEBPACK,FLASK\" -c \"bgBlue.bold,bgMagenta.bold\" \"npm run webpack-dev-server\" \"npm run flask-server\"",
-    "webpack-dev-server": "NODE_ENV=debug webpack-dev-server --port 2992 --hot --inline",
-    "flask-server": "FLASK_APP=$PWD/autoapp.py FLASK_DEBUG=1 flask run",
-    "lint": "eslint \"assets/js/*.js\"",
-    "postinstall": "npm run build"
-  }
-```
 
 #### Push code to Heroku
 

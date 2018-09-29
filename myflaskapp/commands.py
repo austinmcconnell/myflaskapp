@@ -25,7 +25,7 @@ def test():
 @click.command()
 def lint():
     """Lint and check code style with pylint."""
-    skip = ['node_modules', '__pycache__', 'migrations', 'assets']
+    skip = ['__pycache__', 'migrations', 'static']
     root_files = glob('*.py')
     root_directories = [name for name in next(os.walk('.'))[1] if not name.startswith('.')]
     files_and_directories = [arg for arg in root_files + root_directories if arg not in skip]

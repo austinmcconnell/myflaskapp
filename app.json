@@ -1,46 +1,41 @@
 {
-  "name": "My Flask App",
-  "description": "A flasky app.",
-  "repository": "https://github.com/austinmcconnell/myflaskapp",
-  "success_url": "/",
-  "env": {
-    "FLASK_APP": "autoapp.py",
-    "FLASK_DEBUG": "0",
-    "NODE_ENV": "development",
-    "NPM_CONFIG_PRODUCTION": "false",
-    "SECRET_TOKEN": {
-      "description": "A secret key for verifying the integrity of signed cookies.",
-      "generator": "secret"
+    "description": "A flasky app.",
+    "addons": [
+        {
+            "options": {
+                "version": "10"
+            },
+            "plan": "heroku-postgresql:hobby-dev"
+        },
+        "rollbar",
+        "papertrail",
+        "mailgun"
+    ],
+    "buildpacks": [
+        {
+            "url": "heroku/python"
+        }
+    ],
+    "env": {
+        "FLASK_APP": "autoapp.py",
+        "FLASK_DEBUG": "0",
+        "SECRET_TOKEN": {
+            "description": "A secret key for verifying the integrity of signed cookies.",
+            "generator": "secret"
+        },
+        "WEB_CONCURRENCY": {
+            "description": "The number of processes to run.",
+            "value": "3"
+        }
     },
-    "WEB_CONCURRENCY": {
-      "description": "The number of processes to run.",
-      "value": "3"
-    }
-  },
-  "formation": {
-    "web": {
-      "quantity": 1,
-      "size": "free"
-    }
-  },
-  "image": "heroku/python",
-  "addons": [
-    {
-      "plan": "heroku-postgresql:hobby-dev",
-      "options": {
-        "version": "10"
-      }
+    "formation": {
+        "web": {
+            "quantity": 1,
+            "size": "free"
+        }
     },
-    "rollbar",
-    "papertrail",
-    "mailgun"
-  ],
-  "buildpacks": [
-    {
-      "url": "heroku/python"
-    },
-    {
-      "url": "heroku/nodejs"
-    }
-  ]
+    "image": "heroku/python",
+    "name": "My Flask App",
+    "repository": "https://github.com/austinmcconnell/myflaskapp",
+    "success_url": "/"
 }
