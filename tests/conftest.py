@@ -24,9 +24,11 @@ def app():
 
 
 @pytest.fixture
-def testapp(app):
+def testapp(app, db):
     """A Webtest app."""
-    return TestApp(app)
+    with TestApp(app) as client:
+        yield client
+    # return TestApp(app)
 
 
 @pytest.fixture

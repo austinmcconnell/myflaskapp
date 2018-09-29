@@ -183,7 +183,7 @@ class TestRegistering:
         assert response.status_code == 302
         assert urlparse(response.location).path == url_for('public.home')
 
-    @pytest.mark.xfail
+    # @pytest.mark.xfail
     def test_email_already_confirmed_redirect(self, db, testapp):
         with mail.record_messages() as outbox:
             res = testapp.get(url_for('user.register'))
@@ -201,7 +201,15 @@ class TestRegistering:
 
         user = User.get_by_id(1)
 
-        login_user(user)
+        res = testapp.get(url_for('user.login'))
+        form = res.forms['loginForm']
+        form['username'] = 'pandas'
+        form['password'] = 'secret'
+        response = form.submit()
+        # print(response.set_cookie)
+        # session = eyJfZnJlc2giOmZhbHNlLCJjc3JmX3Rva2VuIjoiYzNiYzRlMDkxMmZiMDdjNWJlM2E1Y2Y3N2JmYTVmZDk4Nzg0YzAyOCJ9.DbJT2w.M4rgdrscfoukYB1RFea5ib7lL2s
+        # testapp.set_cookie(name=, value=)
+
         user.email_confirmed = True
         # FIXME: .get() has a different context. No logged in user
         response = testapp.get(confirmation_url)
