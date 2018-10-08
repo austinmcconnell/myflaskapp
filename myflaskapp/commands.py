@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Click commands."""
-import os
 from glob import glob
+import os
 from subprocess import call
 
 import click

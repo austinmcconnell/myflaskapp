@@ -1,22 +1,21 @@
 # -*- coding: utf-8 -*-
-"""The app module, containing the app factory function."""
-from flask import Flask, render_template, got_request_exception
+from flask import Flask, got_request_exception, render_template
 from flask_mail import email_dispatched
-
 import rollbar
 import rollbar.contrib.flask
 
 from myflaskapp import commands, public, user
 from myflaskapp.extensions import (bcrypt, bootstrap, cache, csrf_protect, db, debug_toolbar,
                                    login_manager, mail, migrate, moment)
-from myflaskapp.settings import ProdConfig
+from myflaskapp.settings import CONFIG
 
 
-def create_app(config_object=ProdConfig):
-    app = Flask(__name__.split('.')[0])
-    app.config.from_object(config_object)
-    register_extensions(app)
+def create_app(config_name):
+    app = Flask(__name__)
+    app.config.from_object(CONFIG[config_name])
+
     register_blueprints(app)
+    register_extensions(app)
     register_errorhandlers(app)
     register_shellcontext(app)
     register_commands(app)
@@ -24,12 +23,14 @@ def create_app(config_object=ProdConfig):
     @app.before_first_request
     def init_rollbar():
         if app.config['ENV'] in ('production',) and app.config['ROLLBAR_API']:
+            app.logger.info('Initiating rollbar connection')
             rollbar.init(access_token=app.config['ROLLBAR_API'],
                          environment=app.config['ENV'],
                          root=app.config['APP_DIR'],
                          allow_logging_basic_config=False)
 
             got_request_exception.connect(rollbar.contrib.flask.report_exception, app)
+            app.logger.info('Rollbar initiated successfully')
 
     def log_email_message(message, app):
         app.logger.debug(message.body)
@@ -60,7 +61,6 @@ def register_blueprints(app):
 
 def register_errorhandlers(app):
     def render_error(error):
-        """Render error template."""
         # If a HTTPException, pull the `code` attribute; default to 500
         error_code = getattr(error, 'code', 500)
         return render_template('{0}.html'.format(error_code)), error_code
@@ -70,10 +70,8 @@ def register_errorhandlers(app):
 
 def register_shellcontext(app):
     def shell_context():
-        """Shell context objects."""
-        return {
-            'db': db,
-            'User': user.models.User}
+        return {'db': db,
+                'User': user.models.User}
 
     app.shell_context_processor(shell_context)
 

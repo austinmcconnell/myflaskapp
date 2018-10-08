@@ -4,17 +4,22 @@ import os
 
 
 class Config(object):
-    """Base configuration."""
 
-    SECRET_KEY = os.environ.get('SECRET_TOKEN')
+    # Path
     APP_DIR = os.path.abspath(os.path.dirname(__file__))  # This directory
     PROJECT_ROOT = os.path.abspath(os.path.join(APP_DIR, os.pardir))
-    BCRYPT_LOG_ROUNDS = 13
-    DEBUG_TB_ENABLED = False  # Disable Debug toolbar
-    DEBUG_TB_INTERCEPT_REDIRECTS = False
-    CACHE_TYPE = 'simple'  # Can be "memcached", "redis", etc.
+
+    # Database
+    DB_USERNAME = os.getenv('DATABASE_USERNAME')
+    DB_PASSWORD = os.getenv('DATABASE_PASSWORD')
+    DB_HOST = os.getenv('DATABASE_HOST')
+    DB_PORT = os.getenv('DATABASE_PORT', 5432)
+    DB_NAME = os.getenv('DATABASE_NAME')
+    SQLALCHEMY_DATABASE_URI = f'postgresql://{DB_USERNAME}:{DB_PASSWORD}@' \
+                              f'{DB_HOST}:{DB_PORT}/{DB_NAME}'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    WEBPACK_MANIFEST_PATH = 'webpack/manifest.json'
+
+    # Email
     MAIL_SERVER = os.environ.get('MAIL_SERVER')
     MAIL_PORT = int(os.environ.get('MAIL_PORT') or 25)
     MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS') is not None
@@ -22,47 +27,30 @@ class Config(object):
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     ADMINS = ['austin.s.mcconnell@gmail.com']
 
-
-class ProdConfig(Config):
-    """Production configuration."""
-
-    ENV = 'production'
-    DEBUG = False
-    DEBUG_TB_ENABLED = False  # Disable Debug toolbar
-    DATABASE_URL = os.getenv('DATABASE_URL')
-
-    if DATABASE_URL:
-        SQLALCHEMY_DATABASE_URI = DATABASE_URL
-    else:
-        DB_USERNAME = os.getenv('DB_USERNAME')
-        DB_PASSWORD = os.getenv('DB_PASSWORD')
-        DB_HOST = os.getenv('DB_HOST')
-        DB_PORT = os.getenv('DB_PORT', 5432)
-        DB_NAME = os.getenv('DB_NAME')
-        SQLALCHEMY_DATABASE_URI = f'postgresql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
+    # Access tokens
     ROLLBAR_API = os.getenv('ROLLBAR_ACCESS_TOKEN')
     PAPERTRAIL_API = os.getenv('PAPERTRAIL_API_TOKEN')
 
-
-class DevConfig(Config):
-    """Development configuration."""
-
-    ENV = 'development'
-    DEBUG = True
-    DB_NAME = 'dev.db'
-    # Put the db file in project root
-    DB_PATH = os.path.join(Config.PROJECT_ROOT, DB_NAME)
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///{0}'.format(DB_PATH)
-    DEBUG_TB_ENABLED = True
-    CACHE_TYPE = 'simple'  # Can be "memcached", "redis", etc.
+    # Misc Extension
+    SECRET_KEY = os.environ.get('SECRET_TOKEN')
+    BCRYPT_LOG_ROUNDS = 13
+    CACHE_TYPE = 'simple'
+    DEBUG_TB_INTERCEPT_REDIRECTS = False
 
 
-class TestConfig(Config):
-    """Test configuration."""
+class DevelopmentConfig(Config):
+    CACHE_TYPE = 'simple'
 
+
+class TestingConfig(Config):
     ENV = 'test'
     TESTING = True
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = 'sqlite://'
     BCRYPT_LOG_ROUNDS = 4  # For faster tests; needs at least 4 to avoid "ValueError: Invalid rounds"
     WTF_CSRF_ENABLED = False  # Allows form testing
+
+
+CONFIG = dict(development=DevelopmentConfig,
+              testing=TestingConfig,
+              default=Config)

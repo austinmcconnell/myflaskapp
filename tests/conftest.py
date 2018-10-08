@@ -6,14 +6,13 @@ from webtest import TestApp
 
 from myflaskapp.app import create_app
 from myflaskapp.database import db as _db
-from myflaskapp.settings import TestConfig
 
 from .factories import UserFactory
 
 
 @pytest.fixture(scope='session')
 def app():
-    _app = create_app(TestConfig)
+    _app = create_app('testing')
     ctx = _app.test_request_context()
     ctx.push()
 
