@@ -5,4 +5,4 @@ from myflaskapp.app import create_app
 
 CONFIG_NAME = 'development' if get_debug_flag() else 'default'
 
-APP = create_app(CONFIG_NAME)  # pylint: disable=invalid-name
+app = create_app(CONFIG_NAME)  # pylint: disable=invalid-name
