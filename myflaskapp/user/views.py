@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 """User views."""
-from flask import Blueprint, render_template, flash, redirect, url_for, request
-from flask_login import login_required, logout_user, login_user, current_user
+from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask_login import current_user, login_required, login_user, logout_user
 
 from myflaskapp.email import send_confirm_email, send_password_reset_email
-from myflaskapp.extensions import login_manager, db
-from myflaskapp.user.forms import RegisterForm, LoginForm, ResetPasswordRequestForm, \
-    ResetPasswordForm
+from myflaskapp.extensions import db, login_manager
+from myflaskapp.user.forms import (LoginForm, RegisterForm, ResetPasswordForm,
+                                   ResetPasswordRequestForm)
 from myflaskapp.user.models import User
 from myflaskapp.utils import flash_errors
 

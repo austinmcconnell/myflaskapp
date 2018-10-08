@@ -1,7 +1,7 @@
 # from threading import Thread
 from typing import List
 
-from flask import render_template, current_app
+from flask import current_app, render_template
 from flask_mail import Message
 
 from myflaskapp.extensions import mail
