@@ -53,9 +53,9 @@ Take the token from above and place it in a .env file along with the following i
 
 ```ini
 # Flask
-FLASK_APP=autoapp.py
-FLASK_DEBUG=1
-MYFLASKAPP_SECRET=secret_token_from_above
+FLASK_APP=run.py
+FLASK_ENV=development
+SECRET_KEY=secret_token_from_above
 ```
 
 This uses a sqlite database by default for local development. If you would like to setup something more powerful (or that matches your production setup), add the following section to your .env file:
@@ -103,7 +103,7 @@ Note: you can leave the project name off and just use `heroku create` and you'll
 
 #### Set Environment Variables
 
-	heroku config:set FLASK_APP=autoapp.py FLASK_DEBUG=0
+	heroku config:set FLASK_APP=run.py FLASK_ENV=production
 
 This sets the pertinent Flask env variables on your heroku dyno.
 
