@@ -4,10 +4,10 @@ from flask_mail import email_dispatched
 import rollbar
 import rollbar.contrib.flask
 
-from myflaskapp import commands, public, user
-from myflaskapp.extensions import (bcrypt, bootstrap, cache, csrf_protect, db, debug_toolbar,
-                                   login_manager, mail, migrate, moment)
-from myflaskapp.settings import CONFIG
+from app import commands, public, user
+from app.extensions import (bcrypt, bootstrap, cache, csrf_protect, db, debug_toolbar,
+                            login_manager, mail, migrate, moment)
+from app.settings import CONFIG
 
 
 def create_app(config_name):

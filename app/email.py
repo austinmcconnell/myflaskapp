@@ -4,8 +4,8 @@ from typing import List
 from flask import current_app, render_template
 from flask_mail import Message
 
-from myflaskapp.extensions import mail
-from myflaskapp.user.models import User
+from app.extensions import mail
+from app.user.models import User
 
 
 def send_async_email(app, msg):

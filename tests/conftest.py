@@ -4,8 +4,8 @@
 import pytest
 from webtest import TestApp
 
-from myflaskapp.app import create_app
-from myflaskapp.database import db as _db
+from app.app import create_app
+from app.database import db as _db
 
 from .factories import UserFactory
 

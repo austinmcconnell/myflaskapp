@@ -9,8 +9,8 @@ from flask_login import UserMixin
 import jwt
 from jwt import InvalidTokenError
 
-from myflaskapp.database import Column, Model, SurrogatePK, db, reference_col, relationship
-from myflaskapp.extensions import bcrypt
+from app.database import Column, Model, SurrogatePK, db, reference_col, relationship
+from app.extensions import bcrypt
 
 
 class Role(SurrogatePK, Model):

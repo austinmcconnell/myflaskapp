@@ -3,12 +3,12 @@
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required, login_user, logout_user
 
-from myflaskapp.email import send_confirm_email, send_password_reset_email
-from myflaskapp.extensions import db, login_manager
-from myflaskapp.user.forms import (LoginForm, RegisterForm, ResetPasswordForm,
-                                   ResetPasswordRequestForm)
-from myflaskapp.user.models import User
-from myflaskapp.utils import flash_errors
+from app.email import send_confirm_email, send_password_reset_email
+from app.extensions import db, login_manager
+from app.user.forms import (LoginForm, RegisterForm, ResetPasswordForm,
+                            ResetPasswordRequestForm)
+from app.user.models import User
+from app.utils import flash_errors
 
 bp = Blueprint(name='user',  # pylint: disable=invalid-name
                import_name=__name__,
