@@ -34,7 +34,7 @@ jobs:
           name: Run mypy checker
           command: |
             . venv/bin/activate
-            mypy myflaskapp --ignore-missing-imports
+            mypy app --ignore-missing-imports
       - run:
           name: Run tests
           command: |
