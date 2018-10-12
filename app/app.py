@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, got_request_exception, render_template
+from flask import Flask, got_request_exception, render_template, request, current_app, g
 from flask_mail import email_dispatched
 import rollbar
 import rollbar.contrib.flask
 
 from app import commands, public, user
-from app.extensions import (bcrypt, bootstrap, cache, csrf_protect, db, debug_toolbar,
-                            login_manager, mail, migrate, moment)
+from app.extensions import (babel, bcrypt, bootstrap, cache, csrf_protect, db,
+                            debug_toolbar, login_manager, mail, migrate, moment)
 from app.settings import CONFIG
 
 
@@ -19,6 +19,10 @@ def create_app(config_name):
     register_errorhandlers(app)
     register_shellcontext(app)
     register_commands(app)
+
+    @app.before_request
+    def before_request():
+        g.locale = str(get_locale())
 
     @app.before_first_request
     def init_rollbar():
@@ -42,6 +46,7 @@ def create_app(config_name):
 
 
 def register_extensions(app):
+    babel.init_app(app)
     bcrypt.init_app(app)
     bootstrap.init_app(app)
     cache.init_app(app)
@@ -80,3 +85,9 @@ def register_commands(app):
     app.cli.add_command(commands.test)
     app.cli.add_command(commands.lint)
     app.cli.add_command(commands.clean)
+    app.cli.add_command(commands.translate)
+
+
+@babel.localeselector
+def get_locale():
+    return request.accept_languages.best_match(current_app.config['LANGUAGES'])

@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 flask = "*"
+flask-babel = "*"
 flask-bcrypt = "*"
 flask-bootstrap = "*"
 flask-caching = "*"

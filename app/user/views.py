@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """User views."""
 from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask_babel import _
 from flask_login import current_user, login_required, login_user, logout_user
 
 from app.email import send_confirm_email, send_password_reset_email
