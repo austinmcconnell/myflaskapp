@@ -32,6 +32,7 @@ class Config(object):
     PAPERTRAIL_API = os.getenv('PAPERTRAIL_API_TOKEN')
 
     # Misc Extension
+    LANGUAGES = ['en', 'fr']
     SECRET_KEY = os.environ.get('SECRET_TOKEN')
     BCRYPT_LOG_ROUNDS = 13
     CACHE_TYPE = 'simple'
