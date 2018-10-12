@@ -1,9 +1,9 @@
-Dear {{ user.username }},
+{{ _('Hi %(username)s,', username=user.username) }}
 
-Plase confirm your email by clicking the this link:
+{{ _('Please confirm your email by clicking the following link:') }}
 
 {{ url_for('user.confirm_email', token=token, _external=True) }}
 
-Sincerely,
+{{ _('Sincerely,') }}
 
-The My Flask App Team
+{{ _('The %(title)s team', title= 'My Flask App')}}

@@ -19,15 +19,17 @@
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav">
-      <li><a href="{{ url_for('public.home') }}">Home</a></li>
-      <li><a href="{{ url_for('public.about') }}">About</a></li>
+      <li><a href="{{ url_for('public.home') }}">{{ _(Home) }}</a></li>
+      <li><a href="{{ url_for('public.about') }}">{{ _(About) }}</a></li>
     </ul>
     {% if current_user and current_user.is_authenticated %}
     <ul class="nav navbar-nav navbar-right">
         <li>
-            <p class="navbar-text"><a class="navbar-link" href="{{ url_for('user.members') }}">Logged in as {{ current_user.username }}</a></p>
+            <p class="navbar-text"><a class="navbar-link" href="{{ url_for('user.members') }}">{{ _('Logged in as') }} {{ current_user.username }}</a></p>
         </li>
-        <li><a class="navbar-link" href="{{ url_for('user.logout') }}"><i class="fa fa-sign-out"></i></a></li>
+        <li>
+            <p class="navbar-text"><a class="navbar-link" href="{{ url_for('user.logout') }}"><i class="fa fa-sign-out">{{ _('Log out') }}</i></a></p>
+        </li>
 
     </ul>
     {% elif form %}
@@ -40,7 +42,7 @@
         {{ form.username(placeholder="Username", class_="form-control") }}
         {{ form.password(placeholder="Password", class_="form-control") }}
       </div>
-      <button type="submit" class="btn btn-default">Log in</button>
+      <button type="submit" class="btn btn-default">{{ _('Log in') }}</button>
     </form>
     {% endif %}
   </div><!-- /.navbar-collapse -->

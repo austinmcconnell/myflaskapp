@@ -1,6 +1,6 @@
 
 {% extends "base.html" %}
 {% block app_content %}
-    <h1>Welcome {{ current_user.username }}</h1>
-    <h3>This is the members-only page.</h3>
+    <h1>{{ _('Welcome %(username)s', username=current_user.username) }}</h1>
+    <h3>{{ _('This is the members-only page') }}</h3>
 {% endblock %}
