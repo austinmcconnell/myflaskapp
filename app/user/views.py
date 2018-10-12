@@ -27,7 +27,7 @@ def load_user(user_id):
 def logout():
     """Logout."""
     logout_user()
-    flash('You are logged out.', 'info')
+    flash(_('You are logged out.'), 'info')
     return redirect(url_for('public.home'))
 
 
@@ -40,8 +40,8 @@ def register():
                            email=form.email.data,
                            password=form.password.data,
                            active=False)
-        flash('Thank you for registering. Please validate your email '
-              'address before logging in.', 'success')
+        flash(_('Thank you for registering. Please validate your email address before logging in.'),
+              'success')
         send_confirm_email(user)
         return redirect(url_for('public.home'))
     else:
@@ -52,11 +52,13 @@ def register():
 @bp.route('/login/', methods=['GET', 'POST'])
 def login():
     """Login user."""
+    if current_user.is_authenticated:
+        return redirect(url_for('public.home'))
     form = LoginForm(request.form)
     if request.method == 'POST':
         if form.validate_on_submit():
             login_user(form.user)
-            flash('You are logged in.', 'success')
+            flash(_('You are logged in.'), 'success')
             redirect_url = request.args.get('next') or url_for('user.members')
             return redirect(redirect_url)
         else:
@@ -68,14 +70,14 @@ def login():
 def reset_password_request():
     nav_form = LoginForm(request.form)
     if current_user.is_authenticated:
-        flash('You are already logged in.', 'info')
+        flash(_('You are already logged in.'), 'info')
         return redirect(url_for('public.home'))
     form = ResetPasswordRequestForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user:
             send_password_reset_email(user)
-        flash('Check your email for the instructions to reset your password')
+        flash(_('Check your email for the instructions to reset your password'))
         return redirect(url_for('user.login'))
     return render_template('reset_password_request.html',
                            title='Reset Password',
@@ -85,7 +87,7 @@ def reset_password_request():
 @bp.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
     if current_user.is_authenticated:
-        flash('You are already logged in.', 'info')
+        flash(_('You are already logged in.'), 'info')
         return redirect(url_for('public.home'))
     user = User.verify_reset_password_token(token)
     if not user:
@@ -94,7 +96,7 @@ def reset_password(token):
     if form.validate_on_submit():
         user.set_password(form.password.data)
         db.session.commit()
-        flash('Your password has been reset.')
+        flash(_('Your password has been reset.'))
         return redirect(url_for('user.login'))
     return render_template('reset_password.html', form=form)
 
@@ -103,7 +105,7 @@ def reset_password(token):
 def confirm_email(token):
     if not current_user.is_anonymous:
         if current_user.email_confirmed:
-            flash('You have already verified your email address.', 'info')
+            flash(_('You have already verified your email address.'), 'info')
             return redirect(url_for('public.home'))
     user = User.verify_confirmation_token(token)
     if not user:
@@ -111,7 +113,7 @@ def confirm_email(token):
     user.confirm_email()
     user.active = True
     db.session.commit()
-    flash('Your email has been confirmed.', 'success')
+    flash(_('Your email has been confirmed.'), 'success')
     return redirect(url_for('public.home'))
 
 

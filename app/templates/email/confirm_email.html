@@ -1,15 +1,13 @@
 
 
-<p>Dear {{ user.username }},</p>
+<p>{{ _('Hi %(username)s,', username=user.username) }}</p>
 <p>
-    Plase confirm your email by clicking the this link:
-    <a href="{{ url_for('user.confirm_email', token=token, _external=True) }}">
-        click here
-    </a>.
+    {{ _('Please confirm your email by clicking the follwing link:') }}
+    <a href="{{ url_for('user.confirm_email', token=token, _external=True) }}">{{ _('click here') }}</a>.
 </p>
-<p>Alternatively, you can paste the following link in your browser's address bar:</p>
+<p>{{ _('Alternatively, paste the following link in your browser\'s address bar:') }}</p>
 <p>{{ url_for('user.confirm_email', token=token, _external=True) }}</p>
-<p>Sincerely,</p>
+<p>{{ _('Sincerely,') }}</p>
 
 
-<p>The My Flask App Team</p>
+<p>{{ _('The %(title)s team', title= 'My Flask App')}}</p>
