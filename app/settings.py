@@ -2,6 +2,10 @@
 """Application configuration."""
 import os
 
+from dotenv import load_dotenv
+
+load_dotenv(override=True, verbose=True)
+
 
 class Config(object):
 
@@ -40,10 +44,6 @@ class Config(object):
     REDIS_URL = os.environ.get('REDIS_URL', 'redis://')
 
 
-class DevelopmentConfig(Config):
-    CACHE_TYPE = 'simple'
-
-
 class TestingConfig(Config):
     ENV = 'test'
     TESTING = True
@@ -54,6 +54,5 @@ class TestingConfig(Config):
     PRESERVE_CONTEXT_ON_EXCEPTION = False
 
 
-CONFIG = dict(development=DevelopmentConfig,
-              testing=TestingConfig,
-              default=Config)
+CONFIG = dict(default=Config,
+              testing=TestingConfig)
