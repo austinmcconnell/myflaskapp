@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-10-13 14:37-0500\n"
+"POT-Creation-Date: 2018-10-13 16:28-0500\n"
 "PO-Revision-Date: 2018-10-13 13:36-0500\n"
 "Last-Translator: \n"
 "Language: fr\n"
@@ -28,34 +28,64 @@ msgid "Welcome to %(title)s"
 msgstr "Bienvenue sur %(title)s"
 
 #: app/public/templates/home.html:9
-msgid "This is a starter Flask template. It includes Bootstrap 3, jQuery 2, Flask-SQLAlchemy, "
-"WTForms, and various testing utilities out of the box."
-msgstr "Ceci est un modèle de flacon de démarrage. Il comprend Bootstrap 3, "
-"jQuery 2, Flask-SQLAlchemy, WTForms et divers utilitaires de test prêts à l'emploi."
+msgid ""
+"This is a starter Flask template. It includes Bootstrap 3, jQuery 2, "
+"Flask-SQLAlchemy, WTForms, and various testing utilities out of the box."
+msgstr ""
+"Ceci est un modèle de flacon de démarrage. Il comprend Bootstrap 3, "
+"jQuery 2, Flask-SQLAlchemy, WTForms et divers utilitaires de test prêts à"
+" l'emploi."
 
 #: app/public/templates/home.html:10
 msgid "Learn more"
 msgstr "En savoir plus"
 
 #: app/public/templates/home.html:17
-msgid "Sleek, intuitive, and powerful mobile-first front-end framework for faster and easier web development."
-msgstr "Premier framework frontal mobile, élégant, intuitif et puissant pour un développement Web plus rapide et plus facile."
+msgid ""
+"Sleek, intuitive, and powerful mobile-first front-end framework for "
+"faster and easier web development."
+msgstr ""
+"Premier framework frontal mobile, élégant, intuitif et puissant pour un "
+"développement Web plus rapide et plus facile."
 
 #: app/public/templates/home.html:21
-msgid "SQLAlchemy is the Python SQL toolkit and Object Relational Mapper that gives application developers the full power and flexibility of SQL."
-msgstr "SQLAlchemy est le toolkit Python SQL et le mappeur d'objets relationnels qui offrent aux développeurs d'applications toute la puissance et la flexibilité de SQL."
+msgid ""
+"SQLAlchemy is the Python SQL toolkit and Object Relational Mapper that "
+"gives application developers the full power and flexibility of SQL."
+msgstr ""
+"SQLAlchemy est le toolkit Python SQL et le mappeur d'objets relationnels "
+"qui offrent aux développeurs d'applications toute la puissance et la "
+"flexibilité de SQL."
 
 #: app/public/templates/home.html:25
-msgid "WTForms is a flexible forms validation and rendering library for python web development."
-msgstr "WTForms est une bibliothèque de validation et de rendu de formulaires flexible pour le développement Web python."
+msgid ""
+"WTForms is a flexible forms validation and rendering library for python "
+"web development."
+msgstr ""
+"WTForms est une bibliothèque de validation et de rendu de formulaires "
+"flexible pour le développement Web python."
+
+#: app/public/templates/home.html:31
+msgid ""
+"Flask-Babel adds internationalization and localization support to the web"
+" app. It respects the user's preferred languages sent by the browser. "
+"Currently supported: French"
+msgstr ""
+"Flask-Babel ajoute un support d'internationalisation et de localisation à"
+" l'application Web. Il respecte les langues préférées de l’utilisateur "
+"envoyées par le navigateur. Actuellement pris en charge: français."
 
 #: app/templates/401.html:3
 msgid "Unauthorized"
 msgstr "Non autorisé"
 
 #: app/templates/401.html:9
-msgid "You are not authorized to see this page. Please log in or create a new account."
-msgstr "Vous n'êtes pas autorisé à voir cette page. Veuillez vous connecter ou créer un nouveau compte."
+msgid ""
+"You are not authorized to see this page. Please log in or create a new "
+"account."
+msgstr ""
+"Vous n'êtes pas autorisé à voir cette page. Veuillez vous connecter ou "
+"créer un nouveau compte."
 
 #: app/templates/401.html:10 app/templates/nav.html:45
 msgid "Log in"
@@ -78,8 +108,12 @@ msgid "Server error"
 msgstr "Erreur du serveur"
 
 #: app/templates/500.html:10
-msgid "Sorry, something went wrong on our system. Don't panic, we are fixing it! Please try again later."
-msgstr "Désolé, quelque chose s'est mal passé sur notre système. Ne paniquez pas, nous le réglons! Veuillez réessayer plus tard."
+msgid ""
+"Sorry, something went wrong on our system. Don't panic, we are fixing it!"
+" Please try again later."
+msgstr ""
+"Désolé, quelque chose s'est mal passé sur notre système. Ne paniquez pas,"
+" nous le réglons! Veuillez réessayer plus tard."
 
 #: app/templates/footer.html:9
 msgid "About"
@@ -115,7 +149,9 @@ msgstr "cliquez ici"
 #: app/templates/email/confirm_email.html:8
 #: app/templates/email/reset_password.html:10
 msgid "Alternatively, paste the following link in your browser's address bar:"
-msgstr "Vous pouvez également coller le lien suivant dans la barre d'adresse de votre navigateur:"
+msgstr ""
+"Vous pouvez également coller le lien suivant dans la barre d'adresse de "
+"votre navigateur:"
 
 #: app/templates/email/confirm_email.html:10
 #: app/templates/email/reset_password.html:13
@@ -134,7 +170,9 @@ msgstr "Réinitialisez votre mot de passe en cliquant sur ce lien:"
 
 #: app/templates/email/reset_password.html:12
 msgid "If you have not requested a password reset, simply ignore this message."
-msgstr "Si vous n'avez pas demandé de réinitialisation de mot de passe, ignorez simplement ce message."
+msgstr ""
+"Si vous n'avez pas demandé de réinitialisation de mot de passe, ignorez "
+"simplement ce message."
 
 #: app/user/forms.py:14 app/user/forms.py:49
 msgid "Username"
@@ -201,8 +239,12 @@ msgid "You are logged out."
 msgstr "Vous êtes déconnecté"
 
 #: app/user/views.py:43
-msgid "Thank you for registering. Please validate your email address before logging in."
-msgstr "Merci de votre inscription. Veuillez valider votre adresse e-mail avant de vous connecter."
+msgid ""
+"Thank you for registering. Please validate your email address before "
+"logging in."
+msgstr ""
+"Merci de votre inscription. Veuillez valider votre adresse e-mail avant "
+"de vous connecter."
 
 #: app/user/views.py:61
 msgid "You are logged in."
@@ -214,7 +256,9 @@ msgstr "Vous êtes déjà connecté"
 
 #: app/user/views.py:80
 msgid "Check your email for the instructions to reset your password"
-msgstr "Consultez votre email pour les instructions pour réinitialiser votre mot de passe"
+msgstr ""
+"Consultez votre email pour les instructions pour réinitialiser votre mot "
+"de passe"
 
 #: app/user/views.py:99
 msgid "Your password has been reset."
@@ -260,12 +304,3 @@ msgstr "Cliquez ici pour vous connecter"
 #: app/user/templates/reset_password.html:4
 msgid "Reset Your Password"
 msgstr "Réinitialisez votre mot de passe"
-
-#~ msgid "Please confirm your email by clicking the following link:"
-#~ msgstr "Veuillez confirmer votre email en cliquant sur le lien suivant:"
-
-#~ msgid "Click here"
-#~ msgstr "Cliquez ici"
-
-#~ msgid "This is the members-only page."
-#~ msgstr "Ceci est la page réservée aux membres."
