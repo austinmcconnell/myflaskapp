@@ -17,7 +17,7 @@ from app.extensions import (babel, bcrypt, bootstrap, cache, csrf_protect, db,
 from app.settings import CONFIG
 
 
-def create_app(config_name):
+def create_app(config_name='default'):
     app = Flask(__name__)
     app.config.from_object(CONFIG[config_name])
 

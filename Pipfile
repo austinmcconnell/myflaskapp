@@ -20,6 +20,7 @@ gunicorn = "*"
 maya = "*"
 psycopg2 = "*"
 pyjwt = "*"
+python-dotenv = "*"
 rollbar = "*"
 
 [dev-packages]
