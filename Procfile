@@ -1,2 +1,2 @@
-web: gunicorn run:app
-release: flask db upgrade; flask translate compile
+web: flask translate compile; gunicorn run:app
+release: flask db upgrade
