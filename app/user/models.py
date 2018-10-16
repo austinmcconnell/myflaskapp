@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """User models."""
-import datetime as dt
+from datetime import datetime
 from hashlib import md5
 from time import time
 from typing import Union
@@ -10,25 +10,8 @@ from flask_login import UserMixin
 import jwt
 from jwt import InvalidTokenError
 
-from app.database import Column, Model, SurrogatePK, db, reference_col, relationship
+from app.database import Column, Model, SurrogatePK, db
 from app.extensions import bcrypt
-
-
-class Role(SurrogatePK, Model):
-    """A role for a user."""
-
-    __tablename__ = 'roles'
-    name = Column(db.String(80), unique=True, nullable=False)
-    user_id = reference_col('users', nullable=True)
-    user = relationship('User', backref='roles')
-
-    def __init__(self, name, **kwargs):
-        """Create instance."""
-        db.Model.__init__(self, name=name, **kwargs)
-
-    def __repr__(self):
-        """Represent instance as a unique string."""
-        return '<Role({name})>'.format(name=self.name)
 
 
 class User(UserMixin, SurrogatePK, Model):
@@ -39,15 +22,15 @@ class User(UserMixin, SurrogatePK, Model):
     email = Column(db.String(80), unique=True, nullable=False)
     #: The hashed password
     password = Column(db.Binary(128), nullable=True)
-    created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
     first_name = Column(db.String(30), nullable=True)
     last_name = Column(db.String(30), nullable=True)
     active = Column(db.Boolean(), default=False)
     is_admin = Column(db.Boolean(), default=False)
     email_confirmed = Column(db.Boolean(), nullable=True, default=False)
-    email_confirmed_at = Column(db.DateTime, nullable=True)
-    last_seen = db.Column(db.DateTime, default=dt.datetime.utcnow)
+    email_confirmed_at = Column(db.DateTime(timezone='America/Chicago'), nullable=True)
     locale = db.Column(db.String(length=2), default='en')
+    created_at = Column(db.DateTime(timezone='America/Chicago'), nullable=False, default=datetime.now)
+    last_seen = db.Column(db.DateTime(timezone='America/Chicago'), default=datetime.now)
 
     def __init__(self, username: str, email: str, password: str=None, **kwargs) -> None:
         """Create instance."""
@@ -90,7 +73,7 @@ class User(UserMixin, SurrogatePK, Model):
 
     def confirm_email(self) -> None:
         self.email_confirmed = True
-        self.email_confirmed_at = dt.datetime.utcnow()
+        self.email_confirmed_at = datetime.now()
 
     def get_confirmation_token(self) -> str:
         return jwt.encode(
