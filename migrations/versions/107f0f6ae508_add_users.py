@@ -1,22 +1,19 @@
 """
-Create Users table.
+Create Users table
 
-Revision ID: 536562bed58a
+Revision ID: 107f0f6ae508
 Revises:
-Create Date: 2018-01-06 09:47:50.307403
+Create Date: 2018-10-15 21:38:44.913464
 
 """
 from alembic import op
 import sqlalchemy as sa
 
 # revision identifiers, used by Alembic.
-revision = '536562bed58a'
+revision = '107f0f6ae508'
 down_revision = None
 branch_labels = None
 depends_on = None
-
-
-# pylint: disable=invalid-name
 
 
 def upgrade():
@@ -26,18 +23,21 @@ def upgrade():
                     sa.Column('username', sa.String(length=80), nullable=False),
                     sa.Column('email', sa.String(length=80), nullable=False),
                     sa.Column('password', sa.Binary(), nullable=True),
-                    sa.Column('created_at', sa.DateTime(), nullable=False),
                     sa.Column('first_name', sa.String(length=30), nullable=True),
                     sa.Column('last_name', sa.String(length=30), nullable=True),
                     sa.Column('active', sa.Boolean(), nullable=True),
                     sa.Column('is_admin', sa.Boolean(), nullable=True),
                     sa.Column('email_confirmed', sa.Boolean(), nullable=True),
-                    sa.Column('email_confirmed_at', sa.DateTime(), nullable=True),
+                    sa.Column('email_confirmed_at', sa.DateTime(timezone='America/Chicago'),
+                              nullable=True),
+                    sa.Column('locale', sa.String(length=2), nullable=True),
+                    sa.Column('created_at', sa.DateTime(timezone='America/Chicago'),
+                              nullable=False),
+                    sa.Column('last_seen', sa.DateTime(timezone='America/Chicago'), nullable=True),
                     sa.PrimaryKeyConstraint('id'),
                     sa.UniqueConstraint('email'),
                     sa.UniqueConstraint('username')
                     )
-
     # ### end Alembic commands ###
 
 
