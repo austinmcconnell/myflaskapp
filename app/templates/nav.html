@@ -21,6 +21,7 @@
     <ul class="nav navbar-nav">
       <li><a href="{{ url_for('public.home') }}">{{ _('Home') }}</a></li>
       <li><a href="{{ url_for('public.about') }}">{{ _('About') }}</a></li>
+        <li><a href="{{ url_for('user.edit_profile') }}">{{ _('Profile') }}</a></li>
     </ul>
     {% if current_user and current_user.is_authenticated %}
     <ul class="nav navbar-nav navbar-right">
@@ -34,13 +35,13 @@
     </ul>
     {% elif form %}
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="{{ url_for('user.register') }}">Create account</a></li>
+      <li><a href="{{ url_for('user.register') }}">{{ _('Create account') }}</a></li>
     </ul>
     <form id="loginForm" method="POST" class="navbar-form form-inline navbar-right" action="/" role="login">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
       <div class="form-group">
-        {{ form.username(placeholder="Username", class_="form-control") }}
-        {{ form.password(placeholder="Password", class_="form-control") }}
+        {{ form.username(class_="form-control") }}
+        {{ form.password(class_="form-control") }}
       </div>
       <button type="submit" class="btn btn-default">{{ _('Log in') }}</button>
     </form>

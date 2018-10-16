@@ -1,5 +1,5 @@
 """
-Alembic revision script.
+Create Roles table.
 
 Revision ID: c7e3b474c749
 Revises: 536562bed58a

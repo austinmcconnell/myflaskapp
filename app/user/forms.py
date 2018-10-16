@@ -2,7 +2,7 @@
 """User forms."""
 from flask_babel import lazy_gettext as _l, _
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, StringField, SubmitField
+from wtforms import PasswordField, SelectField, StringField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo, Length
 
 from .models import User
@@ -20,7 +20,7 @@ class RegisterForm(FlaskForm):
     confirm = PasswordField(label=_l('Verify password'),
                             validators=[DataRequired(),
                                         EqualTo('password', message=_l('Passwords must match'))])
-    submit = SubmitField(_('Register'))
+    submit = SubmitField(_l('Register'))
 
     def __init__(self, *args, **kwargs):
         """Create instance."""
@@ -46,8 +46,8 @@ class RegisterForm(FlaskForm):
 class LoginForm(FlaskForm):
     """Login form."""
 
-    username = StringField(_l('Username'), validators=[DataRequired()])
-    password = PasswordField(_l('Password'), validators=[DataRequired()])
+    username = StringField(_l('Username'),  validators=[DataRequired()], render_kw={'placeholder': _l('Username')})
+    password = PasswordField(_l('Password'), validators=[DataRequired()], render_kw={'placeholder': _l('Password')})
     submit = SubmitField(_l('Log In'))
 
     def __init__(self, *args, **kwargs):
@@ -85,3 +85,11 @@ class ResetPasswordForm(FlaskForm):
     password = PasswordField(_l('Password'), validators=[DataRequired()])
     password2 = PasswordField(_l('Repeat Password'), validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField(_l('Reset Password'))
+
+
+class EditProfileForm(FlaskForm):
+    username = StringField(_l('Username'), validators=[DataRequired()])
+    first_name = StringField(_l('First Name'))
+    last_name = StringField(_l('Last Name'))
+    locale = SelectField(_l('Preferred Language'), choices=[('en', _l('English')), ('fr', _l('French'))])
+    submit = SubmitField(_l('Submit'))

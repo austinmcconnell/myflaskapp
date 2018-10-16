@@ -48,6 +48,10 @@ textarea {
           box-sizing: border-box;
 }
 
+ .form-edit-profile {
+   width: 25%;
+ }
+
 /* footer */
 
 footer {

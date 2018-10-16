@@ -1,4 +1,5 @@
 from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask_babel import _
 from flask_login import login_user
 
 from app.user.forms import LoginForm
@@ -24,7 +25,7 @@ def home():
     if request.method == 'POST':
         if form.validate_on_submit():
             login_user(form.user)
-            flash('You are logged in.', 'success')
+            flash(_('You are logged in.'), 'success')
             redirect_url = request.args.get('next') or url_for('user.members')
             return redirect(redirect_url)
         else:

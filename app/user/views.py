@@ -6,8 +6,8 @@ from flask_login import current_user, login_required, login_user, logout_user
 
 from app.email import send_confirm_email, send_password_reset_email
 from app.extensions import db, login_manager
-from app.user.forms import (LoginForm, RegisterForm, ResetPasswordForm,
-                            ResetPasswordRequestForm)
+from app.user.forms import (EditProfileForm, LoginForm, RegisterForm,
+                            ResetPasswordForm, ResetPasswordRequestForm)
 from app.user.models import User
 from app.utils import flash_errors
 
@@ -122,3 +122,25 @@ def confirm_email(token):
 def members():
     """List members."""
     return render_template('members.html')
+
+
+@bp.route('/edit_profile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    form = EditProfileForm()
+    if form.validate_on_submit():
+        current_user.first_name = form.first_name.data
+        current_user.last_name = form.last_name.data
+        current_user.locale = form.locale.data
+        db.session.commit()
+        flash(_('Your changes have been saved.'))
+        # return redirect(url_for('public.home'))
+        return render_template('edit_profile.html', title=_('Edit Profile'), form=form)
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.first_name.data = current_user.first_name
+        form.last_name.data = current_user.last_name
+        form.locale.data = current_user.locale
+    else:
+        flash_errors(form)
+    return render_template('edit_profile.html', title=_('Edit Profile'), form=form)

@@ -1,5 +1,5 @@
 """
-Alembic revision script.
+Create Users table.
 
 Revision ID: 536562bed58a
 Revises:

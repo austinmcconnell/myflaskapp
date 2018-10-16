@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-10-14 14:40-0500\n"
+"POT-Creation-Date: 2018-10-15 21:01-0500\n"
 "PO-Revision-Date: 2018-10-13 13:36-0500\n"
 "Last-Translator: \n"
 "Language: fr\n"
@@ -17,6 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.6.0\n"
+
+#: app/public/views.py:28 app/user/views.py:61
+msgid "You are logged in."
+msgstr "Vous êtes connecté"
 
 #: app/public/templates/about.html:8
 msgid "This template was created by"
@@ -87,11 +91,11 @@ msgstr ""
 "Vous n'êtes pas autorisé à voir cette page. Veuillez vous connecter ou "
 "créer un nouveau compte."
 
-#: app/templates/401.html:10 app/templates/nav.html:45
+#: app/templates/401.html:10 app/templates/nav.html:46
 msgid "Log in"
 msgstr "S'identifier"
 
-#: app/templates/401.html:11
+#: app/templates/401.html:11 app/templates/nav.html:38
 msgid "Create account"
 msgstr "Créer un compte"
 
@@ -127,11 +131,15 @@ msgstr "Contact"
 msgid "Home"
 msgstr "Accueil"
 
-#: app/templates/nav.html:28
+#: app/templates/nav.html:24
+msgid "Profile"
+msgstr "Profil"
+
+#: app/templates/nav.html:29
 msgid "Logged in as"
 msgstr "Connecté en tant que"
 
-#: app/templates/nav.html:31
+#: app/templates/nav.html:32
 msgid "Log out"
 msgstr "Se déconnecter"
 
@@ -178,7 +186,7 @@ msgstr ""
 "Si vous n'avez pas demandé de réinitialisation de mot de passe, ignorez "
 "simplement ce message."
 
-#: app/user/forms.py:14 app/user/forms.py:49
+#: app/user/forms.py:14 app/user/forms.py:49 app/user/forms.py:91
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
@@ -238,6 +246,30 @@ msgstr "Répéter le mot de passe"
 msgid "Reset Password"
 msgstr "Réinitialiser le mot de passe"
 
+#: app/user/forms.py:92
+msgid "First Name"
+msgstr "Prénom"
+
+#: app/user/forms.py:93
+msgid "Last Name"
+msgstr "Nom de Famille"
+
+#: app/user/forms.py:94
+msgid "Preferred Language"
+msgstr "Langue Préférée"
+
+#: app/user/forms.py:94
+msgid "English"
+msgstr "Anglais"
+
+#: app/user/forms.py:94
+msgid "French"
+msgstr "Français"
+
+#: app/user/forms.py:95
+msgid "Submit"
+msgstr "Soumettre"
+
 #: app/user/views.py:30
 msgid "You are logged out."
 msgstr "Vous êtes déconnecté"
@@ -249,10 +281,6 @@ msgid ""
 msgstr ""
 "Merci de votre inscription. Veuillez valider votre adresse e-mail avant "
 "de vous connecter."
-
-#: app/user/views.py:61
-msgid "You are logged in."
-msgstr "Vous êtes connecté"
 
 #: app/user/views.py:73 app/user/views.py:90
 msgid "You are already logged in."
@@ -275,6 +303,14 @@ msgstr "Vous avez déjà confirmé votre adresse email."
 #: app/user/views.py:116
 msgid "Your email has been confirmed."
 msgstr "Votre adresse de messagerie a bien été confirmée."
+
+#: app/user/views.py:136
+msgid "Your changes have been saved."
+msgstr "Vos changements ont été enregistrés."
+
+#: app/user/templates/edit_profile.html:4 app/user/views.py:145
+msgid "Edit Profile"
+msgstr "Editer le Profil"
 
 #: app/user/templates/login.html:4
 msgid "Sign In"
