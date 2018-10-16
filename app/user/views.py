@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """User views."""
-from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask import Blueprint, flash, redirect, render_template, request, url_for, session
 from flask_babel import _
 from flask_login import current_user, login_required, login_user, logout_user
 
@@ -133,6 +133,7 @@ def edit_profile():
         current_user.last_name = form.last_name.data
         current_user.locale = form.locale.data
         db.session.commit()
+        session['locale'] = form.locale.data
         flash(_('Your changes have been saved.'))
         # return redirect(url_for('public.home'))
         return render_template('edit_profile.html', title=_('Edit Profile'), form=form)
