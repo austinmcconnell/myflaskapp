@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """User models."""
 import datetime as dt
+from hashlib import md5
 from time import time
 from typing import Union
 
@@ -45,6 +46,8 @@ class User(UserMixin, SurrogatePK, Model):
     is_admin = Column(db.Boolean(), default=False)
     email_confirmed = Column(db.Boolean(), nullable=True, default=False)
     email_confirmed_at = Column(db.DateTime, nullable=True)
+    last_seen = db.Column(db.DateTime, default=dt.datetime.utcnow)
+    locale = db.Column(db.String(length=2), default='en')
 
     def __init__(self, username: str, email: str, password: str=None, **kwargs) -> None:
         """Create instance."""
@@ -102,3 +105,8 @@ class User(UserMixin, SurrogatePK, Model):
         except:
             return None
         return User.query.get(user_id)
+
+    def avatar(self, size):
+        digest = md5(self.email.lower().encode('utf-8')).hexdigest()
+        return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(
+            digest, size)

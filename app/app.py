@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
+
 from flask import Flask, got_request_exception, render_template, request, current_app, g
+from flask_login import current_user
 from flask_mail import email_dispatched
 import rollbar
 import rollbar.contrib.flask
@@ -22,6 +25,9 @@ def create_app(config_name):
 
     @app.before_request
     def before_request():
+        if current_user.is_authenticated:
+            current_user.last_seen = datetime.utcnow()
+            db.session.commit()
         g.locale = str(get_locale())
 
     @app.before_first_request
@@ -90,4 +96,8 @@ def register_commands(app):
 
 @babel.localeselector
 def get_locale():
-    return request.accept_languages.best_match(current_app.config['LANGUAGES'])
+    if current_user.is_authenticated:
+        locale = current_user.locale
+    else:
+        locale = request.accept_languages.best_match(current_app.config['LANGUAGES'])
+    return locale
