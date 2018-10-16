@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 
-from flask import Flask, got_request_exception, render_template, request, current_app, g
+from flask import Flask, got_request_exception, render_template, request, current_app, g, session
 from flask_login import current_user
 from flask_mail import email_dispatched
 import rollbar
@@ -98,6 +98,8 @@ def register_commands(app):
 def get_locale():
     if current_user.is_authenticated:
         locale = current_user.locale
+    elif 'locale' in session:
+        return session['locale']
     else:
         locale = request.accept_languages.best_match(current_app.config['LANGUAGES'])
     return locale
