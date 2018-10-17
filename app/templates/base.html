@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block navbar %}
-    {% with form=nav_form  %}
+    {% with form=nav_form %}
         {% include "nav.html" %}
     {% endwith %}
 {% endblock %}
@@ -13,11 +13,11 @@
 {% block content %}
     <div class="container">
         {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-            <div class="alert alert-info" role="alert">{{ message }}</div>
-            {% endfor %}
-        {% endif %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-info" role="alert">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
         {% endwith %}
 
         {# application content needs to be provided in the app_content block #}
@@ -27,14 +27,14 @@
 {% endblock %}
 
 {% block styles -%}
-    {{super()}}  {# do not forget to call super or Bootstrap's own stylesheets
+    {{ super() }}  {# do not forget to call super or Bootstrap's own stylesheets
                     will disappear! #}
-    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 {% endblock %}
 
 {% block scripts %}
     {{ super() }}
     {{ moment.include_moment() }}
     {{ moment.lang(g.locale) }}
-    <link rel="stylesheet" href="{{url_for('static', filename='js/main.js')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='js/main.js') }}">
 {% endblock %}

@@ -1,35 +1,35 @@
-
 {% extends "base.html" %}
 {% block app_content %}
-<!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron">
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
 
-  <h1>{{ _('Welcome to %(title)s', title='My Flask App') }}</h1>
+        <h1>{{ _('Welcome to %(title)s', title='My Flask App') }}</h1>
 
-  <p>{{ _('This is a starter Flask template. It includes Bootstrap 3, jQuery 2, Flask-SQLAlchemy, WTForms, and various testing utilities out of the box.') }}</p>
-  <p><a href="https://github.com/austinmcconnell/myflaskapp" class="btn btn-primary btn-large">{{ _('Learn more') }}</a></p>
-</div><!-- /.jumbotron -->
+        <p>{{ _('This is a starter Flask template. It includes Bootstrap 3, jQuery 2, Flask-SQLAlchemy, WTForms, and various testing utilities out of the box.') }}</p>
+        <p><a href="https://github.com/austinmcconnell/myflaskapp"
+              class="btn btn-primary btn-large">{{ _('Learn more') }}</a></p>
+    </div><!-- /.jumbotron -->
 
-<div class="body-content">
-  <div class="row">
-    <div class="col-lg-4">
-      <h2><i class="fa fa-code"></i> Bootstrap 3</h2>
-      <p>{{ _('Sleek, intuitive, and powerful mobile-first front-end framework for faster and easier web development.') }}</p>
+    <div class="body-content">
+        <div class="row">
+            <div class="col-lg-4">
+                <h2><i class="fa fa-code"></i> Bootstrap 3</h2>
+                <p>{{ _('Sleek, intuitive, and powerful mobile-first front-end framework for faster and easier web development.') }}</p>
+            </div>
+            <div class="col-lg-4">
+                <h2><i class="fa fa-flask"></i> SQLAlchemy</h2>
+                <p>{{ _('SQLAlchemy is the Python SQL toolkit and Object Relational Mapper that gives application developers the full power and flexibility of SQL.') }}</p>
+            </div>
+            <div class="col-lg-4">
+                <h2><i class="fa fa-edit"></i> WTForms</h2>
+                <p>{{ _('WTForms is a flexible forms validation and rendering library for python web development.') }}</p>
+            </div>
+        </div><!-- /.row -->
+        <div class="row">
+            <div class="col-lg-4">
+                <h2><i class="fa fa-code"></i> Flask-Babel</h2>
+                <p>{{ _('Flask-Babel adds internationalization and localization support to the web app. It respects the user\'s preferred languages sent by the browser. Currently supported: French') }}</p>
+            </div>
+        </div>
     </div>
-    <div class="col-lg-4">
-      <h2><i class="fa fa-flask"></i> SQLAlchemy</h2>
-      <p>{{ _('SQLAlchemy is the Python SQL toolkit and Object Relational Mapper that gives application developers the full power and flexibility of SQL.') }}</p>
-   </div>
-    <div class="col-lg-4">
-      <h2><i class="fa fa-edit"></i> WTForms</h2>
-      <p>{{ _('WTForms is a flexible forms validation and rendering library for python web development.') }}</p>
-    </div>
-  </div><!-- /.row -->
-<div class="row">
-    <div class="col-lg-4">
-      <h2><i class="fa fa-code"></i> Flask-Babel</h2>
-      <p>{{ _('Flask-Babel adds internationalization and localization support to the web app. It respects the user\'s preferred languages sent by the browser. Currently supported: French') }}</p>
-    </div>
-</div>
-</div>
 {% endblock %}
