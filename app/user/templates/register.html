@@ -1,28 +1,28 @@
 {% extends "base.html" %}
 {% block app_content %}
-<div class="container-narrow">
-  <h1>{{ _('Register') }}</h1>
-    <br/>
-    <form id="registerForm" class="form form-register" method="POST" action="" role="form">
+    <div class="container-narrow">
+        <h1>{{ _('Register') }}</h1>
+        <br/>
+        <form id="registerForm" class="form form-register" method="POST" action="" role="form">
             {{ form.hidden_tag() }}
             <div class="form-group">
-                {{form.username.label}}
-                {{form.username(class_="form-control")}}
+                {{ form.username.label }}
+                {{ form.username(class_="form-control") }}
             </div>
             <div class="form-group">
-                {{form.email.label}}
-                {{form.email(class_="form-control")}}
+                {{ form.email.label }}
+                {{ form.email(class_="form-control") }}
             </div>
             <div class="form-group">
-                {{form.password.label}}
-                {{form.password(class_="form-control")}}
+                {{ form.password.label }}
+                {{ form.password(class_="form-control") }}
             </div>
             <div class="form-group">
-                {{form.confirm.label}}
-                {{form.confirm(class_="form-control")}}
+                {{ form.confirm.label }}
+                {{ form.confirm(class_="form-control") }}
             </div>
             <p>{{ form.submit(class_="btn btn-default btn-submit") }}</p>
-    </form>
-    <p><em>{{ _('Already registered?') }}</em><a href="/">{{ _('Click here to login')}}</a></p>
-</div>
+        </form>
+        <p><em>{{ _('Already registered?') }}</em><a href="/">{{ _('Click here to login') }}</a></p>
+    </div>
 {% endblock %}
