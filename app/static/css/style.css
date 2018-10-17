@@ -33,11 +33,6 @@ textarea {
   width: 180px;
 }
 
-
-.form-register {
-  width: 50%;
-}
-
 .form-register .form-control {
   position: relative;
   font-size: 16px;
@@ -47,10 +42,6 @@ textarea {
      -moz-box-sizing: border-box;
           box-sizing: border-box;
 }
-
- .form-edit-profile {
-   width: 25%;
- }
 
 /* footer */
 
