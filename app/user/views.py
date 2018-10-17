@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """User views."""
-from flask import Blueprint, flash, redirect, render_template, request, url_for, session
+from flask import Blueprint, flash, g, redirect, render_template, request, url_for, session
 from flask_babel import _
 from flask_login import current_user, login_required, login_user, logout_user
 
@@ -39,7 +39,9 @@ def register():
         user = User.create(username=form.username.data,
                            email=form.email.data,
                            password=form.password.data,
-                           active=False)
+                           active=False,
+                           locale=g.locale)
+        session['locale'] = user.locale
         flash(_('Thank you for registering. Please validate your email address before logging in.'),
               'success')
         send_confirm_email(user)
