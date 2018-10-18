@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Defines fixtures available to all tests."""
 
+from flask import g
 import pytest
 from webtest import TestApp
 
@@ -15,6 +16,10 @@ def app():
     _app = create_app('testing')
     ctx = _app.test_request_context()
     ctx.push()
+
+    @_app.before_request
+    def set_locale():
+        g.locale = 'en'
 
     yield _app
 
