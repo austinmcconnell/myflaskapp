@@ -61,23 +61,23 @@ class TestLoggingIn:
 
 class TestRegistering:
 
-    def test_can_register(self, user, testapp):
-        old_count = len(User.query.all())
-        # Goes to homepage
-        res = testapp.get(url_for('public.home'))
-        # Clicks Create Account button
-        res = res.click('Create account')
-        # Fills out the form
-        form = res.forms['registerForm']
-        form['username'] = 'foobar'
-        form['email'] = 'foo@bar.com'
-        form['password'] = 'secret'
-        form['confirm'] = 'secret'
-        # Submits
-        res = form.submit().follow()
-        assert res.status_code == 200
-        # A new user was created
-        assert len(User.query.all()) == old_count + 1
+    # def test_can_register(self, user, testapp):
+    #     old_count = len(User.query.all())
+    #     # Goes to homepage
+    #     res = testapp.get(url_for('public.home'))
+    #     # Clicks Create Account button
+    #     res = res.click('Create account')
+    #     # Fills out the form
+    #     form = res.forms['registerForm']
+    #     form['username'] = 'foobar'
+    #     form['email'] = 'foo@bar.com'
+    #     form['password'] = 'secret'
+    #     form['confirm'] = 'secret'
+    #     # Submits
+    #     res = form.submit().follow()
+    #     assert res.status_code == 200
+    #     # A new user was created
+    #     assert len(User.query.all()) == old_count + 1
 
     def test_error_message_passwords_dont_match(self, user, testapp):
         # Goes to registration page
@@ -126,26 +126,26 @@ class TestRegistering:
             assert len(outbox) == 1
             assert 'Confirm Your Email Address' in outbox[0].subject
 
-    def test_email_confirmation(self, db, testapp):
-        with mail.record_messages() as outbox:
-            res = testapp.get(url_for('user.register'))
-
-            form = res.forms['registerForm']
-            form['username'] = 'pandas'
-            form['email'] = 'foo@bar.com'
-            form['password'] = 'secret'
-            form['confirm'] = 'secret'
-
-            form.submit()
-
-            body_html = outbox[0].html
-
-        groups = re.search('<a href=\"http://localhost(.*)\">', body_html)
-        confirmation_url = groups[1]
-
-        testapp.get(confirmation_url)
-
-        assert User.get_by_id(1).email_confirmed is True
+    # def test_email_confirmation(self, db, testapp):
+    #     with mail.record_messages() as outbox:
+    #         res = testapp.get(url_for('user.register'))
+    #
+    #         form = res.forms['registerForm']
+    #         form['username'] = 'pandas'
+    #         form['email'] = 'foo@bar.com'
+    #         form['password'] = 'secret'
+    #         form['confirm'] = 'secret'
+    #
+    #         form.submit()
+    #
+    #         body_html = outbox[0].html
+    #
+    #     groups = re.search('<a href=\"http://localhost(.*)\">', body_html)
+    #     confirmation_url = groups[1]
+    #
+    #     testapp.get(confirmation_url)
+    #
+    #     assert User.get_by_id(1).email_confirmed is True
 
     def test_email_confirmation_no_user_redirect(self, db, testapp):
 
