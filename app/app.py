@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
+import maya
 
 from flask import Flask, got_request_exception, render_template, request, current_app, g, session
 from flask_login import current_user
@@ -26,7 +26,7 @@ def create_app(config_name):
     @app.before_request
     def before_request():
         if current_user.is_authenticated:
-            current_user.last_seen = datetime.now()
+            current_user.last_seen = maya.now().datetime()
             db.session.commit()
         g.locale = str(get_locale())
 
