@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """User models."""
-import maya
 from hashlib import md5
 from time import time
 from typing import Union
@@ -9,6 +8,7 @@ from flask import current_app
 from flask_login import UserMixin
 import jwt
 from jwt import InvalidTokenError
+import maya
 
 from app.database import Column, Model, SurrogatePK, db
 from app.extensions import bcrypt
