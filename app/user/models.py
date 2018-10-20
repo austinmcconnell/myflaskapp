@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """User models."""
-from datetime import datetime
+import maya
 from hashlib import md5
 from time import time
 from typing import Union
@@ -27,10 +27,10 @@ class User(UserMixin, SurrogatePK, Model):
     active = Column(db.Boolean(), default=False)
     is_admin = Column(db.Boolean(), default=False)
     email_confirmed = Column(db.Boolean(), nullable=True, default=False)
-    email_confirmed_at = Column(db.DateTime(timezone='America/Chicago'), nullable=True)
+    email_confirmed_at = Column(db.DateTime(timezone=True), nullable=True)
     locale = db.Column(db.String(length=2), default='en')
-    created_at = Column(db.DateTime(timezone='America/Chicago'), nullable=False, default=datetime.now)
-    last_seen = db.Column(db.DateTime(timezone='America/Chicago'), default=datetime.now)
+    created_at = Column(db.DateTime(timezone=True), nullable=False, default=maya.now().datetime)
+    last_seen = db.Column(db.DateTime(timezone=True))
 
     def __init__(self, username: str, email: str, password: str=None, **kwargs) -> None:
         """Create instance."""
@@ -73,7 +73,7 @@ class User(UserMixin, SurrogatePK, Model):
 
     def confirm_email(self) -> None:
         self.email_confirmed = True
-        self.email_confirmed_at = datetime.now()
+        self.email_confirmed_at = maya.now().datetime()
 
     def get_confirmation_token(self) -> str:
         return jwt.encode(

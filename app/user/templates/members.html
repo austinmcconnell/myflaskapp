@@ -2,4 +2,7 @@
 {% block app_content %}
     <h1>{{ _('Welcome %(username)s', username=current_user.username) }}</h1>
     <h3>{{ _('This is the members-only page') }}</h3>
+    {% if current_user.last_seen %}
+        <p>Last seen on: {{ moment(current_user.last_seen.utcnow()).format('LLL') }}</p>
+    {% endif %}
 {% endblock %}
