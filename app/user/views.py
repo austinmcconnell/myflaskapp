@@ -126,9 +126,9 @@ def members():
     return render_template('members.html')
 
 
-@bp.route('/edit_profile', methods=['GET', 'POST'])
+@bp.route('/profile', methods=['GET', 'POST'])
 @login_required
-def edit_profile():
+def profile():
     form = EditProfileForm()
     if form.validate_on_submit():
         current_user.first_name = form.first_name.data
@@ -138,7 +138,7 @@ def edit_profile():
         session['locale'] = form.locale.data
         flash(_('Your changes have been saved.'))
         # return redirect(url_for('public.home'))
-        return render_template('edit_profile.html', title=_('Edit Profile'), form=form)
+        return render_template('profile.html', title=_('Profile'), form=form)
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.first_name.data = current_user.first_name
@@ -146,4 +146,4 @@ def edit_profile():
         form.locale.data = current_user.locale
     else:
         flash_errors(form)
-    return render_template('edit_profile.html', title=_('Edit Profile'), form=form)
+    return render_template('profile.html', title=_('Profile'), form=form)
