@@ -1,11 +1,12 @@
 """
-Create Users table
+Create Users table.
 
 Revision ID: 107f0f6ae508
 Revises:
 Create Date: 2018-10-15 21:38:44.913464
 
 """
+# pylint: disable=invalid-name
 from alembic import op
 import sqlalchemy as sa
 

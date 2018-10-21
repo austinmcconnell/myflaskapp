@@ -1,5 +1,4 @@
 {
-    "description": "A flasky app.",
     "addons": [
         {
             "options": {
@@ -16,6 +15,7 @@
             "url": "heroku/python"
         }
     ],
+    "description": "A flasky app.",
     "env": {
         "FLASK_APP": "autoapp.py",
         "FLASK_DEBUG": "0",
