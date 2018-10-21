@@ -26,10 +26,10 @@ jobs:
           paths:
             - "venv"
       - run:
-          name: Run Python linter
+          name: Run pre-commit checks
           command: |
             . venv/bin/activate
-            flask lint
+            flask check
       - run:
           name: Run mypy checker
           command: |

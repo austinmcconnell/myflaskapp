@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """Click commands."""
-from glob import glob
 import os
 from subprocess import call
 
@@ -19,20 +18,9 @@ def test():
 
 
 @click.command()
-def lint():
-    skip = ['__pycache__', 'migrations', 'static']
-    root_files = glob('*.py')
-    root_directories = [name for name in next(os.walk('.'))[1] if not name.startswith('.')]
-    files_and_directories = [arg for arg in root_files + root_directories if arg not in skip]
-
-    def execute_tool(description, *args):
-        """Execute a checking tool with its arguments."""
-        command_line = list(args) + files_and_directories
-        click.echo('{}: {}'.format(description, ' '.join(command_line)))
-        status_code = call(command_line)
-        if status_code != 0:
-            exit(status_code)
-    execute_tool('Checking code style', 'pylint')
+def check():
+    status_code = call(['pre-commit', 'run', '--all'])
+    exit(status_code)
 
 
 @click.command()
