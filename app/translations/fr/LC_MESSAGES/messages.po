@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-10-15 21:01-0500\n"
+"POT-Creation-Date: 2018-10-20 20:47-0500\n"
 "PO-Revision-Date: 2018-10-13 13:36-0500\n"
 "Last-Translator: \n"
 "Language: fr\n"
@@ -18,20 +18,20 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.6.0\n"
 
-#: app/public/views.py:28 app/user/views.py:61
+#: app/public/views.py:28 app/user/views.py:63
 msgid "You are logged in."
 msgstr "Vous êtes connecté"
 
-#: app/public/templates/about.html:8
+#: app/public/templates/about.html:7
 msgid "This template was created by"
 msgstr "Ce modèle a été créé par"
 
-#: app/public/templates/home.html:7
+#: app/public/templates/home.html:6
 #, python-format
 msgid "Welcome to %(title)s"
 msgstr "Bienvenue sur %(title)s"
 
-#: app/public/templates/home.html:9
+#: app/public/templates/home.html:8
 msgid ""
 "This is a starter Flask template. It includes Bootstrap 3, jQuery 2, "
 "Flask-SQLAlchemy, WTForms, and various testing utilities out of the box."
@@ -91,27 +91,27 @@ msgstr ""
 "Vous n'êtes pas autorisé à voir cette page. Veuillez vous connecter ou "
 "créer un nouveau compte."
 
-#: app/templates/401.html:10 app/templates/nav.html:46
+#: app/templates/401.html:10 app/templates/nav.html:62
 msgid "Log in"
 msgstr "S'identifier"
 
-#: app/templates/401.html:11 app/templates/nav.html:38
+#: app/templates/401.html:11 app/templates/nav.html:53
 msgid "Create account"
 msgstr "Créer un compte"
 
-#: app/templates/404.html:4
+#: app/templates/404.html:3
 msgid "Page Not Found"
 msgstr "Page non trouvée"
 
-#: app/templates/404.html:10
+#: app/templates/404.html:9
 msgid "Sorry, that page doesn't exist."
 msgstr "Désolé, cette page n'existe pas."
 
-#: app/templates/500.html:4
+#: app/templates/500.html:3
 msgid "Server error"
 msgstr "Erreur du serveur"
 
-#: app/templates/500.html:10
+#: app/templates/500.html:9
 msgid ""
 "Sorry, something went wrong on our system. Don't panic, we are fixing it!"
 " Please try again later."
@@ -119,7 +119,7 @@ msgstr ""
 "Désolé, quelque chose s'est mal passé sur notre système. Ne paniquez pas,"
 " nous le réglons! Veuillez réessayer plus tard."
 
-#: app/templates/footer.html:9 app/templates/nav.html:23
+#: app/templates/footer.html:9 app/templates/nav.html:25
 msgid "About"
 msgstr "En savoir plus"
 
@@ -127,60 +127,57 @@ msgstr "En savoir plus"
 msgid "Contact"
 msgstr "Contact"
 
-#: app/templates/nav.html:22
+#: app/templates/nav.html:24
 msgid "Home"
 msgstr "Accueil"
 
-#: app/templates/nav.html:24
+#: app/templates/nav.html:39 app/user/templates/profile.html:6
+#: app/user/views.py:141 app/user/views.py:149
 msgid "Profile"
 msgstr "Profil"
 
-#: app/templates/nav.html:29
-msgid "Logged in as"
-msgstr "Connecté en tant que"
-
-#: app/templates/nav.html:32
+#: app/templates/nav.html:45
 msgid "Log out"
 msgstr "Se déconnecter"
 
-#: app/templates/email/confirm_email.html:3
-#: app/templates/email/reset_password.html:3
+#: app/templates/email/confirm_email.html:1
+#: app/templates/email/reset_password.html:1
 #, python-format
 msgid "Hi %(username)s,"
 msgstr "Salut %(username)s,"
 
-#: app/templates/email/confirm_email.html:5
+#: app/templates/email/confirm_email.html:3
 msgid "Please confirm your email by clicking the follwing link:"
 msgstr "Veuillez confirmer votre email en cliquant sur le lien suivant:"
 
-#: app/templates/email/confirm_email.html:6
-#: app/templates/email/reset_password.html:7
+#: app/templates/email/confirm_email.html:4
+#: app/templates/email/reset_password.html:5
 msgid "click here"
 msgstr "cliquez ici"
 
-#: app/templates/email/confirm_email.html:8
-#: app/templates/email/reset_password.html:10
+#: app/templates/email/confirm_email.html:6
+#: app/templates/email/reset_password.html:8
 msgid "Alternatively, paste the following link in your browser's address bar:"
 msgstr ""
 "Vous pouvez également coller le lien suivant dans la barre d'adresse de "
 "votre navigateur:"
 
-#: app/templates/email/confirm_email.html:10
-#: app/templates/email/reset_password.html:13
+#: app/templates/email/confirm_email.html:8
+#: app/templates/email/reset_password.html:11
 msgid "Sincerely,"
 msgstr "Cordialement"
 
-#: app/templates/email/confirm_email.html:13
-#: app/templates/email/reset_password.html:16
+#: app/templates/email/confirm_email.html:11
+#: app/templates/email/reset_password.html:14
 #, python-format
 msgid "The %(title)s team"
 msgstr "L'équipe %(title)s"
 
-#: app/templates/email/reset_password.html:5
+#: app/templates/email/reset_password.html:3
 msgid "Reset your password by clicking the this link:"
 msgstr "Réinitialisez votre mot de passe en cliquant sur ce lien:"
 
-#: app/templates/email/reset_password.html:12
+#: app/templates/email/reset_password.html:10
 msgid "If you have not requested a password reset, simply ignore this message."
 msgstr ""
 "Si vous n'avez pas demandé de réinitialisation de mot de passe, ignorez "
@@ -206,7 +203,7 @@ msgstr "Vérifier le mot de passe"
 msgid "Passwords must match"
 msgstr "Les mots de passe doivent correspondre"
 
-#: app/user/forms.py:23 app/user/templates/register.html:4
+#: app/user/forms.py:23 app/user/templates/register.html:6
 msgid "Register"
 msgstr "Registre"
 
@@ -242,7 +239,7 @@ msgstr "Demander la réinitialisation du mot de passe"
 msgid "Repeat Password"
 msgstr "Répéter le mot de passe"
 
-#: app/user/forms.py:87 app/user/templates/reset_password_request.html:4
+#: app/user/forms.py:87 app/user/templates/reset_password_request.html:6
 msgid "Reset Password"
 msgstr "Réinitialiser le mot de passe"
 
@@ -274,7 +271,7 @@ msgstr "Soumettre"
 msgid "You are logged out."
 msgstr "Vous êtes déconnecté"
 
-#: app/user/views.py:43
+#: app/user/views.py:45
 msgid ""
 "Thank you for registering. Please validate your email address before "
 "logging in."
@@ -282,66 +279,72 @@ msgstr ""
 "Merci de votre inscription. Veuillez valider votre adresse e-mail avant "
 "de vous connecter."
 
-#: app/user/views.py:73 app/user/views.py:90
+#: app/user/views.py:75 app/user/views.py:92
 msgid "You are already logged in."
 msgstr "Vous êtes déjà connecté"
 
-#: app/user/views.py:80
+#: app/user/views.py:82
 msgid "Check your email for the instructions to reset your password"
 msgstr ""
 "Consultez votre email pour les instructions pour réinitialiser votre mot "
 "de passe"
 
-#: app/user/views.py:99
+#: app/user/views.py:101
 msgid "Your password has been reset."
 msgstr "Votre mot de passe a été réinitialisé."
 
-#: app/user/views.py:108
+#: app/user/views.py:110
 msgid "You have already verified your email address."
 msgstr "Vous avez déjà confirmé votre adresse email."
 
-#: app/user/views.py:116
+#: app/user/views.py:118
 msgid "Your email has been confirmed."
 msgstr "Votre adresse de messagerie a bien été confirmée."
 
-#: app/user/views.py:136
+#: app/user/views.py:139
 msgid "Your changes have been saved."
 msgstr "Vos changements ont été enregistrés."
 
-#: app/user/templates/edit_profile.html:4 app/user/views.py:145
-msgid "Edit Profile"
-msgstr "Editer le Profil"
-
-#: app/user/templates/login.html:4
+#: app/user/templates/login.html:6
 msgid "Sign In"
 msgstr "Se connecter"
 
-#: app/user/templates/login.html:19
+#: app/user/templates/login.html:13
 msgid "Forgot Your Password?"
 msgstr "Mot de passe oublié?"
 
-#: app/user/templates/login.html:20
+#: app/user/templates/login.html:14
 msgid "Click here to reset it"
 msgstr "Cliquez ici pour le réinitialiser"
 
-#: app/user/templates/members.html:4
+#: app/user/templates/members.html:3
 #, python-format
 msgid "Welcome %(username)s"
 msgstr "Bienvenue %(username)s"
 
-#: app/user/templates/members.html:5
+#: app/user/templates/members.html:4
 msgid "This is the members-only page"
 msgstr "Ceci est la page réservée aux membres"
 
-#: app/user/templates/register.html:26
+#: app/user/templates/profile.html:8
+msgid "Edit Gravatar image at"
+msgstr "Éditer l'image Gravatar à"
+
+#: app/user/templates/register.html:13
 msgid "Already registered?"
 msgstr "Déjà inscrit(e) ?"
 
-#: app/user/templates/register.html:26
+#: app/user/templates/register.html:13
 msgid "Click here to login"
 msgstr "Cliquez ici pour vous connecter"
 
-#: app/user/templates/reset_password.html:4
+#: app/user/templates/reset_password.html:6
 msgid "Reset Your Password"
 msgstr "Réinitialisez votre mot de passe"
+
+#~ msgid "Logged in as"
+#~ msgstr "Connecté en tant que"
+
+#~ msgid "Edit Profile"
+#~ msgstr "Editer le Profil"
 
