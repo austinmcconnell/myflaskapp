@@ -1,0 +1,19 @@
+{
+    "attr-no-dup": true,
+    "attr-no-unsafe-char": true,
+    "attr-quote-style": "double",
+    "attr-req-value": true,
+    "attr-validate": true,
+    "class-no-dup": true,
+    "id-no-dup": true,
+    "indent-style": "spaces",
+    "indent-width": 4,
+    "indent-width-cont": true,
+    "id-class-style": "dash",
+    "line-end-style": "lf",
+    "line-no-trailing-whitespace": true,
+    "tag-bans": false,
+    "tag-close": true,
+    "tag-name-lowercase": true,
+    "tag-name-match": true
+}
