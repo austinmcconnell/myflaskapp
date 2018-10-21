@@ -347,4 +347,3 @@ msgstr "Réinitialisez votre mot de passe"
 
 #~ msgid "Edit Profile"
 #~ msgstr "Editer le Profil"
-
