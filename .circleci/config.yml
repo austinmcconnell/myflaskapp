@@ -39,7 +39,7 @@ jobs:
           name: Run tests
           command: |
             . venv/bin/activate
-            pytest --cov-report=html
+            pytest --cov app --cov-branch --cov-report=html
       - run:
           name: Code coverage
           command: |
