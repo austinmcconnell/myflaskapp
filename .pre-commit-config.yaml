@@ -14,6 +14,10 @@ repos:
         args: [ --autofix, --indent=4]
       - id: mixed-line-ending
       - id: trailing-whitespace
+  - repo: https://github.com/pre-commit/mirrors-csslint
+    rev: v1.0.5
+    hooks:
+    - id: csslint
   - repo: https://github.com/pre-commit/mirrors-pylint
     rev: v2.0.1
     hooks:
@@ -23,7 +27,6 @@ repos:
     rev: v0.620
     hooks:
       - id: mypy
-
   - repo: git://github.com/chewse/pre-commit-mirrors-pydocstyle
     sha: v2.1.1
     hooks:
