@@ -17,7 +17,7 @@ class TestLoggingIn:
     def test_login_return_200(self, user, testapp, endpoint):
         res = testapp.get(url_for(endpoint))
 
-        form = res.forms['loginForm']
+        form = res.forms['login-form']
         form['username'] = user.username
         form['password'] = 'myprecious'
 
@@ -27,7 +27,7 @@ class TestLoggingIn:
     def test_alert_on_logout(self, user, testapp):
         res = testapp.get(url_for('public.home'))
         # Fills out login form in navbar
-        form = res.forms['loginForm']
+        form = res.forms['login-form']
         form['username'] = user.username
         form['password'] = 'myprecious'
         # Submits
@@ -40,7 +40,7 @@ class TestLoggingIn:
     def test_error_message_incorrect_password(self, user, testapp, endpoint):
         res = testapp.get(url_for(endpoint))
 
-        form = res.forms['loginForm']
+        form = res.forms['login-form']
         form['username'] = user.username
         form['password'] = 'wrong'
 
@@ -51,7 +51,7 @@ class TestLoggingIn:
     def test_error_message_username_doesnt_exist(self, user, testapp, endpoint):
         res = testapp.get(url_for(endpoint))
 
-        form = res.forms['loginForm']
+        form = res.forms['login-form']
         form['username'] = 'unknown'
         form['password'] = 'myprecious'
 
