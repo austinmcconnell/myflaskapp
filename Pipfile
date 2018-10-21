@@ -25,6 +25,7 @@ rollbar = "*"
 [dev-packages]
 factory-boy = "*"
 mypy = "*"
+pre-commit = "*"
 pylint = "*"
 pytest = "*"
 pytest-cov = "*"
