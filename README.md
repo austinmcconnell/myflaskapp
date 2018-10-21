@@ -38,6 +38,7 @@ Run the following commands to setup your environment :
 
     git clone https://github.com/austinmcconnell/myflaskapp
     cd myflaskapp
+    pre-commit install
     pipenv install --dev
 
 You will see a pretty welcome screen [here](http://localhost:5000)
