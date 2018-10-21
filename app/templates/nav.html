@@ -27,7 +27,7 @@
             {% if current_user and current_user.is_authenticated %}
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-haspopup="true" aria-expanded="false" style="padding: unset">
+                           aria-haspopup="true" aria-expanded="false">
                             <img class="avatar" src="{{ current_user.avatar(40) }}" alt="User Avatar"></a>
                         <ul class="dropdown-menu nav navbar-nav navbar-inverse">
                             <li><a class="navbar-link" href="{{ url_for('user.profile') }}">{{ _('Profile') }}</a></li>
@@ -39,9 +39,8 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{{ url_for('user.register') }}">{{ _('Create account') }}</a></li>
                 </ul>
-                <form id="loginForm" method="POST" class="navbar-form form-inline navbar-right"
-                      action="/" role="login">
-                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <form id="login-form" method="POST" class="navbar-form form-inline navbar-right" action="/" role="login">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                     <div class="form-group">
                         {{ form.username(class_="form-control") }}
                         {{ form.password(class_="form-control") }}
