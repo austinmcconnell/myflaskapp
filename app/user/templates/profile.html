@@ -4,6 +4,8 @@
 {% block app_content %}
     <div class="container-narrow">
         <h1>{{ _('Profile') }}</h1>
+        <img class="avatar" src="{{ current_user.avatar(128) }}" alt="User Avatar"><br>
+        {{ _('Edit Gravatar image at') }} <a href="https://{{ current_user.locale }}.gravatar.com">https://{{ current_user.locale }}.gravatar.com</a>
         <div class="row">
             <div class="col-md-6">
                 {{ wtf.quick_form(form) }}
