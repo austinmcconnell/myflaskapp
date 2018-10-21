@@ -18,11 +18,10 @@ repos:
     rev: v1.0.5
     hooks:
     - id: csslint
-  - repo: https://github.com/pre-commit/mirrors-pylint
-    rev: v2.0.1
+  - repo: https://github.com/Lucas-C/pre-commit-hooks-nodejs
+    rev: v1.1.0
     hooks:
-      - id: pylint
-        args: ['--ignore=migrations,env.py']
+    -  id: htmllint
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v0.620
     hooks:
@@ -32,3 +31,8 @@ repos:
     hooks:
       - id: pydocstyle
         args: ['--ignore=D1,D203,D212']
+  - repo: https://github.com/pre-commit/mirrors-pylint
+    rev: v2.0.1
+    hooks:
+      - id: pylint
+        args: ['--ignore=migrations,env.py']
