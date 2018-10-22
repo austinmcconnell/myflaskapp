@@ -8,6 +8,7 @@ import rollbar
 import rollbar.contrib.flask
 
 from app import commands, public, user
+from app.user.models import User
 from app.extensions import (babel, bcrypt, bootstrap, cache, csrf_protect, db,
                             debug_toolbar, login_manager, mail, migrate, moment)
 from app.settings import CONFIG
@@ -82,7 +83,7 @@ def register_errorhandlers(app):
 def register_shellcontext(app):
     def shell_context():
         return {'db': db,
-                'User': user.models.User}
+                'User': User}
 
     app.shell_context_processor(shell_context)
 
