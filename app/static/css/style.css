@@ -39,6 +39,10 @@ textarea {
 	display: grid;
 }
 
+.nav>li>a.dropdown-toggle {
+  padding: unset;
+}
+
 /* Forms */
 
 .navbar-form input[type="text"],
