@@ -7,7 +7,10 @@ from flask_mail import email_dispatched
 import rollbar
 import rollbar.contrib.flask
 
-from app import commands, public, user
+from app import commands
+from app.auth import auth_bp
+from app.user import user_bp
+from app.public import public_bp
 from app.user.models import User
 from app.extensions import (babel, bcrypt, bootstrap, cache, csrf_protect, db,
                             debug_toolbar, login_manager, mail, migrate, moment)
@@ -67,8 +70,9 @@ def register_extensions(app):
 
 
 def register_blueprints(app):
-    app.register_blueprint(user.views.bp)
-    app.register_blueprint(public.views.bp)
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(public_bp)
+    app.register_blueprint(user_bp)
 
 
 def register_errorhandlers(app):

@@ -18,7 +18,7 @@
     "description": "A flasky app.",
     "env": {
         "FLASK_APP": "autoapp.py",
-        "FLASK_DEBUG": "0",
+        "FLASK_ENV": "development",
         "SECRET_TOKEN": {
             "description": "A secret key for verifying the integrity of signed cookies.",
             "generator": "secret"

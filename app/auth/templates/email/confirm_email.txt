@@ -2,7 +2,7 @@
 
 {{ _('Please confirm your email by clicking the following link:') }}
 
-{{ url_for('user.confirm_email', token=token, _external=True) }}
+{{ url_for('auth.confirm_email', token=token, _external=True) }}
 
 {{ _('Sincerely,') }}
 

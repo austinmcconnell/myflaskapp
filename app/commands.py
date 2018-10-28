@@ -12,6 +12,7 @@ TEST_PATH = os.path.join(PROJECT_ROOT, 'tests')
 
 @click.command()
 def test():
+    """Run tests."""
     import pytest
     status_code = pytest.main([TEST_PATH])
     exit(status_code)
@@ -19,12 +20,14 @@ def test():
 
 @click.command()
 def check():
+    """Run pre-commit checks."""
     status_code = call(['pre-commit', 'run', '--all'])
     exit(status_code)
 
 
 @click.command()
 def clean():
+    """Recursively remove .pyc and .pyo files."""
     for dirpath, dirnames, filenames in os.walk('.'):
         for filename in filenames:
             if filename.endswith('.pyc') or filename.endswith('.pyo'):

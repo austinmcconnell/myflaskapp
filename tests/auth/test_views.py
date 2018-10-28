@@ -8,12 +8,12 @@ import pytest
 
 from app.extensions import mail
 from app.user.models import User
-from .factories import UserFactory
+from tests.factories import UserFactory
 
 
 class TestLoggingIn:
 
-    @pytest.mark.parametrize('endpoint', ('public.home', 'user.login'))
+    @pytest.mark.parametrize('endpoint', ('public.home', 'auth.login'))
     def test_login_return_200(self, user, testapp, endpoint):
         res = testapp.get(url_for(endpoint))
 
@@ -32,11 +32,11 @@ class TestLoggingIn:
         form['password'] = 'myprecious'
         # Submits
         res = form.submit().follow()
-        res = testapp.get(url_for('user.logout')).follow()
+        res = testapp.get(url_for('auth.logout')).follow()
         # sees alert
         assert 'You are logged out.' in res
 
-    @pytest.mark.parametrize('endpoint', ('public.home', 'user.login'))
+    @pytest.mark.parametrize('endpoint', ('public.home', 'auth.login'))
     def test_error_message_incorrect_password(self, user, testapp, endpoint):
         res = testapp.get(url_for(endpoint))
 
@@ -47,7 +47,7 @@ class TestLoggingIn:
         res = form.submit()
         assert 'Invalid password' in res
 
-    @pytest.mark.parametrize('endpoint', ('public.home', 'user.login'))
+    @pytest.mark.parametrize('endpoint', ('public.home', 'auth.login'))
     def test_error_message_username_doesnt_exist(self, user, testapp, endpoint):
         res = testapp.get(url_for(endpoint))
 
@@ -81,7 +81,7 @@ class TestRegistering:
 
     def test_error_message_passwords_dont_match(self, user, testapp):
         # Goes to registration page
-        res = testapp.get(url_for('user.register'))
+        res = testapp.get(url_for('auth.register'))
         # Fills out form, but passwords don't match
         form = res.forms['registerForm']
         form['username'] = 'foobar'
@@ -97,7 +97,7 @@ class TestRegistering:
         user = UserFactory(active=True)  # A registered user
         user.save()
         # Goes to registration page
-        res = testapp.get(url_for('user.register'))
+        res = testapp.get(url_for('auth.register'))
         # Fills out form, but username is already registered
         form = res.forms['registerForm']
         form['username'] = user.username
@@ -113,7 +113,7 @@ class TestRegistering:
         # Goes to registration page
         with mail.record_messages() as outbox:
 
-            res = testapp.get(url_for('user.register'))
+            res = testapp.get(url_for('auth.register'))
 
             form = res.forms['registerForm']
             form['username'] = 'pandas'
@@ -128,7 +128,7 @@ class TestRegistering:
 
     def test_email_confirmation(self, db, testapp):
         with mail.record_messages() as outbox:
-            res = testapp.get(url_for('user.register'))
+            res = testapp.get(url_for('auth.register'))
 
             form = res.forms['registerForm']
             form['username'] = 'pandas'
@@ -150,7 +150,7 @@ class TestRegistering:
     def test_email_confirmation_no_user_redirect(self, db, testapp):
 
         with mail.record_messages() as outbox:
-            res = testapp.get(url_for('user.register'))
+            res = testapp.get(url_for('auth.register'))
             form = res.forms['registerForm']
             form['username'] = 'pandas'
             form['email'] = 'foo@bar.com'
@@ -171,7 +171,7 @@ class TestRegistering:
     @pytest.mark.xfail
     def test_email_already_confirmed_redirect(self, db, testapp):
         with mail.record_messages() as outbox:
-            res = testapp.get(url_for('user.register'))
+            res = testapp.get(url_for('auth.register'))
             form = res.forms['registerForm']
             form['username'] = 'pandas'
             form['email'] = 'foo@bar.com'

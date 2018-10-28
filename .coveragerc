@@ -1,0 +1,7 @@
+[run]
+branch = True
+omit = app/commands.py
+
+[report]
+show_missing = True
+fail_under = 80

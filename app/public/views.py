@@ -2,22 +2,22 @@ from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_babel import _
 from flask_login import login_user
 
-from app.user.forms import LoginForm
+from app.auth.forms import LoginForm
 from app.utils import flash_errors
 
-bp = Blueprint(name='public',  # pylint: disable=invalid-name
-               import_name=__name__,
-               template_folder='templates')
+public_bp = Blueprint(name='public',  # pylint: disable=invalid-name
+                      import_name=__name__,
+                      template_folder='templates')
 
 
-@bp.route('/about/')
+@public_bp.route('/about/')
 def about():
     """About page."""
     form = LoginForm(request.form)
     return render_template('about.html', nav_form=form)
 
 
-@bp.route('/', methods=['GET', 'POST'])
+@public_bp.route('/', methods=['GET', 'POST'])
 def home():
     """Home page."""
     form = LoginForm(request.form)
