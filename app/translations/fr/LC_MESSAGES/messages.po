@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-10-20 20:47-0500\n"
+"POT-Creation-Date: 2018-10-25 07:29-0500\n"
 "PO-Revision-Date: 2018-10-13 13:36-0500\n"
 "Last-Translator: \n"
 "Language: fr\n"
@@ -18,9 +18,178 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.6.0\n"
 
-#: app/public/views.py:28 app/user/views.py:63
+#: app/auth/email.py:10
+msgid "[My Flask App] Reset Your Password"
+msgstr "[My Flask App] Réinitialiser votre mot de passe"
+
+#: app/auth/email.py:19
+msgid "[My Flask App] Confirm Your Email Address"
+msgstr "[My Flask App] Confirmez votre adresse e-mail"
+
+#: app/auth/forms.py:12 app/auth/forms.py:47 app/user/forms.py:10
+msgid "Username"
+msgstr "Nom d'utilisateur"
+
+#: app/auth/forms.py:14 app/auth/forms.py:78
+msgid "Email"
+msgstr "E-mail"
+
+#: app/auth/forms.py:16 app/auth/forms.py:48 app/auth/forms.py:83
+msgid "Password"
+msgstr "Mot de passe"
+
+#: app/auth/forms.py:18
+msgid "Verify password"
+msgstr "Vérifier le mot de passe"
+
+#: app/auth/forms.py:20
+msgid "Passwords must match"
+msgstr "Les mots de passe doivent correspondre"
+
+#: app/auth/forms.py:21 app/auth/templates/register.html:6
+msgid "Register"
+msgstr "Registre"
+
+#: app/auth/forms.py:35
+msgid "Username already registered"
+msgstr "Nom d'Utilisateur déjà enregistré"
+
+#: app/auth/forms.py:39
+msgid "Email already registered"
+msgstr "Email déjà enregistré"
+
+#: app/auth/forms.py:49
+msgid "Log In"
+msgstr "S'identifier"
+
+#: app/auth/forms.py:64
+msgid "Unknown username"
+msgstr "Nom d'utilisateur inconnu"
+
+#: app/auth/forms.py:68
+msgid "Invalid password"
+msgstr "Mot de passe incorrect"
+
+#: app/auth/forms.py:72
+msgid "User not activated"
+msgstr "Utilisateur non activé"
+
+#: app/auth/forms.py:79
+msgid "Request Password Reset"
+msgstr "Demander la réinitialisation du mot de passe"
+
+#: app/auth/forms.py:84
+msgid "Repeat Password"
+msgstr "Répéter le mot de passe"
+
+#: app/auth/forms.py:85 app/auth/templates/reset_password_request.html:6
+msgid "Reset Password"
+msgstr "Réinitialiser le mot de passe"
+
+#: app/auth/views.py:21
+msgid "You are logged out."
+msgstr "Vous êtes déconnecté"
+
+#: app/auth/views.py:36
+msgid ""
+"Thank you for registering. Please validate your email address before "
+"logging in."
+msgstr ""
+"Merci de votre inscription. Veuillez valider votre adresse e-mail avant "
+"de vous connecter."
+
+#: app/auth/views.py:54 app/public/views.py:28
 msgid "You are logged in."
 msgstr "Vous êtes connecté"
+
+#: app/auth/views.py:66 app/auth/views.py:83
+msgid "You are already logged in."
+msgstr "Vous êtes déjà connecté"
+
+#: app/auth/views.py:73
+msgid "Check your email for the instructions to reset your password"
+msgstr ""
+"Consultez votre email pour les instructions pour réinitialiser votre mot "
+"de passe"
+
+#: app/auth/views.py:92
+msgid "Your password has been reset."
+msgstr "Votre mot de passe a été réinitialisé."
+
+#: app/auth/views.py:101
+msgid "You have already verified your email address."
+msgstr "Vous avez déjà confirmé votre adresse email."
+
+#: app/auth/views.py:109
+msgid "Your email has been confirmed."
+msgstr "Votre adresse de messagerie a bien été confirmée."
+
+#: app/auth/templates/login.html:6
+msgid "Sign In"
+msgstr "Se connecter"
+
+#: app/auth/templates/login.html:13
+msgid "Forgot Your Password?"
+msgstr "Mot de passe oublié?"
+
+#: app/auth/templates/login.html:14
+msgid "Click here to reset it"
+msgstr "Cliquez ici pour le réinitialiser"
+
+#: app/auth/templates/register.html:13
+msgid "Already registered?"
+msgstr "Déjà inscrit(e) ?"
+
+#: app/auth/templates/register.html:13
+msgid "Click here to login"
+msgstr "Cliquez ici pour vous connecter"
+
+#: app/auth/templates/reset_password.html:6
+msgid "Reset Your Password"
+msgstr "Réinitialisez votre mot de passe"
+
+#: app/auth/templates/email/confirm_email.html:1
+#: app/auth/templates/email/reset_password.html:1
+#, python-format
+msgid "Hi %(username)s,"
+msgstr "Salut %(username)s,"
+
+#: app/auth/templates/email/confirm_email.html:3
+msgid "Please confirm your email by clicking the follwing link:"
+msgstr "Veuillez confirmer votre email en cliquant sur le lien suivant:"
+
+#: app/auth/templates/email/confirm_email.html:4
+#: app/auth/templates/email/reset_password.html:5
+msgid "click here"
+msgstr "cliquez ici"
+
+#: app/auth/templates/email/confirm_email.html:6
+#: app/auth/templates/email/reset_password.html:8
+msgid "Alternatively, paste the following link in your browser's address bar:"
+msgstr ""
+"Vous pouvez également coller le lien suivant dans la barre d'adresse de "
+"votre navigateur:"
+
+#: app/auth/templates/email/confirm_email.html:8
+#: app/auth/templates/email/reset_password.html:11
+msgid "Sincerely,"
+msgstr "Cordialement"
+
+#: app/auth/templates/email/confirm_email.html:11
+#: app/auth/templates/email/reset_password.html:14
+#, python-format
+msgid "The %(title)s team"
+msgstr "L'équipe %(title)s"
+
+#: app/auth/templates/email/reset_password.html:3
+msgid "Reset your password by clicking the this link:"
+msgstr "Réinitialisez votre mot de passe en cliquant sur ce lien:"
+
+#: app/auth/templates/email/reset_password.html:10
+msgid "If you have not requested a password reset, simply ignore this message."
+msgstr ""
+"Si vous n'avez pas demandé de réinitialisation de mot de passe, ignorez "
+"simplement ce message."
 
 #: app/public/templates/about.html:7
 msgid "This template was created by"
@@ -91,11 +260,11 @@ msgstr ""
 "Vous n'êtes pas autorisé à voir cette page. Veuillez vous connecter ou "
 "créer un nouveau compte."
 
-#: app/templates/401.html:10 app/templates/nav.html:62
+#: app/templates/401.html:10 app/templates/nav.html:48
 msgid "Log in"
 msgstr "S'identifier"
 
-#: app/templates/401.html:11 app/templates/nav.html:53
+#: app/templates/401.html:11 app/templates/nav.html:40
 msgid "Create account"
 msgstr "Créer un compte"
 
@@ -131,191 +300,42 @@ msgstr "Contact"
 msgid "Home"
 msgstr "Accueil"
 
-#: app/templates/nav.html:39 app/user/templates/profile.html:6
-#: app/user/views.py:141 app/user/views.py:149
+#: app/templates/nav.html:33 app/user/templates/profile.html:6
+#: app/user/views.py:42 app/user/views.py:50
 msgid "Profile"
 msgstr "Profil"
 
-#: app/templates/nav.html:45
+#: app/templates/nav.html:34
 msgid "Log out"
 msgstr "Se déconnecter"
 
-#: app/templates/email/confirm_email.html:1
-#: app/templates/email/reset_password.html:1
-#, python-format
-msgid "Hi %(username)s,"
-msgstr "Salut %(username)s,"
-
-#: app/templates/email/confirm_email.html:3
-msgid "Please confirm your email by clicking the follwing link:"
-msgstr "Veuillez confirmer votre email en cliquant sur le lien suivant:"
-
-#: app/templates/email/confirm_email.html:4
-#: app/templates/email/reset_password.html:5
-msgid "click here"
-msgstr "cliquez ici"
-
-#: app/templates/email/confirm_email.html:6
-#: app/templates/email/reset_password.html:8
-msgid "Alternatively, paste the following link in your browser's address bar:"
-msgstr ""
-"Vous pouvez également coller le lien suivant dans la barre d'adresse de "
-"votre navigateur:"
-
-#: app/templates/email/confirm_email.html:8
-#: app/templates/email/reset_password.html:11
-msgid "Sincerely,"
-msgstr "Cordialement"
-
-#: app/templates/email/confirm_email.html:11
-#: app/templates/email/reset_password.html:14
-#, python-format
-msgid "The %(title)s team"
-msgstr "L'équipe %(title)s"
-
-#: app/templates/email/reset_password.html:3
-msgid "Reset your password by clicking the this link:"
-msgstr "Réinitialisez votre mot de passe en cliquant sur ce lien:"
-
-#: app/templates/email/reset_password.html:10
-msgid "If you have not requested a password reset, simply ignore this message."
-msgstr ""
-"Si vous n'avez pas demandé de réinitialisation de mot de passe, ignorez "
-"simplement ce message."
-
-#: app/user/forms.py:14 app/user/forms.py:49 app/user/forms.py:91
-msgid "Username"
-msgstr "Nom d'utilisateur"
-
-#: app/user/forms.py:16 app/user/forms.py:80
-msgid "Email"
-msgstr "E-mail"
-
-#: app/user/forms.py:18 app/user/forms.py:50 app/user/forms.py:85
-msgid "Password"
-msgstr "Mot de passe"
-
-#: app/user/forms.py:20
-msgid "Verify password"
-msgstr "Vérifier le mot de passe"
-
-#: app/user/forms.py:22
-msgid "Passwords must match"
-msgstr "Les mots de passe doivent correspondre"
-
-#: app/user/forms.py:23 app/user/templates/register.html:6
-msgid "Register"
-msgstr "Registre"
-
-#: app/user/forms.py:37
-msgid "Username already registered"
-msgstr "Nom d'Utilisateur déjà enregistré"
-
-#: app/user/forms.py:41
-msgid "Email already registered"
-msgstr "Email déjà enregistré"
-
-#: app/user/forms.py:51
-msgid "Log In"
-msgstr "S'identifier"
-
-#: app/user/forms.py:66
-msgid "Unknown username"
-msgstr "Nom d'utilisateur inconnu"
-
-#: app/user/forms.py:70
-msgid "Invalid password"
-msgstr "Mot de passe incorrect"
-
-#: app/user/forms.py:74
-msgid "User not activated"
-msgstr "Utilisateur non activé"
-
-#: app/user/forms.py:81
-msgid "Request Password Reset"
-msgstr "Demander la réinitialisation du mot de passe"
-
-#: app/user/forms.py:86
-msgid "Repeat Password"
-msgstr "Répéter le mot de passe"
-
-#: app/user/forms.py:87 app/user/templates/reset_password_request.html:6
-msgid "Reset Password"
-msgstr "Réinitialiser le mot de passe"
-
-#: app/user/forms.py:92
+#: app/user/forms.py:11
 msgid "First Name"
 msgstr "Prénom"
 
-#: app/user/forms.py:93
+#: app/user/forms.py:12
 msgid "Last Name"
 msgstr "Nom de Famille"
 
-#: app/user/forms.py:94
+#: app/user/forms.py:13
 msgid "Preferred Language"
 msgstr "Langue Préférée"
 
-#: app/user/forms.py:94
+#: app/user/forms.py:13
 msgid "English"
 msgstr "Anglais"
 
-#: app/user/forms.py:94
+#: app/user/forms.py:13
 msgid "French"
 msgstr "Français"
 
-#: app/user/forms.py:95
+#: app/user/forms.py:14
 msgid "Submit"
 msgstr "Soumettre"
 
-#: app/user/views.py:30
-msgid "You are logged out."
-msgstr "Vous êtes déconnecté"
-
-#: app/user/views.py:45
-msgid ""
-"Thank you for registering. Please validate your email address before "
-"logging in."
-msgstr ""
-"Merci de votre inscription. Veuillez valider votre adresse e-mail avant "
-"de vous connecter."
-
-#: app/user/views.py:75 app/user/views.py:92
-msgid "You are already logged in."
-msgstr "Vous êtes déjà connecté"
-
-#: app/user/views.py:82
-msgid "Check your email for the instructions to reset your password"
-msgstr ""
-"Consultez votre email pour les instructions pour réinitialiser votre mot "
-"de passe"
-
-#: app/user/views.py:101
-msgid "Your password has been reset."
-msgstr "Votre mot de passe a été réinitialisé."
-
-#: app/user/views.py:110
-msgid "You have already verified your email address."
-msgstr "Vous avez déjà confirmé votre adresse email."
-
-#: app/user/views.py:118
-msgid "Your email has been confirmed."
-msgstr "Votre adresse de messagerie a bien été confirmée."
-
-#: app/user/views.py:139
+#: app/user/views.py:40
 msgid "Your changes have been saved."
 msgstr "Vos changements ont été enregistrés."
-
-#: app/user/templates/login.html:6
-msgid "Sign In"
-msgstr "Se connecter"
-
-#: app/user/templates/login.html:13
-msgid "Forgot Your Password?"
-msgstr "Mot de passe oublié?"
-
-#: app/user/templates/login.html:14
-msgid "Click here to reset it"
-msgstr "Cliquez ici pour le réinitialiser"
 
 #: app/user/templates/members.html:3
 #, python-format
@@ -329,18 +349,6 @@ msgstr "Ceci est la page réservée aux membres"
 #: app/user/templates/profile.html:8
 msgid "Edit Gravatar image at"
 msgstr "Éditer l'image Gravatar à"
-
-#: app/user/templates/register.html:13
-msgid "Already registered?"
-msgstr "Déjà inscrit(e) ?"
-
-#: app/user/templates/register.html:13
-msgid "Click here to login"
-msgstr "Cliquez ici pour vous connecter"
-
-#: app/user/templates/reset_password.html:6
-msgid "Reset Your Password"
-msgstr "Réinitialisez votre mot de passe"
 
 #~ msgid "Logged in as"
 #~ msgstr "Connecté en tant que"

@@ -70,6 +70,4 @@ def reference_col(tablename, nullable=False, pk_name='id', **kwargs):
         category_id = reference_col('category')
         category = relationship('Category', backref='categories')
     """
-    return db.Column(
-        db.ForeignKey('{0}.{1}'.format(tablename, pk_name)),
-        nullable=nullable, **kwargs)
+    return db.Column(db.ForeignKey(f'{tablename}.{pk_name}'), nullable=nullable, **kwargs)

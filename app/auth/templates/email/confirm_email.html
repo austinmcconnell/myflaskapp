@@ -1,10 +1,10 @@
 <p>{{ _('Hi %(username)s,', username=user.username) }}</p>
 <p>
     {{ _('Please confirm your email by clicking the follwing link:') }}
-    <a href="{{ url_for('user.confirm_email', token=token, _external=True) }}">{{ _('click here') }}</a>.
+    <a href="{{ url_for('auth.confirm_email', token=token, _external=True) }}">{{ _('click here') }}</a>.
 </p>
 <p>{{ _('Alternatively, paste the following link in your browser\'s address bar:') }}</p>
-<p>{{ url_for('user.confirm_email', token=token, _external=True) }}</p>
+<p>{{ url_for('auth.confirm_email', token=token, _external=True) }}</p>
 <p>{{ _('Sincerely,') }}</p>
 
 

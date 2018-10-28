@@ -31,13 +31,13 @@
                             <img class="avatar" src="{{ current_user.avatar(40) }}" alt="User Avatar"></a>
                         <ul class="dropdown-menu nav navbar-nav navbar-inverse">
                             <li><a class="navbar-link" href="{{ url_for('user.profile') }}">{{ _('Profile') }}</a></li>
-                            <li><a class="navbar-link" href="{{ url_for('user.logout') }}">{{ _('Log out') }}</a></li>
+                            <li><a class="navbar-link" href="{{ url_for('auth.logout') }}">{{ _('Log out') }}</a></li>
                         </ul>
                     </li>
                 </ul>
             {% elif form %}
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{ url_for('user.register') }}">{{ _('Create account') }}</a></li>
+                    <li><a href="{{ url_for('auth.register') }}">{{ _('Create account') }}</a></li>
                 </ul>
                 <form id="login-form" method="POST" class="navbar-form form-inline navbar-right" action="/" role="login">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">

@@ -7,9 +7,8 @@
         <div class="text-center">
             <h1>401</h1>
             <p>{{ _('You are not authorized to see this page. Please log in or create a new account.') }}<br><br>
-                <a href="{{ url_for('user.login') }}">{{ _('Log in') }}</a><br>
-                <a href="{{ url_for('user.register') }}">{{ _('Create account') }}</a>.
-
+                <a href="{{ url_for('auth.login') }}">{{ _('Log in') }}</a><br>
+                <a href="{{ url_for('auth.register') }}">{{ _('Create account') }}</a>
             </p>
         </div>
     </div>
