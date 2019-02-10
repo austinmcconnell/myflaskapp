@@ -27,6 +27,7 @@ pyyaml = "==4.2b4"
 
 [dev-packages]
 factory-boy = "*"
+flask-shell-ipython = "*"
 mypy = "*"
 pre-commit = "*"
 pylint = "*"
