@@ -4,7 +4,7 @@ import os
 
 from dotenv import load_dotenv
 
-load_dotenv(override=True, verbose=True)
+load_dotenv()
 
 
 class Config(object):
