@@ -13,7 +13,7 @@ from app.user import user_bp
 from app.public import public_bp
 from app.user.models import User
 from app.extensions import (babel, bcrypt, bootstrap, cache, csrf_protect, db,
-                            debug_toolbar, login_manager, mail, migrate, moment)
+                            debug_toolbar, login_manager, mail, migrate, moment, secure_headers)
 from app.settings import CONFIG
 
 
@@ -33,6 +33,11 @@ def create_app(config_name='default'):
             current_user.last_seen = maya.now().datetime()
             db.session.commit()
         g.locale = str(get_locale())
+
+    @app.after_request
+    def set_secure_headers(response):
+        secure_headers.flask(response)
+        return response
 
     @app.before_first_request
     def init_rollbar():
