@@ -1,0 +1,8 @@
+*
+!app/
+!migrations/
+!Pipfile
+!Pipfile.lock
+!babel.cfg
+!boot*.sh
+!wsgi.py

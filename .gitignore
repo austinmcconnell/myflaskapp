@@ -123,3 +123,4 @@ output/*/index.html
 
 TODO.md
 erd_from_sqlalchemy.png
+.volumes/

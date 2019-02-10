@@ -1,0 +1,42 @@
+version: "3.7"
+services:
+  web:
+    build: .
+    ports:
+      - 5000:5000
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - .env
+    volumes:
+      - ./app/:/home/myflaskapp/app
+      - ./migrations/:/home/myflaskapp/migrations
+  web-worker:
+    build: .
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - .env
+    entrypoint: ["./boot-worker.sh"]
+    volumes:
+      - ./app/:/home/myflaskapp/app
+      - ./migrations/:/home/myflaskapp/migrations
+  db:
+    image: postgres:12.1
+    ports:
+    - 15432:5432
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: myflaskapp
+    volumes:
+      - .volumes/db:/var/lib/postgresql/data
+  redis:
+    image: redis:5.0
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - 16379:6379
+    volumes:
+      - .volumes/redis:/data
