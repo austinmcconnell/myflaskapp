@@ -21,7 +21,9 @@ maya = "*"
 psycopg2 = "*"
 pyjwt = "*"
 python-dotenv = "*"
+redis = "*"
 rollbar = "*"
+rq = "*"
 secure = "*"
 
 [dev-packages]
