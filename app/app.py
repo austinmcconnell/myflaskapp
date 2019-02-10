@@ -4,6 +4,8 @@ import maya
 from flask import Flask, got_request_exception, render_template, request, current_app, g, session
 from flask_login import current_user
 from flask_mail import email_dispatched
+from redis import Redis
+import rq
 import rollbar
 import rollbar.contrib.flask
 
@@ -57,6 +59,9 @@ def create_app(config_name='default'):
 
     if app.config['DEBUG']:
         email_dispatched.connect(log_email_message)
+
+    app.redis = Redis.from_url(app.config['REDIS_URL'])
+    app.task_queue = rq.Queue('myflaskapp-tasks', connection=app.redis)
 
     return app
 
