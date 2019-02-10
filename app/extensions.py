@@ -11,6 +11,7 @@ from flask_migrate import Migrate
 from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
+from secure import SecureHeaders
 
 # pylint: disable=invalid-name
 
@@ -25,3 +26,4 @@ cache = Cache()
 debug_toolbar = DebugToolbarExtension()
 mail = Mail()
 moment = Moment()
+secure_headers = SecureHeaders()
