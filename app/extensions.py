@@ -11,16 +11,25 @@ from flask_migrate import Migrate
 from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
+from sqlalchemy import MetaData
 from secure import SecureHeaders
 
 # pylint: disable=invalid-name
+
+convention = {
+    'ix': 'ix_%(column_0_label)s',
+    'uq': 'uq_%(table_name)s_%(column_0_name)s',
+    'ck': 'ck_%(table_name)s_%(constraint_name)s',
+    'fk': 'fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s',
+    'pk': 'pk_%(table_name)s'
+}
 
 babel = Babel()
 bcrypt = Bcrypt()
 bootstrap = Bootstrap()
 csrf_protect = CSRFProtect()
 login_manager = LoginManager()
-db = SQLAlchemy()
+db = SQLAlchemy(metadata=MetaData(naming_convention=convention))
 migrate = Migrate()
 cache = Cache()
 debug_toolbar = DebugToolbarExtension()
