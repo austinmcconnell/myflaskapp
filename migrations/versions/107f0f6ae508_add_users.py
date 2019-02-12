@@ -33,9 +33,9 @@ def upgrade():
                     sa.Column('locale', sa.String(length=2), nullable=True),
                     sa.Column('created_at', sa.DateTime(timezone=True), nullable=False),
                     sa.Column('last_seen', sa.DateTime(timezone=True), nullable=True),
-                    sa.PrimaryKeyConstraint('id'),
-                    sa.UniqueConstraint('email'),
-                    sa.UniqueConstraint('username')
+                    sa.PrimaryKeyConstraint('id', name=op.f('pk_users')),
+                    sa.UniqueConstraint('email', name=op.f('uq_users_email')),
+                    sa.UniqueConstraint('username', name=op.f('uq_users_username'))
                     )
     # ### end Alembic commands ###
 
