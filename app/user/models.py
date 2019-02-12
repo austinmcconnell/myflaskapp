@@ -13,6 +13,7 @@ import maya
 from app.notification.models import Notification
 from app.database import Column, Model, SurrogatePK, db
 from app.extensions import bcrypt
+from app.task.models import Task
 
 
 class User(UserMixin, SurrogatePK, Model):
@@ -34,6 +35,7 @@ class User(UserMixin, SurrogatePK, Model):
     last_seen = db.Column(db.DateTime(timezone=True))
 
     notifications = db.relationship('Notification', backref='user', lazy='dynamic')
+    tasks = db.relationship('Task', backref='user', lazy='dynamic')
 
     def __init__(self, username: str, email: str, password: str=None, **kwargs) -> None:
         """Create instance."""
@@ -105,3 +107,15 @@ class User(UserMixin, SurrogatePK, Model):
         notification = Notification(name=name, payload=data, user=self)
         db.session.add(notification)
         return notification
+
+    def launch_task(self, name, description, *args, **kwargs):
+        rq_job = current_app.task_queue.enqueue('app.task.tasks.' + name, *args, **kwargs)
+        task = Task(id=rq_job.get_id(), name=name, description=description, user=self)
+        db.session.add(task)
+        return task
+
+    def get_tasks_in_progress(self):
+        return Task.query.filter_by(user=self, complete=False).all()
+
+    def get_task_in_progress(self, name):
+        return Task.query.filter_by(name=name, user=self, complete=False).first()
