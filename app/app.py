@@ -18,6 +18,7 @@ from app.notification.models import Notification
 from app.extensions import (babel, bcrypt, bootstrap, cache, csrf_protect, db,
                             debug_toolbar, login_manager, mail, migrate, moment, secure_headers)
 from app.settings import CONFIG
+from app.task.models import Task
 
 
 def create_app(config_name='default'):
@@ -99,7 +100,8 @@ def register_shellcontext(app):
     def shell_context():
         return {'db': db,
                 'Notification': Notification,
-                'User': User}
+                'User': User,
+                'Task': Task}
 
     app.shell_context_processor(shell_context)
 
