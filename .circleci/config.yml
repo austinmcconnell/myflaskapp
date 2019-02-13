@@ -29,11 +29,19 @@ jobs:
           key: deps1-{{ checksum "Pipfile.lock" }}
           paths:
             - "venv"
+      - restore_cache:
+          name: Restoring Pre-Commit repositories
+          key: pre-commit1000-{{ checksum ".pre-commit-config.yml" }}
       - run:
           name: Run pre-commit checks
           command: |
             . venv/bin/activate
             flask check
+      - save_cache:
+          name: Savings Pre-Commit repositories
+          key: pre-commit1000-{{ checksum ".pre-commit-config.yml" }}
+          paths:
+            - /home/circleci/.cache/pre-commit
       - run:
           name: Run mypy checker
           command: |
