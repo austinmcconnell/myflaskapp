@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """User views."""
-from flask import Blueprint, flash, render_template, request, session, jsonify
+from flask import Blueprint, flash, render_template, request, session, jsonify, redirect, url_for
 from flask_babel import _
 from flask_login import current_user, login_required
 import maya
@@ -67,3 +67,14 @@ def notifications():
     response = [{'name': n.name, 'data': n.payload, 'timestamp': n.timestamp}
                 for n in user_notifications]
     return jsonify(response)
+
+
+@user_bp.route('/example_task')
+@login_required
+def example_task():
+    if current_user.get_task_in_progress('example'):
+        flash(_('An export task is currently in progress'))
+    else:
+        current_user.launch_task('example', _('Runing example task...'), 25)
+        db.session.commit()
+    return redirect(url_for('user.members'))
