@@ -7,6 +7,9 @@ jobs:
           FLASK_APP: app.app
           FLASK_ENV: testing
           SECRET_TOKEN: super-secret
+          DATABASE_USERNAME: postgres
+          DATABASE_NAME: postgres
+      - image: postgres:11.1-alpine
     working_directory: ~/repo
     steps:
       - checkout
