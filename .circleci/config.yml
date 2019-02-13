@@ -31,7 +31,7 @@ jobs:
             - "venv"
       - restore_cache:
           name: Restoring Pre-Commit repositories
-          key: pre-commit1000-{{ checksum ".pre-commit-config.yml" }}
+          key: pre-commit1000-{{ checksum ".pre-commit-config.yaml" }}
       - run:
           name: Run pre-commit checks
           command: |
@@ -39,7 +39,7 @@ jobs:
             flask check
       - save_cache:
           name: Savings Pre-Commit repositories
-          key: pre-commit1000-{{ checksum ".pre-commit-config.yml" }}
+          key: pre-commit1000-{{ checksum ".pre-commit-config.yaml" }}
           paths:
             - /home/circleci/.cache/pre-commit
       - run:
