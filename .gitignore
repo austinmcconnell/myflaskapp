@@ -120,3 +120,5 @@ output/*/index.html
 
 # Sqlite Database
 *.db
+
+TODO.md
