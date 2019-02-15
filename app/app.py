@@ -12,6 +12,7 @@ from app.auth import auth_bp
 from app.user import user_bp
 from app.public import public_bp
 from app.user.models import User
+from app.notification.models import Notification
 from app.extensions import (babel, bcrypt, bootstrap, cache, csrf_protect, db,
                             debug_toolbar, login_manager, mail, migrate, moment, secure_headers)
 from app.settings import CONFIG
@@ -92,6 +93,7 @@ def register_errorhandlers(app):
 def register_shellcontext(app):
     def shell_context():
         return {'db': db,
+                'Notification': Notification,
                 'User': User}
 
     app.shell_context_processor(shell_context)
