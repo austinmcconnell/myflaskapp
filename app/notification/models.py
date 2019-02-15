@@ -14,3 +14,7 @@ class Notification(SurrogatePK, Model):
 
     def __init__(self, name: str, user, payload: Dict) -> None:
         db.Model.__init__(self, name=name, user_id=user.id, payload=payload)
+
+    def update(self, commit=True, **kwargs):
+        kwargs['timestamp'] = maya.now().datetime()
+        super().update(commit, **kwargs)
