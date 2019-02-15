@@ -10,6 +10,7 @@ import jwt
 from jwt import InvalidTokenError
 import maya
 
+from app.notification.models import Notification
 from app.database import Column, Model, SurrogatePK, db
 from app.extensions import bcrypt
 
@@ -31,6 +32,8 @@ class User(UserMixin, SurrogatePK, Model):
     locale = db.Column(db.String(length=2), default='en')
     created_at = Column(db.DateTime(timezone=True), nullable=False, default=maya.now().datetime)
     last_seen = db.Column(db.DateTime(timezone=True))
+
+    notifications = db.relationship('Notification', backref='user', lazy='dynamic')
 
     def __init__(self, username: str, email: str, password: str=None, **kwargs) -> None:
         """Create instance."""
@@ -93,3 +96,9 @@ class User(UserMixin, SurrogatePK, Model):
         digest = md5(self.email.lower().encode('utf-8')).hexdigest()
         return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(
             digest, size)
+
+    def add_notification(self, name, data):
+        self.notifications.filter_by(name=name).delete()
+        notification = Notification(name=name, payload=data, user=self)
+        db.session.add(notification)
+        return notification
