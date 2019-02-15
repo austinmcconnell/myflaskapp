@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Defines fixtures available to all tests."""
 
-from flask import g
+from flask import g, url_for
 import pytest
 from webtest import TestApp
 
@@ -48,4 +48,16 @@ def db(app):
 def user(db):
     user = UserFactory(password='myprecious')
     db.session.commit()
+    return user
+
+
+@pytest.fixture
+def authenticated_user(user, testapp):
+    res = testapp.get(url_for('auth.login'))
+
+    form = res.forms['login-form']
+    form['username'] = user.username
+    form['password'] = 'myprecious'
+
+    _ = form.submit().follow()
     return user
