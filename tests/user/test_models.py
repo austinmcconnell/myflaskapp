@@ -56,3 +56,15 @@ class TestUser:
         """User full name."""
         user = UserFactory(first_name='Foo', last_name='Bar')
         assert user.full_name == 'Foo Bar'
+
+    def test_add_notification(self):
+        """User full name."""
+        user = UserFactory(first_name='Foo', last_name='Bar')
+
+        user_notifications = list(user.notifications)
+        assert len(user_notifications) == 0
+
+        user.add_notification(name='panda', data='bear')
+
+        user_notifications = list(user.notifications)
+        assert len(user_notifications) == 1
