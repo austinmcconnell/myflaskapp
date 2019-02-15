@@ -103,8 +103,12 @@ class User(UserMixin, SurrogatePK, Model):
             digest, size)
 
     def add_notification(self, name, data):
-        self.notifications.filter_by(name=name).delete()
-        notification = Notification(name=name, payload=data, user=self)
+        notification = self.notifications.filter_by(name=name).first()
+
+        if notification:
+            notification.update(payload=data)
+        else:
+            notification = Notification(name=name, payload=data, user=self)
         db.session.add(notification)
         return notification
 
