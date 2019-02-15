@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-02-10 12:05-0600\n"
+"POT-Creation-Date: 2019-02-15 07:41-0600\n"
 "PO-Revision-Date: 2018-10-13 13:36-0500\n"
 "Last-Translator: \n"
 "Language: fr\n"
@@ -254,8 +254,8 @@ msgid ""
 "policies. Secure header defaults come from OWASP Secure Headers project."
 msgstr ""
 "Secure.py améliore la sécurité en activant l'application de sécurité du "
-"navigateur. Les en-têtes sécurisés par défaut proviennent du projet OWASP "
-"Secure Headers."
+"navigateur. Les en-têtes sécurisés par défaut proviennent du projet OWASP"
+" Secure Headers."
 
 #: app/templates/401.html:3
 msgid "Unauthorized"
@@ -310,7 +310,7 @@ msgid "Home"
 msgstr "Accueil"
 
 #: app/templates/nav.html:33 app/user/templates/profile.html:6
-#: app/user/views.py:42 app/user/views.py:50
+#: app/user/views.py:44 app/user/views.py:52
 msgid "Profile"
 msgstr "Profil"
 
@@ -342,9 +342,17 @@ msgstr "Français"
 msgid "Submit"
 msgstr "Soumettre"
 
-#: app/user/views.py:40
+#: app/user/views.py:42
 msgid "Your changes have been saved."
 msgstr "Vos changements ont été enregistrés."
+
+#: app/user/views.py:76
+msgid "An export task is currently in progress"
+msgstr "Une tâche d'exportation est en cours"
+
+#: app/user/views.py:78
+msgid "Runing example task..."
+msgstr "Exécution d'une tâche d'exemple"
 
 #: app/user/templates/members.html:3
 #, python-format
@@ -354,6 +362,10 @@ msgstr "Bienvenue %(username)s"
 #: app/user/templates/members.html:4
 msgid "This is the members-only page"
 msgstr "Ceci est la page réservée aux membres"
+
+#: app/user/templates/members.html:7
+msgid "Run example task"
+msgstr "Exécuter la tâche exemple"
 
 #: app/user/templates/profile.html:8
 msgid "Edit Gravatar image at"
