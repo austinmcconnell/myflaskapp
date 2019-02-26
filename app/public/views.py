@@ -1,4 +1,4 @@
-from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask import Blueprint, flash, redirect, render_template, request, url_for, send_from_directory
 from flask_babel import _
 from flask_login import login_user
 
@@ -32,3 +32,8 @@ def home():
             flash_errors(form)
 
     return render_template('home.html', nav_form=form)
+
+
+@public_bp.route('/robots.txt')
+def robots_txt():
+    return send_from_directory('static', 'robots.txt')
