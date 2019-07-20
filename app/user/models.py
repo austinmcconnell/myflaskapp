@@ -49,7 +49,8 @@ class User(UserMixin, SurrogatePK, Model):
 
     def check_password(self, value: str) -> bool:
         """Check password."""
-        return bcrypt.check_password_hash(self.password, value)
+        is_good_password: bool = bcrypt.check_password_hash(self.password, value)
+        return is_good_password
 
     @property
     def full_name(self) -> str:
@@ -72,7 +73,8 @@ class User(UserMixin, SurrogatePK, Model):
                                  algorithms=['HS256'])['reset_password']
         except InvalidTokenError:
             return None
-        return User.query.get(user_id)
+        user: User = User.query.get(user_id)
+        return user
 
     def confirm_email(self) -> None:
         self.email_confirmed = True
@@ -90,7 +92,8 @@ class User(UserMixin, SurrogatePK, Model):
                                  algorithms=['HS256'])['confirm_email']
         except:
             return None
-        return User.query.get(user_id)
+        user: User = User.query.get(user_id)
+        return user
 
     def avatar(self, size):
         digest = md5(self.email.lower().encode('utf-8')).hexdigest()
