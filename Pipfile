@@ -23,7 +23,6 @@ pyjwt = "*"
 python-dotenv = "*"
 rollbar = "*"
 secure = "*"
-pyyaml = "==4.2b4"
 
 [dev-packages]
 factory-boy = "*"
