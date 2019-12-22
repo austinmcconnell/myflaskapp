@@ -49,4 +49,27 @@
     {{ moment.include_moment() }}
     {{ moment.lang(g.locale) }}
     <link rel="stylesheet" href="{{ url_for('static', filename='js/main.js') }}">
+    <script>
+        function set_task_progress(task_id, progress) {
+            $('#' + task_id + '-progress').text(progress);
+        }
+        {% if current_user.is_authenticated %}
+            $(function() {
+                let since = 0;
+                setInterval(function() {
+                    $.ajax('{{ url_for('user.notifications') }}?since=' + since).done(
+                        function(notifications) {
+                            for (let i = 0; i < notifications.length; i++) {
+                                if (notifications[i].name === 'task_progress')
+                                    set_task_progress(
+                                        notifications[i].data['task_id'],
+                                        notifications[i].data['progress']);
+                                since = notifications[i].timestamp;
+                            }
+                        }
+                    );
+                }, 10000);
+            });
+        {% endif %}
+    </script>
 {% endblock %}
