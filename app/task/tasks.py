@@ -27,16 +27,10 @@ def _set_task_progress(progress):
 
 
 def example(seconds):
-    job = get_current_job()
     _set_task_progress(0)
     for i in range(1, seconds + 1):
-        job.meta['progress'] = 100 * i / seconds
-        job.save_meta()
         _set_task_progress(100 * i // seconds)
         time.sleep(1)
-
-    job.meta['progress'] = 100
-    job.save_meta()
 
 
 # def export_posts(user_id):
@@ -49,7 +43,6 @@ def example(seconds):
 #         for post in user.posts.order_by(Post.timestamp.asc()):
 #             data.append({'body': post.body,
 #                          'timestamp': post.timestamp.isoformat() + 'Z'})
-#             time.sleep(5)
 #             i += 1
 #             _set_task_progress(i // total_posts * 100)
 #
