@@ -68,3 +68,12 @@ class TestUser:
 
         user_notifications = list(user.notifications)
         assert len(user_notifications) == 1
+
+    def test_verify_reset_password(self):
+        user1 = UserFactory(first_name='Foo', last_name='Bar')
+        user1.save()
+
+        token = user1.get_reset_password_token()
+
+        user2 = User.verify_reset_password_token(token)
+        assert user1 == user2
