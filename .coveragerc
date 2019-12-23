@@ -1,6 +1,6 @@
 [run]
 branch = True
-omit = app/commands.py
+omit = app/commands.py, app/task/tasks.py
 
 [report]
 show_missing = True
