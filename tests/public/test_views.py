@@ -7,3 +7,9 @@ def test_get_robots_txt(testapp):
 
     assert 'User-agent:' in response.text
     assert 'Disallow:' in response.text
+
+
+def test_get_erd(testapp):
+    response = testapp.get(url_for('public.show_database_diagram'))
+
+    assert 'image/png' in response.content_type

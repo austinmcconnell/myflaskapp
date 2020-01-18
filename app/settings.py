@@ -45,7 +45,7 @@ class Config(object):
 
 
 class TestingConfig(Config):
-    ENV = 'test'
+    # ENV = 'test'
     TESTING = True
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = f'postgresql://{Config.DB_USERNAME}:{Config.DB_PASSWORD}@' \
