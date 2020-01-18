@@ -122,3 +122,4 @@ output/*/index.html
 *.db
 
 TODO.md
+erd_from_sqlalchemy.png
