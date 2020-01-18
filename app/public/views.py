@@ -1,9 +1,11 @@
+from eralchemy import render_er
 from flask import Blueprint, flash, redirect, render_template, request, url_for, send_from_directory
 from flask_babel import _
 from flask_login import login_user
 
 from app.auth.forms import LoginForm
-from app.utils import flash_errors
+from app.database import Model
+from app.utils import development_only, flash_errors
 
 public_bp = Blueprint(name='public',  # pylint: disable=invalid-name
                       import_name=__name__,
@@ -37,3 +39,11 @@ def home():
 @public_bp.route('/robots.txt')
 def robots_txt():
     return send_from_directory('static', 'robots.txt')
+
+
+@public_bp.route('/erd')
+@development_only
+def show_database_diagram():
+    filename = 'erd_from_sqlalchemy.png'
+    render_er(Model, f'app/static/{filename}')
+    return send_from_directory(directory='static', filename=filename)
