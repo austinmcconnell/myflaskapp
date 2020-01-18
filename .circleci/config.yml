@@ -5,7 +5,7 @@ jobs:
       - image: circleci/python:3.6.3
         environment:
           FLASK_APP: app.app
-          FLASK_ENV: testing
+          FLASK_ENV: development
           SECRET_TOKEN: super-secret
           DATABASE_USERNAME: postgres
           DATABASE_NAME: myflaskapp-test
