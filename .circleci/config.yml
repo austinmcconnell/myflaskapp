@@ -7,11 +7,10 @@ jobs:
           FLASK_APP: app.app
           FLASK_ENV: development
           SECRET_TOKEN: super-secret
-          DATABASE_USERNAME: postgres
-          DATABASE_NAME: myflaskapp-test
+          SQLALCHEMY_TEST_DATABASE_URI: postgresql://postgres:@localhost:5432/myflaskapp
       - image: postgres:11.1-alpine
         environment:
-          POSTGRES_DB: myflaskapp-test
+          POSTGRES_DB: myflaskapp
     working_directory: ~/repo
     steps:
       - checkout

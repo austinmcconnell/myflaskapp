@@ -14,13 +14,7 @@ class Config(object):
     PROJECT_ROOT = os.path.abspath(os.path.join(APP_DIR, os.pardir))
 
     # Database
-    DB_USERNAME = os.getenv('DATABASE_USERNAME')
-    DB_PASSWORD = os.getenv('DATABASE_PASSWORD')
-    DB_HOST = os.getenv('DATABASE_HOST')
-    DB_PORT = os.getenv('DATABASE_PORT', 5432)
-    DB_NAME = os.getenv('DATABASE_NAME')
-    SQLALCHEMY_DATABASE_URI = f'postgresql://{DB_USERNAME}:{DB_PASSWORD}@' \
-                              f'{DB_HOST}:{DB_PORT}/{DB_NAME}'
+    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Email
@@ -45,14 +39,12 @@ class Config(object):
 
 
 class TestingConfig(Config):
-    # ENV = 'test'
     TESTING = True
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = f'postgresql://{Config.DB_USERNAME}:{Config.DB_PASSWORD}@' \
-        f'localhost:{Config.DB_PORT}/myflaskapp-test'
     BCRYPT_LOG_ROUNDS = 4  # For faster tests; needs at least 4 to avoid "ValueError: Invalid rounds"
     WTF_CSRF_ENABLED = False  # Allows form testing
     PRESERVE_CONTEXT_ON_EXCEPTION = False
+    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_TEST_DATABASE_URI')
 
 
 CONFIG = dict(default=Config,

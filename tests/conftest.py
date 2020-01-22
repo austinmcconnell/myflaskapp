@@ -3,6 +3,7 @@
 
 from flask import g, url_for
 import pytest
+import pytest_pgsql
 from webtest import TestApp
 
 from app.app import create_app
@@ -34,6 +35,11 @@ def testapp(app):
 @pytest.fixture
 def db(app):
     _db.app = app
+    if app.config['SQLALCHEMY_DATABASE_URI'] is None:
+        pytest_pgsql.create_engine_fixture('my_engine')
+        postgres_db = pytest_pgsql.PostgreSQLTestDB.create_fixture('postgres_db', 'my_engine')
+
+        app.config['SQLALCHEMY_DATABASE_URI'] = postgres_db.engine.url
     with app.app_context():
         _db.create_all()
 

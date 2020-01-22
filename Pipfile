@@ -36,6 +36,7 @@ pylint = "*"
 pytest = "*"
 pytest-cov = "*"
 webtest = "*"
+pytest-pgsql = "*"
 
 [requires]
 python_version = "3.6"
