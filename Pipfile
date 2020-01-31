@@ -35,8 +35,8 @@ pre-commit = "*"
 pylint = "*"
 pytest = "*"
 pytest-cov = "*"
+"testing.postgresql" = "*"
 webtest = "*"
-pytest-pgsql = "*"
 
 [requires]
 python_version = "3.8"
