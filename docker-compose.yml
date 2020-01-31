@@ -1,5 +1,36 @@
 version: "3.7"
 services:
+  traefik:
+    image: "traefik:v2.1.3"
+    command:
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --providers.docker
+      - --api
+      - --certificatesresolvers.le.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+      - --certificatesresolvers.le.acme.email=austin.s.mcconnell@gmail.com
+      - --certificatesresolvers.le.acme.storage=/config/acme.json
+      - --certificatesresolvers.le.acme.tlschallenge=true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - .volumes/traefik/:/config
+    labels:
+      # Dashboard
+      - traefik.http.routers.traefik.rule=Host(`traefik.docker.localhost`)
+      - traefik.http.routers.traefik.service=api@internal
+      - traefik.http.routers.traefik.tls.certresolver=le
+      - traefik.http.routers.traefik.entrypoints=websecure
+
+      # global redirect to https
+      - traefik.http.routers.http-catchall.rule=hostregexp(`{host:.+}`)
+      - traefik.http.routers.http-catchall.entrypoints=web
+      - traefik.http.routers.http-catchall.middlewares=redirect-to-https
+
+      # middleware redirect
+      - traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https
   web:
     build: .
     ports:
@@ -12,6 +43,11 @@ services:
     volumes:
       - ./app/:/home/myflaskapp/app
       - ./migrations/:/home/myflaskapp/migrations
+    labels:
+      - traefik.http.routers.myflaskapp.rule=Host(`myflaskapp.docker.localhost`)
+      - traefik.http.services.myflaskapp.loadbalancer.server.port=5000
+      - traefik.http.routers.myflaskapp.tls.certresolver=le
+      - traefik.http.routers.myflaskapp.entrypoints=websecure
   web-worker:
     build: .
     depends_on:
