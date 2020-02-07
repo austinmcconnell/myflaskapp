@@ -24,8 +24,8 @@ jobs:
           command: |
             python3 -m venv venv
             . venv/bin/activate
-            pip install pipenv
-            pip install codecov
+            pip install --upgrade pip setuptools
+            pip install pipenv codecov
             pipenv install --dev
       - save_cache:
           key: deps1-{{ checksum "Pipfile.lock" }}
