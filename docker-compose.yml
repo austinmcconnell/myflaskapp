@@ -19,7 +19,7 @@ services:
       - .volumes/traefik/:/config
     labels:
       # Dashboard
-      - traefik.http.routers.traefik.rule=Host(`traefik.docker.localhost`)
+      - traefik.http.routers.traefik.rule=Host(`traefik.${DOMAIN}`)
       - traefik.http.routers.traefik.service=api@internal
       - traefik.http.routers.traefik.tls.certresolver=le
       - traefik.http.routers.traefik.entrypoints=websecure
@@ -33,8 +33,6 @@ services:
       - traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https
   web:
     build: .
-    ports:
-      - 5000:5000
     depends_on:
       - db
       - redis
@@ -47,7 +45,7 @@ services:
       - ./app/:/home/myflaskapp/app
       - ./migrations/:/home/myflaskapp/migrations
     labels:
-      - traefik.http.routers.myflaskapp.rule=Host(`myflaskapp.docker.localhost`)
+      - traefik.http.routers.myflaskapp.rule=Host(`${DOMAIN}`)
       - traefik.http.services.myflaskapp.loadbalancer.server.port=5000
       - traefik.http.routers.myflaskapp.tls.certresolver=le
       - traefik.http.routers.myflaskapp.entrypoints=websecure
@@ -67,18 +65,24 @@ services:
       - ./migrations/:/home/myflaskapp/migrations
   db:
     image: postgres:12.1
-    ports:
-    - 15432:5432
     restart: always
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: myflaskapp
     volumes:
       - .volumes/db:/var/lib/postgresql/data
+    labels:
+      - traefik.http.routers.postgres.rule=Host(`postgres.${DOMAIN}`)
+      - traefik.http.services.postgres.loadbalancer.server.port=5432
+      - traefik.http.routers.postgres.tls.certresolver=le
+      - traefik.http.routers.postgres.entrypoints=websecure
   redis:
     image: redis:5.0
     command: ["redis-server", "--appendonly", "yes"]
-    ports:
-      - 16379:6379
     volumes:
       - .volumes/redis:/data
+    labels:
+      - traefik.http.routers.redis.rule=Host(`redis.${DOMAIN}`)
+      - traefik.http.services.redis.loadbalancer.server.port=6379
+      - traefik.http.routers.redis.tls.certresolver=le
+      - traefik.http.routers.redis.entrypoints=websecure

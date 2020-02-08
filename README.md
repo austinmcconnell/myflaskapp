@@ -63,6 +63,12 @@ For local development, also add then following environment variable
 FLASK_ENV=development
 ```
 
+If you are using docker-compose to run the app locally, add the domain env var
+
+```ini
+DOMAIN=myflaskapp.localhost
+```
+
 This uses a sqlite database by default for local development. If you would like to setup something more powerful (or that matches your production setup), add the following section to your .env file:
 
 ```ini
