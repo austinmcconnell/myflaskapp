@@ -77,3 +77,10 @@ class TestUser:
 
         user2 = User.verify_reset_password_token(token)
         assert user1 == user2
+
+    def test_add_message(self):
+        user = UserFactory(first_name='Foo', last_name='Bar')
+        assert user.new_messages() == 0
+
+        user.add_message(contents=f'Bigger on the inside')
+        assert user.new_messages() == 1

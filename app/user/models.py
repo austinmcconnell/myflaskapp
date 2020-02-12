@@ -11,6 +11,7 @@ from jwt import InvalidTokenError
 import maya
 
 from app.notification.models import Notification
+from app.messages.models import Message
 from app.database import Column, Model, SurrogatePK, db
 from app.extensions import bcrypt
 from app.task.models import Task
@@ -33,9 +34,11 @@ class User(UserMixin, SurrogatePK, Model):
     locale = db.Column(db.String(length=2), default='en')
     created_at = Column(db.DateTime(timezone=True), nullable=False, default=maya.now().datetime)
     last_seen = db.Column(db.DateTime(timezone=True))
+    last_message_read_time = db.Column(db.DateTime(timezone=True))
 
     notifications = db.relationship('Notification', backref='user', lazy='dynamic')
     tasks = db.relationship('Task', backref='user', lazy='dynamic')
+    messages = db.relationship('Message', back_populates='user', lazy='dynamic')
 
     def __init__(self, username: str, email: str, password: str=None, **kwargs) -> None:
         """Create instance."""
@@ -108,8 +111,7 @@ class User(UserMixin, SurrogatePK, Model):
         if notification:
             notification.update(payload=data)
         else:
-            notification = Notification(name=name, payload=data, user=self)
-        db.session.add(notification)
+            notification = Notification.create(name=name, payload=data, user=self)
         return notification
 
     def launch_task(self, name, description, *args, **kwargs):
@@ -123,3 +125,11 @@ class User(UserMixin, SurrogatePK, Model):
 
     def get_task_in_progress(self, name):
         return Task.query.filter_by(name=name, user=self, complete=False).first()
+
+    def add_message(self, contents):
+        message = Message.create(user_id=self.id, body=contents)
+        return message
+
+    def new_messages(self):
+        last_read_time = self.last_message_read_time or maya.when('1900-1-1').datetime()
+        return Message.query.filter_by(user_id=self.id).filter(Message.timestamp > last_read_time).count()

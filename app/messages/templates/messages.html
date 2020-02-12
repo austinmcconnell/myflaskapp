@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <h1>{{ _('Messages') }}</h1>
+    <br>
+    {% for message in messages %}
+        <div class="row">
+            <div class="col-md-3">
+                <p class="message">{{ moment(message.timestamp).format('LLL') }}</p>
+            </div>
+            <div class="col-md-9">
+                <p class="message">{{ message.body }}</p>
+            </div>
+        </div>
+    {% endfor %}
+    <nav aria-label="...">
+        <ul class="pager">
+            <li class="previous{% if not prev_url %} disabled{% endif %}">
+                <a href="{{ prev_url or '#' }}">
+                    <span aria-hidden="true">←</span> {{ _('Newer messages') }}
+                </a>
+            </li>
+            <li class="next{% if not next_url %} disabled{% endif %}">
+                <a href="{{ next_url or '#' }}">
+                    {{ _('Older messages') }} <span aria-hidden="true">→</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+{% endblock %}
