@@ -23,6 +23,8 @@ def _set_task_progress(progress):
                                                      'progress': progress})
         if progress >= 100:
             task.complete = True
+            task.user.add_message(contents=f'Task {task.name} (id: {task.id} ) has completed')
+            task.user.add_notification('unread_message_count', task.user.new_messages())
         db.session.commit()
 
 
