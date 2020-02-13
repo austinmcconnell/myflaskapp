@@ -124,12 +124,12 @@ class User(UserMixin, SurrogatePK, Model):
         return Task.query.filter_by(user=self, complete=False).all()
 
     def get_task_in_progress(self, name):
-        return Task.query.filter_by(name=name, user=self, complete=False).first()
+        return Task.query.filter_by(user=self, name=name, complete=False).first()
 
     def add_message(self, contents):
-        message = Message.create(user_id=self.id, body=contents)
+        message = Message.create(user=self, body=contents)
         return message
 
     def new_messages(self):
         last_read_time = self.last_message_read_time or maya.when('1900-1-1').datetime()
-        return Message.query.filter_by(user_id=self.id).filter(Message.timestamp > last_read_time).count()
+        return Message.query.filter_by(user=self).filter(Message.timestamp > last_read_time).count()
