@@ -12,7 +12,7 @@ import rollbar.contrib.flask
 from app import commands
 from app.auth import auth_bp
 from app.user import user_bp
-from app.messages import message_bp
+from app.messages import message_bp, Message
 from app.public import public_bp
 from app.user.models import User
 from app.notification.models import Notification
@@ -101,6 +101,7 @@ def register_errorhandlers(app):
 def register_shellcontext(app):
     def shell_context():
         return {'db': db,
+                'Message': Message,
                 'Notification': Notification,
                 'User': User,
                 'Task': Task}
