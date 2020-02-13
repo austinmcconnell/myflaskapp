@@ -1,4 +1,3 @@
-from eralchemy import render_er
 from flask import Blueprint, flash, redirect, render_template, request, url_for, send_from_directory
 from flask_babel import _
 from flask_login import login_user
@@ -44,6 +43,8 @@ def robots_txt():
 @public_bp.route('/erd')
 @development_only
 def show_database_diagram():
+    from eralchemy import render_er
+
     filename = 'erd_from_sqlalchemy.png'
     render_er(Model, f'app/static/{filename}')
     return send_from_directory(directory='static', filename=filename)

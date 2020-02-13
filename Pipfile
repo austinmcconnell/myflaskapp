@@ -4,7 +4,6 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-eralchemy = "*"
 flask = "*"
 flask-babel = "*"
 flask-bcrypt = "*"
@@ -28,6 +27,7 @@ rq = "*"
 secure = "*"
 
 [dev-packages]
+eralchemy = "*"
 factory-boy = "*"
 flask-shell-ipython = "*"
 mypy = "*"
