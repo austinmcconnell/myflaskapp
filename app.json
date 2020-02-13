@@ -42,5 +42,6 @@
     "image": "heroku/python",
     "name": "My Flask App",
     "repository": "https://github.com/austinmcconnell/myflaskapp",
+    "stack": "heroku-18",
     "success_url": "/"
 }
