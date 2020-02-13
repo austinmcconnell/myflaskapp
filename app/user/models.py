@@ -106,7 +106,7 @@ class User(UserMixin, SurrogatePK, Model):
             digest, size)
 
     def add_notification(self, name, data):
-        notification = self.notifications.filter_by(name=name).first()
+        notification = self.notifications.filter_by(user=self, name=name).first()
 
         if notification:
             notification.update(payload=data)
