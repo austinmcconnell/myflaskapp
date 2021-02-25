@@ -2,7 +2,7 @@ from typing import Dict
 
 import maya
 
-from app.database import Column, Model, SurrogatePK, db
+from app.database import Column, db, Model, SurrogatePK
 
 
 class Notification(SurrogatePK, Model):

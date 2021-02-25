@@ -1,9 +1,9 @@
-from flask import Blueprint, flash, redirect, url_for, request, g, session, render_template
+from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for
 from flask_babel import _
-from flask_login import login_required, logout_user, current_user, login_user
+from flask_login import current_user, login_required, login_user, logout_user
 
-from app.auth.forms import RegisterForm, LoginForm, ResetPasswordRequestForm, ResetPasswordForm
-from app.auth.email import send_password_reset_email, send_confirm_email
+from app.auth.email import send_confirm_email, send_password_reset_email
+from app.auth.forms import LoginForm, RegisterForm, ResetPasswordForm, ResetPasswordRequestForm
 from app.extensions import db
 from app.user.models import User
 from app.utils import flash_errors

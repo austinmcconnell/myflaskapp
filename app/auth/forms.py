@@ -1,7 +1,7 @@
-from flask_babel import lazy_gettext as _l, _
+from flask_babel import _, lazy_gettext as _l
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import DataRequired, Length, Email, EqualTo
+from wtforms import PasswordField, StringField, SubmitField
+from wtforms.validators import DataRequired, Email, EqualTo, Length
 
 from app.user.models import User
 

@@ -3,8 +3,7 @@ from redis.exceptions import RedisError
 import rq
 from rq.exceptions import NoSuchJobError
 
-
-from app.database import Column, Model, db
+from app.database import Column, db, Model
 
 
 class Task(Model):

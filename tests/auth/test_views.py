@@ -2,7 +2,7 @@
 import re
 from urllib.parse import urlparse
 
-from flask import url_for, get_flashed_messages
+from flask import get_flashed_messages, url_for
 from flask_login import login_user
 import pytest
 

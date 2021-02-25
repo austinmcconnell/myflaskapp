@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 """Helper utilities and decorators."""
 from functools import wraps
-from flask import abort, flash, current_app
+
+from flask import abort, current_app, flash
 
 
 def flash_errors(form, category='warning'):

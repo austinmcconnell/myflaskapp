@@ -11,8 +11,8 @@ from flask_migrate import Migrate
 from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
-from sqlalchemy import MetaData
 from secure import SecureHeaders
+from sqlalchemy import MetaData
 
 # pylint: disable=invalid-name
 

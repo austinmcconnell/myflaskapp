@@ -48,6 +48,7 @@ Generate a secret key by opening up a python shell and running this code:
 
 ```python
 import secrets
+
 secrets.token_hex(20)
 ```
 Take the token from above and place it in a .env file along with the following information:
