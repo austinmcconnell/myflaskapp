@@ -1,25 +1,24 @@
 # -*- coding: utf-8 -*-
-import maya
-
-from flask import Flask, got_request_exception, render_template, request, current_app, g, session
+from flask import current_app, Flask, g, got_request_exception, render_template, request, session
 from flask_login import current_user
 from flask_mail import email_dispatched
+import maya
 from redis import Redis
-import rq
 import rollbar
 import rollbar.contrib.flask
+import rq
 
 from app import commands
 from app.auth import auth_bp
-from app.user import user_bp
-from app.messages import message_bp, Message
-from app.public import public_bp
-from app.user.models import User
+from app.extensions import (babel, bcrypt, bootstrap, cache, csrf_protect, db, debug_toolbar,
+                            login_manager, mail, migrate, moment, secure_headers)
+from app.messages import Message, message_bp
 from app.notification.models import Notification
-from app.extensions import (babel, bcrypt, bootstrap, cache, csrf_protect, db,
-                            debug_toolbar, login_manager, mail, migrate, moment, secure_headers)
+from app.public import public_bp
 from app.settings import CONFIG
 from app.task.models import Task
+from app.user import user_bp
+from app.user.models import User
 
 
 def create_app(config_name='default'):

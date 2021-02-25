@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 """User views."""
-from flask import Blueprint, flash, render_template, request, session, jsonify, redirect, url_for
+from flask import Blueprint, flash, jsonify, redirect, render_template, request, session, url_for
 from flask_babel import _
 from flask_login import current_user, login_required
 import maya
 
 from app.extensions import db, login_manager
 from app.notification.models import Notification
-from app.user.forms import (EditProfileForm)
+from app.user.forms import EditProfileForm
 from app.user.models import User
 from app.utils import flash_errors
 

@@ -10,10 +10,10 @@ import jwt
 from jwt import InvalidTokenError
 import maya
 
-from app.notification.models import Notification
-from app.messages.models import Message
-from app.database import Column, Model, SurrogatePK, db
+from app.database import Column, db, Model, SurrogatePK
 from app.extensions import bcrypt
+from app.messages.models import Message
+from app.notification.models import Notification
 from app.task.models import Task
 
 

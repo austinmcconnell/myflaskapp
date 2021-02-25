@@ -1,7 +1,7 @@
 import maya
 
+from app.database import Column, Model, relationship, SurrogatePK
 from app.extensions import db
-from app.database import Column, Model, SurrogatePK, relationship
 
 
 class Message(SurrogatePK, Model):

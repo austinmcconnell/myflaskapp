@@ -1,12 +1,15 @@
 # import json
 # import sys
 import time
+
 # from flask import render_template
 from rq import get_current_job
+
+# from app.user.models import User
 from app import create_app
 from app.database import db
-# from app.user.models import User
 from app.task.models import Task
+
 # from app.email import send_email
 
 app = create_app()  # pylint: disable=invalid-name
