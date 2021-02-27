@@ -1,8 +1,11 @@
-from typing import Dict
+from typing import Dict, TYPE_CHECKING
 
 import maya
 
 from app.database import Column, db, Model, SurrogatePK
+
+if TYPE_CHECKING:
+    from app.user.models import User
 
 
 class Notification(SurrogatePK, Model):
@@ -12,7 +15,7 @@ class Notification(SurrogatePK, Model):
     payload = Column(db.JSON)
     timestamp = Column(db.DateTime(timezone=True), index=True, default=maya.now().datetime)
 
-    def __init__(self, name: str, user, payload: Dict) -> None:
+    def __init__(self, name: str, user: 'User', payload: Dict) -> None:
         db.Model.__init__(self, name=name, user_id=user.id, payload=payload)
 
     def update(self, commit=True, **kwargs):

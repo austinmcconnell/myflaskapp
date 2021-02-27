@@ -1,3 +1,5 @@
+from typing import TYPE_CHECKING
+
 from flask import current_app
 from redis.exceptions import RedisError
 import rq
@@ -5,6 +7,8 @@ from rq.exceptions import NoSuchJobError
 
 from app.database import Column, db, Model
 
+if TYPE_CHECKING:
+    from app.user.models import User
 
 class Task(Model):
     __tablename__ = 'tasks'
@@ -15,7 +19,7 @@ class Task(Model):
     user_id = Column(db.Integer, db.ForeignKey('users.id'))
     complete = Column(db.Boolean, default=False)
 
-    def __init__(self, id: str, name: str, description: str, user) -> None:
+    def __init__(self, id: str, name: str, description: str, user: 'User') -> None:
         db.Model.__init__(self, id=id, name=name, description=description, user=user)
 
     def get_rq_job(self):
