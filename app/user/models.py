@@ -8,6 +8,7 @@ from flask import current_app
 from flask_login import UserMixin
 import jwt
 from jwt import InvalidTokenError
+from jwt.exceptions import PyJWTError
 import maya
 
 from app.database import Column, db, Model, SurrogatePK
@@ -40,7 +41,7 @@ class User(UserMixin, SurrogatePK, Model):
     tasks = db.relationship('Task', backref='user', lazy='dynamic')
     messages = db.relationship('Message', back_populates='user', lazy='dynamic')
 
-    def __init__(self, username: str, email: str, password: str=None, **kwargs) -> None:
+    def __init__(self, username: str, email: str, password: str = None, **kwargs) -> None:
         """Create instance."""
         db.Model.__init__(self, username=username, email=email, **kwargs)
         if password:
@@ -66,7 +67,7 @@ class User(UserMixin, SurrogatePK, Model):
         """Represent instance as a unique string."""
         return '<User({username!r})>'.format(username=self.username)
 
-    def get_reset_password_token(self, expires_in: int=600) -> str:
+    def get_reset_password_token(self, expires_in: int = 600) -> str:
         return jwt.encode(
             {'reset_password': self.id, 'exp': time() + expires_in},
             current_app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
@@ -95,7 +96,7 @@ class User(UserMixin, SurrogatePK, Model):
         try:
             user_id = jwt.decode(token, current_app.config['SECRET_KEY'],
                                  algorithms=['HS256'])['confirm_email']
-        except:
+        except PyJWTError:
             return None
         user: User = User.query.get(user_id)
         return user
