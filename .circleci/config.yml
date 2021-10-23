@@ -11,7 +11,7 @@ jobs:
       - checkout
       - run:
           name: Install build dependencies
-          command: sudo apt-get install graphviz libgraphviz-dev pkg-config libpq-dev libpq5 postgresql-11
+          command: sudo apt-get install graphviz libgraphviz-dev pkg-config libpq-dev libpq5 postgresql
       - restore_cache:
           key: deps1-{{ checksum "Pipfile.lock" }}
       - run:
