@@ -1,7 +1,7 @@
 ---
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.2.3
+    rev: v4.0.1
     hooks:
       - id: check-ast
       - id: check-executables-have-shebangs
@@ -24,7 +24,7 @@ repos:
     hooks:
       - id: fixmyjs
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v0.711
+    rev: v0.910-1
     hooks:
       - id: mypy
   - repo: git://github.com/chewse/pre-commit-mirrors-pydocstyle
@@ -33,7 +33,7 @@ repos:
       - id: pydocstyle
         args: ['--ignore=D1,D203,D212']
   - repo: https://github.com/pre-commit/mirrors-pylint
-    rev: v2.3.1
+    rev: v3.0.0a4
     hooks:
       - id: pylint
         args: ['--ignore=migrations,env.py']
