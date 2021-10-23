@@ -40,7 +40,7 @@ def create_app(config_name='default'):
 
     @app.after_request
     def set_secure_headers(response):
-        secure_headers.flask(response)
+        secure_headers.framework.flask(response)
         return response
 
     @app.before_first_request
