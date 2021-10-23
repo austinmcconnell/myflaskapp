@@ -39,6 +39,7 @@ pytest-cov = "*"
 pytest-xdist = "*"
 "testing.postgresql" = "*"
 webtest = "*"
+types-redis = "*"
 
 [requires]
 python_version = "3.9"
