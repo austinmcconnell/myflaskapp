@@ -1,4 +1,4 @@
-FROM python:3.6-slim AS builder
+FROM python:3.9-slim AS builder
 
 WORKDIR /home/myflaskapp
 
@@ -19,7 +19,7 @@ COPY . .
 
 ENV FLASK_APP wsgi.py
 
-FROM python:3.6-slim
+FROM python:3.9-slim
 
 COPY --from=builder /home/myflaskapp /home/myflaskapp
 
