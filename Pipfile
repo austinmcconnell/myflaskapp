@@ -25,6 +25,7 @@ redis = "*"
 rollbar = "*"
 rq = "*"
 secure = "*"
+email-validator = "*"
 
 [dev-packages]
 eralchemy = "*"
@@ -40,4 +41,4 @@ pytest-xdist = "*"
 webtest = "*"
 
 [requires]
-python_version = "3.6"
+python_version = "3.9"
