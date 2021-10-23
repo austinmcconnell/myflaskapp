@@ -68,9 +68,10 @@ class User(UserMixin, SurrogatePK, Model):
         return '<User({username!r})>'.format(username=self.username)
 
     def get_reset_password_token(self, expires_in: int = 600) -> str:
-        return jwt.encode(
+        token: str = jwt.encode(
             {'reset_password': self.id, 'exp': time() + expires_in},
             current_app.config['SECRET_KEY'], algorithm='HS256')
+        return token
 
     @staticmethod
     def verify_reset_password_token(token) -> Union['User', None]:
@@ -87,9 +88,10 @@ class User(UserMixin, SurrogatePK, Model):
         self.email_confirmed_at = maya.now().datetime()
 
     def get_confirmation_token(self) -> str:
-        return jwt.encode(
+        token: str = jwt.encode(
             {'confirm_email': self.id},
             current_app.config['SECRET_KEY'], algorithm='HS256')
+        return token
 
     @staticmethod
     def verify_confirmation_token(token: str) -> Union['User', None]:
