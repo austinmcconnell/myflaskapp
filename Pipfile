@@ -40,6 +40,7 @@ pytest-xdist = "*"
 "testing.postgresql" = "*"
 webtest = "*"
 types-redis = "*"
+types-flask = "*"
 
 [requires]
 python_version = "3.9"
