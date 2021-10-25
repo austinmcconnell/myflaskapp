@@ -16,7 +16,7 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - .volumes/traefik/:/config
+      - traefik:/config
     labels:
       # Dashboard
       - traefik.http.routers.traefik.rule=Host(`traefik.${DOMAIN}`)
@@ -72,7 +72,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: myflaskapp
     volumes:
-      - .volumes/db:/var/lib/postgresql/data
+      - db:/var/lib/postgresql/data
     labels:
       - traefik.http.routers.postgres.rule=Host(`postgres.${DOMAIN}`)
       - traefik.http.services.postgres.loadbalancer.server.port=5432
@@ -82,9 +82,14 @@ services:
     image: redis:5.0
     command: ["redis-server", "--appendonly", "yes"]
     volumes:
-      - .volumes/redis:/data
+      - redis:/data
     labels:
       - traefik.http.routers.redis.rule=Host(`redis.${DOMAIN}`)
       - traefik.http.services.redis.loadbalancer.server.port=6379
       - traefik.http.routers.redis.tls.certresolver=le
       - traefik.http.routers.redis.entrypoints=websecure
+
+volumes:
+  db:
+  traefik:
+  redis:
