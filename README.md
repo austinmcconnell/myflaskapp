@@ -73,6 +73,12 @@ If you are using docker-compose to run the app locally, add the domain env var
 DOMAIN=myflaskapp.localhost
 ```
 
+and add this to your `/etc/hosts` file
+
+```
+ localhost    myflaskapp.localhost, traefik.myflaskapp.localhost, postgres.myflaskapp.localhost
+ ```
+
 This uses a sqlite database by default for local development. If you would like to setup something more powerful (or that matches your production setup), add the following section to your .env file:
 
 ```ini
