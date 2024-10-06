@@ -1,0 +1,23 @@
+{
+    "[python]": {
+        "editor.defaultFormatter": "eeyore.yapf",
+        "editor.formatOnSave": true
+    },
+    "autopep8.importStrategy": "fromEnvironment",
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    },
+    "editor.formatOnSave": true,
+    "editor.rulers": [
+        100
+    ],
+    "files.trimTrailingWhitespace": true,
+    "pylint.importStrategy": "fromEnvironment",
+    "python.defaultInterpreterPath": ".venv/bin/python",
+    "python.envFile": "${workspaceFolder}/.env",
+    "python.testing.pytestArgs": [
+        "--no-cov"
+    ],
+    "python.testing.pytestEnabled": true,
+    "testing.automaticallyOpenPeekView": "never"
+}
