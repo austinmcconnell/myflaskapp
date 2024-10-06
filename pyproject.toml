@@ -11,6 +11,14 @@ aggressive = 3
 ignore = "E126"
 max_line_length = 100
 
+[tool.coverage.report]
+fail_under = 80
+show_missing = true
+
+[tool.coverage.run]
+branch = true
+omit = ['app/commands.py', 'app/task/tasks.py']
+
 [tool.isort]
 known_first_party = ['app']
 line_length = 100
@@ -67,7 +75,7 @@ ignore = ['migrations']
 max_line_length = 100
 
 [tool.pytest.ini.options]
-addopts = '--verbose -rsxX --showlocals --tb=short -n 3'
+addopts = '--verbose -rsxX --showlocals --tb=short -n 3 --cov=app --cov-report=html'
 pythonpath = '. app'
 testpaths = ['test2s']
 xfail_strict = true
