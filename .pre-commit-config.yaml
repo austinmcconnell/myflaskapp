@@ -15,6 +15,42 @@ repos:
         args: [--autofix, --indent=4]
       - id: mixed-line-ending
       - id: trailing-whitespace
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.10.1
+    hooks:
+      - id: pyupgrade
+  - repo: https://github.com/pre-commit/mirrors-autopep8
+    rev: v2.0.4
+    hooks:
+      - id: autopep8
+  - repo: https://github.com/pyCQA/docformatter
+    rev: v1.7.5
+    hooks:
+      - id: docformatter
+        additional_dependencies: ["tomli"]
+  - repo: https://github.com/pappasam/toml-sort
+    rev: v0.23.1
+    hooks:
+      - id: toml-sort-fix
+  - repo: https://github.com/google/yapf
+    rev: v0.40.2
+    hooks:
+      - id: yapf
+  - repo: https://github.com/pylint-dev/pylint
+    rev: v3.1.0
+    hooks:
+      - id: pylint
+        exclude: ^(migrations)/
+  - repo: https://github.com/hadolint/hadolint
+    rev: v2.12.0
+    hooks:
+      - id: hadolint
+        args: ["--ignore", "DL3008", "--ignore", "DL3013", "--ignore", "DL3042"]
+
   - repo: https://github.com/pre-commit/mirrors-csslint
     rev: v1.0.5
     hooks:
@@ -28,13 +64,3 @@ repos:
     hooks:
       - id: mypy
         additional_dependencies: [types-redis]
-  - repo: https://github.com/chewse/pre-commit-mirrors-pydocstyle
-    rev: v2.1.1
-    hooks:
-      - id: pydocstyle
-        args: ['--ignore=D1,D203,D212']
-  - repo: https://github.com/pre-commit/mirrors-pylint
-    rev: v3.0.0a4
-    hooks:
-      - id: pylint
-        args: ['--ignore=migrations,env.py']
