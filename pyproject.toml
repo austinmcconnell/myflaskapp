@@ -6,11 +6,33 @@ build-backend = 'setuptools.build_meta'
 name = 'myflaskapp'
 readme = 'README.md'
 
+[tool.setuptools]
+packages = ['app']
+
+[tool.tomlsort]
+in_place = true
+sort_first = ['source', 'packages', 'dev-packages', 'requires']
+sort_table_keys = true
+
+[tool.yapf]
+based_on_style = 'pep8'
+column_limit = 100
+spaces_before_comment = 2
+
 [tool.pytest.ini.options]
 addopts = '--verbose -rsxX --showlocals --tb=short -n 3'
 pythonpath = '. app'
 testpaths = ['test2s']
 xfail_strict = true
+
+[tool.autopep8]
+aggressive = 3
+ignore = "E126"
+max_line_length = 100
+
+[tool.isort]
+known_first_party = ['app']
+line_length = 100
 
 [tool.mypy]
 disallow_incomplete_defs = false
@@ -39,7 +61,7 @@ module = [
     'rollbar.*',
     'eralchemy.*',
     'jwt.*',
-    ]
+]
 ignore_missing_imports = true
 
 [tool.pylint]
