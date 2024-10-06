@@ -8,9 +8,10 @@ from app.extensions import db
 from app.user.models import User
 from app.utils import flash_errors
 
-auth_bp = Blueprint(name='auth',  # pylint: disable=invalid-name
-                    import_name=__name__,
-                    template_folder='templates')
+auth_bp = Blueprint(
+    name='auth',  # pylint: disable=invalid-name
+    import_name=__name__,
+    template_folder='templates')
 
 
 @auth_bp.route('/logout/')
@@ -47,6 +48,7 @@ def login():
     """Login user."""
     if current_user.is_authenticated:
         return redirect(url_for('public.home'))
+    # pylint: disable=duplicate-code
     form = LoginForm(request.form)
     if request.method == 'POST':
         if form.validate_on_submit():
@@ -74,7 +76,8 @@ def reset_password_request():
         return redirect(url_for('auth.login'))
     return render_template('reset_password_request.html',
                            title='Reset Password',
-                           nav_form=nav_form, form=form)
+                           nav_form=nav_form,
+                           form=form)
 
 
 @auth_bp.route('/reset_password/<token>', methods=['GET', 'POST'])

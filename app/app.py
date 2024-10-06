@@ -1,12 +1,11 @@
-# -*- coding: utf-8 -*-
-from flask import current_app, Flask, g, got_request_exception, render_template, request, session
-from flask_login import current_user
-from flask_mail import email_dispatched
 import maya
-from redis import Redis
 import rollbar
 import rollbar.contrib.flask
 import rq
+from flask import Flask, current_app, g, got_request_exception, render_template, request, session
+from flask_login import current_user
+from flask_mail import email_dispatched
+from redis import Redis
 
 from app import commands
 from app.auth import auth_bp
@@ -45,7 +44,7 @@ def create_app(config_name='default'):
 
     @app.before_first_request
     def init_rollbar():
-        if app.config['ENV'] in ('production',) and app.config['ROLLBAR_API']:
+        if app.config['ENV'] in ('production', ) and app.config['ROLLBAR_API']:
             app.logger.info('Initiating rollbar connection')
             rollbar.init(access_token=app.config['ROLLBAR_API'],
                          environment=app.config['ENV'],
@@ -89,21 +88,26 @@ def register_blueprints(app):
 
 
 def register_errorhandlers(app):
+
     def render_error(error):
         # If a HTTPException, pull the `code` attribute; default to 500
         error_code = getattr(error, 'code', 500)
-        return render_template('{0}.html'.format(error_code)), error_code
+        return render_template('{}.html'.format(error_code)), error_code
+
     for errcode in [401, 404, 500]:
         app.errorhandler(errcode)(render_error)
 
 
 def register_shellcontext(app):
+
     def shell_context():
-        return {'db': db,
-                'Message': Message,
-                'Notification': Notification,
-                'User': User,
-                'Task': Task}
+        return {
+            'db': db,
+            'Message': Message,
+            'Notification': Notification,
+            'User': User,
+            'Task': Task
+        }
 
     app.shell_context_processor(shell_context)
 

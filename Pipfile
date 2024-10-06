@@ -1,9 +1,10 @@
 [[source]]
+name = "pypi"
 url = "https://pypi.python.org/simple"
 verify_ssl = true
-name = "pypi"
 
 [packages]
+email-validator = "*"
 flask = "*"
 flask-babel = "*"
 flask-bcrypt = "*"
@@ -25,7 +26,6 @@ redis = "*"
 rollbar = "*"
 rq = "*"
 secure = "*"
-email-validator = "*"
 
 [dev-packages]
 eralchemy = "*"
@@ -38,9 +38,9 @@ pytest = "*"
 pytest-cov = "*"
 pytest-xdist = "*"
 "testing.postgresql" = "*"
-webtest = "*"
-types-redis = "*"
 types-flask = "*"
+types-redis = "*"
+webtest = "*"
 
 [requires]
 python_version = "3.9"

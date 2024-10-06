@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 """Defines fixtures available to all tests."""
 
-from flask import g, url_for
 import pytest
+from flask import g, url_for
 from sqlalchemy import create_engine
 from testing.postgresql import Postgresql
 from webtest import TestApp

@@ -1,8 +1,8 @@
-from typing import Dict, TYPE_CHECKING
+from typing import TYPE_CHECKING, Dict
 
 import maya
 
-from app.database import Column, db, Model, SurrogatePK
+from app.database import Column, Model, SurrogatePK, db
 
 if TYPE_CHECKING:
     from app.user.models import User

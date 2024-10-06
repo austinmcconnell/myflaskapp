@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
-from flask import url_for
 import pytest
+from flask import url_for
 
 
 def test_get_robots_txt(testapp):

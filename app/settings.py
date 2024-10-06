@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Application configuration."""
 import os
 
@@ -7,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-class Config(object):
+class Config:
 
     # Path
     APP_DIR = os.path.abspath(os.path.dirname(__file__))  # This directory

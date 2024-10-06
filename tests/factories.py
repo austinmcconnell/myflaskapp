@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Factories to help in tests."""
 from factory import PostGenerationMethodCall, Sequence
 from factory.alchemy import SQLAlchemyModelFactory
@@ -20,8 +19,8 @@ class BaseFactory(SQLAlchemyModelFactory):
 class UserFactory(BaseFactory):
     """User factory."""
 
-    username = Sequence(lambda n: 'user{0}'.format(n))
-    email = Sequence(lambda n: 'user{0}@example.com'.format(n))
+    username = Sequence(lambda n: 'user{}'.format(n))
+    email = Sequence(lambda n: 'user{}@example.com'.format(n))
     password = PostGenerationMethodCall('set_password', 'example')
     active = True
     is_admin = False

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import re
 from urllib.parse import urlparse
 
@@ -97,7 +96,7 @@ class TestRegistering:
         assert 'Passwords must match' in res
 
     def test_error_message_user_already_registered(self, user, testapp):
-        user = UserFactory(active=True)    # A registered user
+        user = UserFactory(active=True)  # A registered user
         user.save()
         # Goes to registration page
         res = testapp.get(url_for('auth.register'))

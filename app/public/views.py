@@ -6,9 +6,10 @@ from app.auth.forms import LoginForm
 from app.database import Model
 from app.utils import development_only, flash_errors
 
-public_bp = Blueprint(name='public',  # pylint: disable=invalid-name
-                      import_name=__name__,
-                      template_folder='templates')
+public_bp = Blueprint(
+    name='public',  # pylint: disable=invalid-name
+    import_name=__name__,
+    template_folder='templates')
 
 
 @public_bp.route('/about/')
@@ -21,6 +22,7 @@ def about():
 @public_bp.route('/', methods=['GET', 'POST'])
 def home():
     """Home page."""
+    # pylint: disable=duplicate-code
     form = LoginForm(request.form)
     # Handle logging in
     if request.method == 'POST':

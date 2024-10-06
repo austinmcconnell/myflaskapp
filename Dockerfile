@@ -12,7 +12,7 @@ WORKDIR /app
 RUN --mount=type=cache,sharing=locked,target=/var/cache/apt \
     --mount=type=cache,sharing=locked,target=/var/lib/apt/lists \
     apt-get update && \
-    apt-get install -y \
+    apt-get install -y --no-install-recommends \
     gcc \
     graphviz \
     libgraphviz-dev \

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """User forms."""
 from flask_babel import lazy_gettext as _l
 from flask_wtf import FlaskForm

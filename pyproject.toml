@@ -6,25 +6,6 @@ build-backend = 'setuptools.build_meta'
 name = 'myflaskapp'
 readme = 'README.md'
 
-[tool.setuptools]
-packages = ['app']
-
-[tool.tomlsort]
-in_place = true
-sort_first = ['source', 'packages', 'dev-packages', 'requires']
-sort_table_keys = true
-
-[tool.yapf]
-based_on_style = 'pep8'
-column_limit = 100
-spaces_before_comment = 2
-
-[tool.pytest.ini.options]
-addopts = '--verbose -rsxX --showlocals --tb=short -n 3'
-pythonpath = '. app'
-testpaths = ['test2s']
-xfail_strict = true
-
 [tool.autopep8]
 aggressive = 3
 ignore = "E126"
@@ -40,47 +21,66 @@ warn_return_any = true
 warn_unused_configs = true
 
 [[tool.mypy.overrides]]
-module = [
-    'flask_babel.*',
-    'flask_wtf.*',
-    'flask_bcrypt.*',
-    'flask_bootstrap.*',
-    'flask_caching.*',
-    'flask_debugtoolbar.*',
-    'flask_login.*',
-    'flask_mail.*',
-    'flask_migrate.*',
-    'flask_moment.*',
-    'flask_sqlalchemy.*',
-    'wtforms.*',
-    'sqlalchemy.*',
-    'secure.*',
-    'maya.*',
-    'pytest.*',
-    'rq.*',
-    'rollbar.*',
-    'eralchemy.*',
-    'jwt.*',
-]
 ignore_missing_imports = true
+module = [
+  'flask_babel.*',
+  'flask_wtf.*',
+  'flask_bcrypt.*',
+  'flask_bootstrap.*',
+  'flask_caching.*',
+  'flask_debugtoolbar.*',
+  'flask_login.*',
+  'flask_mail.*',
+  'flask_migrate.*',
+  'flask_moment.*',
+  'flask_sqlalchemy.*',
+  'wtforms.*',
+  'sqlalchemy.*',
+  'secure.*',
+  'maya.*',
+  'pytest.*',
+  'rq.*',
+  'rollbar.*',
+  'eralchemy.*',
+  'jwt.*'
+]
 
 [tool.pylint]
-max_line_length = 100
 disable = 'all'
 enable = [
-    'bad-continuation',
-    'relative-import',
-    'wrong-import-order',
-    'unused-import',
-    'pointless-statement',
-    'invalid-name',
-    'duplicate-code',
-    'line-too-long',
-    'bad-indentation',
-    'wildcard-import',
-    'bad-except-order',
-    'bad-format-string',
-    'unsupported-membership-test',
-    'redefined-builtin',
+  'bad-continuation',
+  'relative-import',
+  'wrong-import-order',
+  'unused-import',
+  'pointless-statement',
+  'invalid-name',
+  'duplicate-code',
+  'line-too-long',
+  'bad-indentation',
+  'wildcard-import',
+  'bad-except-order',
+  'bad-format-string',
+  'unsupported-membership-test',
+  'redefined-builtin'
 ]
 ignore = ['migrations']
+max_line_length = 100
+
+[tool.pytest.ini.options]
+addopts = '--verbose -rsxX --showlocals --tb=short -n 3'
+pythonpath = '. app'
+testpaths = ['test2s']
+xfail_strict = true
+
+[tool.setuptools]
+packages = ['app']
+
+[tool.tomlsort]
+in_place = true
+sort_first = ['source', 'packages', 'dev-packages', 'requires']
+sort_table_keys = true
+
+[tool.yapf]
+based_on_style = 'pep8'
+column_limit = 100
+spaces_before_comment = 2

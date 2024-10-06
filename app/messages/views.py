@@ -1,11 +1,13 @@
+import maya
 from flask import Blueprint, render_template, request, url_for
 from flask_login import current_user, login_required
-import maya
 
 from app.messages.models import Message
 
-message_bp = Blueprint(name='messages',  # pylint: disable=invalid-name
-                       import_name=__name__, template_folder='templates')
+message_bp = Blueprint(
+    name='messages',  # pylint: disable=invalid-name
+    import_name=__name__,
+    template_folder='templates')
 
 
 @message_bp.route('/messages')

@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
 """User views."""
+import maya
 from flask import Blueprint, flash, jsonify, redirect, render_template, request, session, url_for
 from flask_babel import _
 from flask_login import current_user, login_required
-import maya
 
 from app.extensions import db, login_manager
 from app.notification.models import Notification
@@ -11,9 +10,10 @@ from app.user.forms import EditProfileForm
 from app.user.models import User
 from app.utils import flash_errors
 
-user_bp = Blueprint(name='user',  # pylint: disable=invalid-name
-                    import_name=__name__,
-                    template_folder='templates')
+user_bp = Blueprint(
+    name='user',  # pylint: disable=invalid-name
+    import_name=__name__,
+    template_folder='templates')
 
 
 @login_manager.user_loader
@@ -55,6 +55,7 @@ def profile():
 @user_bp.route('/notifications')
 @login_required
 def notifications():
+
     def to_date(date_string):
         return maya.when(date_string).datetime()
 
@@ -64,8 +65,11 @@ def notifications():
         .filter(Notification.timestamp > since)\
         .order_by(Notification.timestamp.asc())
 
-    response = [{'name': n.name, 'data': n.payload, 'timestamp': n.timestamp}
-                for n in user_notifications]
+    response = [{
+        'name': n.name,
+        'data': n.payload,
+        'timestamp': n.timestamp
+    } for n in user_notifications]
     return jsonify(response)
 
 

@@ -1,17 +1,16 @@
-# -*- coding: utf-8 -*-
 """User models."""
 from hashlib import md5
 from time import time
 from typing import Union
 
+import jwt
+import maya
 from flask import current_app
 from flask_login import UserMixin
-import jwt
 from jwt import InvalidTokenError
 from jwt.exceptions import PyJWTError
-import maya
 
-from app.database import Column, db, Model, SurrogatePK
+from app.database import Column, Model, SurrogatePK, db
 from app.extensions import bcrypt
 from app.messages.models import Message
 from app.notification.models import Notification
@@ -61,7 +60,7 @@ class User(UserMixin, SurrogatePK, Model):
     @property
     def full_name(self) -> str:
         """Full user name."""
-        return '{0} {1}'.format(self.first_name, self.last_name)
+        return '{} {}'.format(self.first_name, self.last_name)
 
     def __repr__(self) -> str:
         """Represent instance as a unique string."""

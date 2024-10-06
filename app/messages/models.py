@@ -1,6 +1,6 @@
 import maya
 
-from app.database import Column, Model, relationship, SurrogatePK
+from app.database import Column, Model, SurrogatePK, relationship
 from app.extensions import db
 
 

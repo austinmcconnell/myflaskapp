@@ -1,7 +1,5 @@
-# -*- coding: utf-8 -*-
-
-from flask import url_for
 import maya
+from flask import url_for
 
 
 class TestNotifications:
