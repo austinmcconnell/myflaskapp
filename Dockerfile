@@ -1,8 +1,17 @@
-FROM python:3.9-slim AS builder
+FROM python:3.9-slim AS base
 
-WORKDIR /home/myflaskapp
+ENV VIRTUAL_ENV=/app/.venv
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-RUN apt-get update && \
+ENV PIPENV_VENV_IN_PROJECT=1
+ENV PIPENV_VERBOSITY=-1
+
+WORKDIR /app
+
+# Buildtime dependencies
+RUN --mount=type=cache,sharing=locked,target=/var/cache/apt \
+    --mount=type=cache,sharing=locked,target=/var/lib/apt/lists \
+    apt-get update && \
     apt-get install -y \
     gcc \
     graphviz \
@@ -10,26 +19,66 @@ RUN apt-get update && \
     libpq-dev \
     python3-dev
 
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install --upgrade pip setuptools wheel pipenv
+
 COPY Pipfile Pipfile.lock ./
 
-RUN pip install --no-cache-dir --upgrade pip setuptools pipenv \
-    && PIPENV_VERBOSITY=-1 PIPENV_VENV_IN_PROJECT=1 pipenv install --deploy
+RUN --mount=type=cache,target=/root/.cache/pipenv \
+    pipenv install --deploy --verbose
 
-COPY . .
+From base as base-dev
 
-ENV FLASK_APP wsgi.py
+RUN --mount=type=cache,target=/root/.cache/pipenv \
+    pipenv install --dev --deploy --verbose
 
-FROM python:3.9-slim
+FROM python:3.9-slim as dev
 
-COPY --from=builder /home/myflaskapp /home/myflaskapp
+ENV VIRTUAL_ENV=/app/.venv
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-WORKDIR /home/myflaskapp
+WORKDIR /app
 
-RUN apt-get update && \
-    apt-get install -y \
+# Runtime dependencies
+RUN --mount=type=cache,sharing=locked,target=/var/cache/apt \
+    --mount=type=cache,sharing=locked,target=/var/lib/apt/lists \
+    apt-get update && \
+    apt-get install --no-install-recommends -y \
     graphviz \
     libpq5
 
+COPY --from=base-dev $VIRTUAL_ENV $VIRTUAL_ENV
+
+COPY . .
+
+RUN flask translate compile
+
+EXPOSE 5000
+EXPOSE 5678
+
+ENTRYPOINT ["gunicorn", "--reload"]
+
+FROM python:3.9-slim as prod
+
+ENV VIRTUAL_ENV=/app/.venv
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+WORKDIR /app
+
+# Runtime dependencies
+RUN --mount=type=cache,sharing=locked,target=/var/cache/apt \
+    --mount=type=cache,sharing=locked,target=/var/lib/apt/lists \
+    apt-get update && \
+    apt-get install --no-install-recommends -y \
+    graphviz \
+    libpq5
+
+COPY --from=base $VIRTUAL_ENV $VIRTUAL_ENV
+
+COPY . .
+
+RUN flask translate compile
+
 EXPOSE 5000
 
-ENTRYPOINT ["./boot.sh"]
+ENTRYPOINT ["gunicorn"]

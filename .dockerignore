@@ -6,3 +6,4 @@
 !babel.cfg
 !boot*.sh
 !wsgi.py
+!gunicorn.conf.py

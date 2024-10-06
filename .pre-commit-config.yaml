@@ -28,7 +28,7 @@ repos:
     hooks:
       - id: mypy
         additional_dependencies: [types-redis]
-  - repo: git://github.com/chewse/pre-commit-mirrors-pydocstyle
+  - repo: https://github.com/chewse/pre-commit-mirrors-pydocstyle
     rev: v2.1.1
     hooks:
       - id: pydocstyle
