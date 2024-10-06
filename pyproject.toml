@@ -11,3 +11,33 @@ addopts = '--verbose -rsxX --showlocals --tb=short -n 3'
 pythonpath = '. app'
 testpaths = ['test2s']
 xfail_strict = true
+
+[tool.mypy]
+disallow_incomplete_defs = false
+warn_return_any = true
+warn_unused_configs = true
+
+[[tool.mypy.overrides]]
+module = [
+    'flask_babel.*',
+    'flask_wtf.*',
+    'flask_bcrypt.*',
+    'flask_bootstrap.*',
+    'flask_caching.*',
+    'flask_debugtoolbar.*',
+    'flask_login.*',
+    'flask_mail.*',
+    'flask_migrate.*',
+    'flask_moment.*',
+    'flask_sqlalchemy.*',
+    'wtforms.*',
+    'sqlalchemy.*',
+    'secure.*',
+    'maya.*',
+    'pytest.*',
+    'rq.*',
+    'rollbar.*',
+    'eralchemy.*',
+    'jwt.*',
+    ]
+ignore_missing_imports = true
