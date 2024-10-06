@@ -41,3 +41,24 @@ module = [
     'jwt.*',
     ]
 ignore_missing_imports = true
+
+[tool.pylint]
+max_line_length = 100
+disable = 'all'
+enable = [
+    'bad-continuation',
+    'relative-import',
+    'wrong-import-order',
+    'unused-import',
+    'pointless-statement',
+    'invalid-name',
+    'duplicate-code',
+    'line-too-long',
+    'bad-indentation',
+    'wildcard-import',
+    'bad-except-order',
+    'bad-format-string',
+    'unsupported-membership-test',
+    'redefined-builtin',
+]
+ignore = ['migrations']
