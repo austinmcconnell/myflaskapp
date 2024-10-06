@@ -12,10 +12,12 @@ def flash_errors(form, category='warning'):
             flash('{0} - {1}'.format(getattr(form, field).label.text, error), category)
 
 
-def development_only(f):
-    @wraps(f)
+def development_only(func):
+
+    @wraps(func)
     def wrapped(**kwargs):
         if not current_app.env == 'development':
             abort(404)
-        return f(**kwargs)
+        return func(**kwargs)
+
     return wrapped

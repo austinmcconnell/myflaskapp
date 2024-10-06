@@ -2,9 +2,9 @@
 import re
 from urllib.parse import urlparse
 
+import pytest
 from flask import get_flashed_messages, url_for
 from flask_login import login_user
-import pytest
 
 from app.extensions import mail
 from app.user.models import User
@@ -47,6 +47,7 @@ class TestLoggingIn:
         res = form.submit()
         assert 'Invalid password' in res
 
+    # pylint: disable=unused-argument
     @pytest.mark.parametrize('endpoint', ('public.home', 'auth.login'))
     def test_error_message_username_doesnt_exist(self, user, testapp, endpoint):
         res = testapp.get(url_for(endpoint))
@@ -61,6 +62,7 @@ class TestLoggingIn:
 
 class TestRegistering:
 
+    # pylint: disable=unused-argument
     def test_can_register(self, user, testapp):
         old_count = len(User.query.all())
         # Goes to homepage
@@ -79,6 +81,7 @@ class TestRegistering:
         # A new user was created
         assert len(User.query.all()) == old_count + 1
 
+    # pylint: disable=unused-argument
     def test_error_message_passwords_dont_match(self, user, testapp):
         # Goes to registration page
         res = testapp.get(url_for('auth.register'))
@@ -94,7 +97,7 @@ class TestRegistering:
         assert 'Passwords must match' in res
 
     def test_error_message_user_already_registered(self, user, testapp):
-        user = UserFactory(active=True)  # A registered user
+        user = UserFactory(active=True)    # A registered user
         user.save()
         # Goes to registration page
         res = testapp.get(url_for('auth.register'))
@@ -109,6 +112,7 @@ class TestRegistering:
         # sees error
         assert 'Username already registered' in res
 
+    # pylint: disable=unused-argument
     def test_confirm_email_sent(self, db, testapp):
         # Goes to registration page
         with mail.record_messages() as outbox:
@@ -126,6 +130,7 @@ class TestRegistering:
             assert len(outbox) == 1
             assert 'Confirm Your Email Address' in outbox[0].subject
 
+    # pylint: disable=unused-argument
     def test_email_confirmation(self, db, testapp):
         with mail.record_messages() as outbox:
             res = testapp.get(url_for('auth.register'))

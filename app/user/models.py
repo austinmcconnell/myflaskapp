@@ -68,9 +68,12 @@ class User(UserMixin, SurrogatePK, Model):
         return '<User({username!r})>'.format(username=self.username)
 
     def get_reset_password_token(self, expires_in: int = 600) -> str:
-        token: str = jwt.encode(
-            {'reset_password': self.id, 'exp': time() + expires_in},
-            current_app.config['SECRET_KEY'], algorithm='HS256')
+        token: str = jwt.encode({
+            'reset_password': self.id,
+            'exp': time() + expires_in
+        },
+                                current_app.config['SECRET_KEY'],
+                                algorithm='HS256')
         return token
 
     @staticmethod
@@ -88,9 +91,9 @@ class User(UserMixin, SurrogatePK, Model):
         self.email_confirmed_at = maya.now().datetime()
 
     def get_confirmation_token(self) -> str:
-        token: str = jwt.encode(
-            {'confirm_email': self.id},
-            current_app.config['SECRET_KEY'], algorithm='HS256')
+        token: str = jwt.encode({'confirm_email': self.id},
+                                current_app.config['SECRET_KEY'],
+                                algorithm='HS256')
         return token
 
     @staticmethod
@@ -105,8 +108,7 @@ class User(UserMixin, SurrogatePK, Model):
 
     def avatar(self, size):
         digest = md5(self.email.lower().encode('utf-8')).hexdigest()
-        return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(
-            digest, size)
+        return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(digest, size)
 
     def add_notification(self, name, data):
         notification = self.notifications.filter_by(user=self, name=name).first()
@@ -119,7 +121,7 @@ class User(UserMixin, SurrogatePK, Model):
 
     def launch_task(self, name, description, *args, **kwargs):
         rq_job = current_app.task_queue.enqueue('app.task.tasks.' + name, *args, **kwargs)
-        task = Task(id=rq_job.get_id(), name=name, description=description, user=self)
+        task = Task(id_=rq_job.get_id(), name=name, description=description, user=self)
         db.session.add(task)
         return task
 

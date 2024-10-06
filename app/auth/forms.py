@@ -1,4 +1,5 @@
-from flask_babel import _, lazy_gettext as _l
+from flask_babel import _
+from flask_babel import lazy_gettext as _l
 from flask_wtf import FlaskForm
 from wtforms import PasswordField, StringField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo, Length
@@ -9,15 +10,16 @@ from app.user.models import User
 class RegisterForm(FlaskForm):
     """Register form."""
 
-    username = StringField(label=_l('Username'),
-                           validators=[DataRequired(), Length(min=3, max=25)])
+    username = StringField(label=_l('Username'), validators=[DataRequired(), Length(min=3, max=25)])
     email = StringField(label=_l('Email'),
-                        validators=[DataRequired(), Email(), Length(min=6, max=40)])
+                        validators=[DataRequired(), Email(),
+                                    Length(min=6, max=40)])
     password = PasswordField(label=_l('Password'),
                              validators=[DataRequired(), Length(min=6, max=40)])
-    confirm = PasswordField(label=_l('Verify password'),
-                            validators=[DataRequired(),
-                                        EqualTo('password', message=_l('Passwords must match'))])
+    confirm = PasswordField(
+        label=_l('Verify password'),
+        validators=[DataRequired(),
+                    EqualTo('password', message=_l('Passwords must match'))])
     submit = SubmitField(_l('Register'))
 
     def __init__(self, *args, **kwargs):
@@ -44,8 +46,12 @@ class RegisterForm(FlaskForm):
 class LoginForm(FlaskForm):
     """Login form."""
 
-    username = StringField(_l('Username'), validators=[DataRequired()], render_kw={'placeholder': _l('Username')})
-    password = PasswordField(_l('Password'), validators=[DataRequired()], render_kw={'placeholder': _l('Password')})
+    username = StringField(_l('Username'),
+                           validators=[DataRequired()],
+                           render_kw={'placeholder': _l('Username')})
+    password = PasswordField(_l('Password'),
+                             validators=[DataRequired()],
+                             render_kw={'placeholder': _l('Password')})
     submit = SubmitField(_l('Log In'))
 
     def __init__(self, *args, **kwargs):
@@ -81,5 +87,6 @@ class ResetPasswordRequestForm(FlaskForm):
 
 class ResetPasswordForm(FlaskForm):
     password = PasswordField(_l('Password'), validators=[DataRequired()])
-    password2 = PasswordField(_l('Repeat Password'), validators=[DataRequired(), EqualTo('password')])
+    password2 = PasswordField(_l('Repeat Password'),
+                              validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField(_l('Reset Password'))

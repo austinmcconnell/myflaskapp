@@ -15,7 +15,8 @@ class Config(object):
 
     # Database
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
-    if isinstance(SQLALCHEMY_DATABASE_URI, str) and SQLALCHEMY_DATABASE_URI.startswith('postgres://'):
+    if isinstance(SQLALCHEMY_DATABASE_URI,
+                  str) and SQLALCHEMY_DATABASE_URI.startswith('postgres://'):
         SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace('postgres://', 'postgresql://', 1)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
@@ -43,11 +44,10 @@ class Config(object):
 class TestingConfig(Config):
     TESTING = True
     DEBUG = True
-    BCRYPT_LOG_ROUNDS = 4  # For faster tests; needs at least 4 to avoid "ValueError: Invalid rounds"
+    BCRYPT_LOG_ROUNDS = 4  # For faster tests; need at least 4 to avoid "ValueError: Invalid rounds"
     WTF_CSRF_ENABLED = False  # Allows form testing
     PRESERVE_CONTEXT_ON_EXCEPTION = False
     SQLALCHEMY_DATABASE_URI = os.getenv('TEST_DATABASE_URL')
 
 
-CONFIG = dict(default=Config,
-              testing=TestingConfig)
+CONFIG = dict(default=Config, testing=TestingConfig)
