@@ -40,7 +40,7 @@ class User(UserMixin, SurrogatePK, Model):
     tasks = db.relationship('Task', backref='user', lazy='dynamic')
     messages = db.relationship('Message', back_populates='user', lazy='dynamic')
 
-    def __init__(self, username: str, email: str, password: str = None, **kwargs) -> None:
+    def __init__(self, username: str, email: str, password: str = '', **kwargs) -> None:
         """Create instance."""
         db.Model.__init__(self, username=username, email=email, **kwargs)
         if password:

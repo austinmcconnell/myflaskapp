@@ -1,5 +1,5 @@
 from threading import Thread
-from typing import List
+from typing import List, Optional
 
 from flask import current_app
 from flask_mail import Message
@@ -17,7 +17,7 @@ def send_email(subject: str,
                recipients: List[str],
                text_body: str,
                html_body: str,
-               attachments: List = None,
+               attachments: Optional[List] = None,
                sync: bool = False) -> None:
     msg = Message(subject, sender=sender, recipients=recipients)
     msg.body = text_body
