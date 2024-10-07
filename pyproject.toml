@@ -74,7 +74,7 @@ enable = [
 ignore = ['migrations']
 max_line_length = 100
 
-[tool.pytest.ini.options]
+[tool.pytest.ini_options]
 addopts = '--verbose -rsxX --showlocals --tb=short -n 3 --cov=app --cov-report=html'
 pythonpath = '. app'
 testpaths = ['test2s']
