@@ -77,7 +77,7 @@ COPY --from=base $VIRTUAL_ENV $VIRTUAL_ENV
 
 COPY . .
 
-RUN flask translate compile
+# RUN flask translate compile
 
 EXPOSE 5000
 
