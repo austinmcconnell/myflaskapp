@@ -42,9 +42,8 @@ def create_app(config_name='default'):
         secure_headers.framework.flask(response)
         return response
 
-    @app.before_first_request
-    def init_rollbar():
-        if app.config['ENV'] in ('production', ) and app.config['ROLLBAR_API']:
+    with app.app_context():
+        if not app.config['DEBUG'] and app.config['ROLLBAR_API']:
             app.logger.info('Initiating rollbar connection')
             rollbar.init(access_token=app.config['ROLLBAR_API'],
                          environment=app.config['ENV'],
