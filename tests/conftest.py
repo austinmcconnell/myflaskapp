@@ -12,7 +12,7 @@ from app.database import db as _db
 from .factories import UserFactory
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture
 def app():
     _app = create_app('testing')
     ctx = _app.test_request_context()
