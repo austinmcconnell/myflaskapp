@@ -32,6 +32,17 @@
             "name": "Python: Flask",
             "request": "launch",
             "type": "debugpy"
+        },
+        {
+            "justMyCode": false,
+            "name": "Pytest",
+            "program": "${file}",
+            "purpose": [
+                "debug-test"
+            ],
+            "request": "launch",
+            "type": "debugpy"
         }
-    ]
+    ],
+    "version": "0.2.0"
 }
