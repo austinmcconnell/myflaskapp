@@ -30,7 +30,7 @@ class TestRegisterForm:
     def test_validate_success(self, db):
         """Register with success."""
         form = RegisterForm(username='newusername',
-                            email='new@test.test',
+                            email='panda.bear@panda.bear',
                             password='example',
                             confirm='example')
         assert form.validate() is True
