@@ -67,7 +67,7 @@ def create_app(config_name='default'):
 
 
 def register_extensions(app):
-    babel.init_app(app)
+    babel.init_app(app, locale_selector=get_locale)
     bcrypt.init_app(app)
     bootstrap.init_app(app)
     cache.init_app(app)
@@ -119,7 +119,6 @@ def register_commands(app):
     app.cli.add_command(commands.translate)
 
 
-@babel.localeselector
 def get_locale():
     if current_user.is_authenticated:
         locale = current_user.locale
