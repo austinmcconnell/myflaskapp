@@ -46,7 +46,8 @@ class TestingConfig(Config):
     BCRYPT_LOG_ROUNDS = 4  # For faster tests; need at least 4 to avoid "ValueError: Invalid rounds"
     WTF_CSRF_ENABLED = False  # Allows form testing
     PRESERVE_CONTEXT_ON_EXCEPTION = False
-    SQLALCHEMY_DATABASE_URI = os.getenv('TEST_DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:example@postgres.myflaskapp.localhost:\
+        5432/tests'
 
 
 CONFIG = dict(default=Config, testing=TestingConfig)
