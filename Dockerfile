@@ -1,4 +1,5 @@
-FROM python:3.9-slim AS base
+ARG PYTHON_VERSION=3.9
+FROM python:${PYTHON_VERSION}-slim AS base
 
 ENV VIRTUAL_ENV=/app/.venv
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
@@ -32,7 +33,7 @@ From base as base-dev
 RUN --mount=type=cache,target=/root/.cache/pipenv \
     pipenv install --dev --deploy --verbose
 
-FROM python:3.9-slim as dev
+FROM python:${PYTHON_VERSION}-slim as dev
 
 ENV VIRTUAL_ENV=/app/.venv
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
@@ -58,7 +59,7 @@ EXPOSE 5678
 
 ENTRYPOINT ["gunicorn", "--reload"]
 
-FROM python:3.9-slim as prod
+FROM python:${PYTHON_VERSION}-slim as prod
 
 ENV VIRTUAL_ENV=/app/.venv
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
