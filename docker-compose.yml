@@ -39,7 +39,7 @@ services:
     env_file:
       - .env
     environment:
-      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD}@db:5432/myflaskapp
+      DATABASE_URL: postgresql+psycopg://postgres:${POSTGRES_PASSWORD}@db:5432/myflaskapp
       REDIS_URL: redis://redis
     volumes:
       - ./app/:/home/myflaskapp/app
@@ -57,7 +57,7 @@ services:
     env_file:
       - .env
     environment:
-      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD}@db:5432/myflaskapp
+      DATABASE_URL: postgresql+psycopg://postgres:${POSTGRES_PASSWORD}@db:5432/myflaskapp
       REDIS_URL: redis://redis
     entrypoint: ["rq", "worker", "--url", "$REDIS_URL", "myflaskapp-tasks"]
     volumes:
